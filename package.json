@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
+  "name": "sf-sandbox-preview",
   "version": "0.2.6",
-  "description": "A sample Node.js app using Express 4",
+  "description": "A sandbox preview Node.js app using Express 4",
   "engines": {
     "node": "6.11.1"
   },
@@ -17,10 +17,6 @@
   "devDependencies": {
     "request": "^2.81.0",
     "tape": "^4.7.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
   },
   "keywords": [
     "node",
