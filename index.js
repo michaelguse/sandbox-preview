@@ -3,18 +3,23 @@ const url = require('url');
 
 const params = url.parse(process.env.DATABASE_URL||'postgres://mguse:@localhost:5432/mguse');
 const auth = params.auth.split(':');
+var sslValue = true;
+
+if (params.hostname == 'localhost')
+  { sslValue = false }  
 
 const config = {
   user: auth[0],
   password: auth[1],
   host: params.hostname,
   port: params.port,
-  database: params.pathname.split('/')[1]
+  database: params.pathname.split('/')[1],
+  ssl: sslValue
 };
 
 const pool = new Pool(config);
 
-// console.log('Parsed auth params: ', config);
+console.log('Parsed auth params: ', config);
 
 var express = require('express');
 var app = express();
