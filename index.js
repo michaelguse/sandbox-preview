@@ -1,3 +1,20 @@
+const Pool = require('pg-pool');
+const url = require('url')
+
+const params = url.parse(process.env.DATABASE_URL||'postgres://mguse:@localhost:5432/mguse');
+const auth = params.auth.split(':');
+
+const config = {
+  user: auth[0],
+  password: auth[1],
+  host: params.hostname,
+  port: params.port,
+  database: params.pathname.split('/')[1],
+  ssl: true
+};
+
+const pool = new Pool(config);
+
 var express = require('express');
 var app = express();
 
@@ -13,30 +30,9 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
-});
-
-const Pool = require('pg');
-const url = require('url')
-
-const params = url.parse(process.env.DATABASE_URL||'postgres://postgres:@localhost:5432/mguse');
-const auth = params.auth.split(':');
-
-const config = {
-  user: auth[0],
-  password: auth[1],
-  host: params.hostname,
-  port: params.port,
-  database: params.pathname.split('/')[1],
-  ssl: true
-};
-
-const pool = new Pool(config);
-
 app.get('/db', function (request, response) {
   pool.connect(function(err, client, done) {
-    client.query('SELECT * FROM test_table', function(err, result) {
+    client.query('SELECT * FROM test_table', ['pg-pool'], function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
@@ -44,4 +40,8 @@ app.get('/db', function (request, response) {
        { response.render('pages/db', {results: result.rows} ); }
     });
   });
+});
+
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
