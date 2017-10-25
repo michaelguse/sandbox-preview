@@ -14,7 +14,7 @@ const config = {
 
 const pool = new Pool(config);
 
-console.log('Parsed auth params: ', config);
+// console.log('Parsed auth params: ', config);
 
 var express = require('express');
 var app = express();
