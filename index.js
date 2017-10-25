@@ -1,5 +1,5 @@
 const Pool = require('pg-pool');
-const url = require('url')
+const url = require('url');
 
 const params = url.parse(process.env.DATABASE_URL||'postgres://mguse:@localhost:5432/mguse');
 const auth = params.auth.split(':');
@@ -9,11 +9,12 @@ const config = {
   password: auth[1],
   host: params.hostname,
   port: params.port,
-  database: params.pathname.split('/')[1],
-  ssl: true
+  database: params.pathname.split('/')[1]
 };
 
 const pool = new Pool(config);
+
+console.log('Parsed auth params: ', config);
 
 var express = require('express');
 var app = express();
@@ -31,14 +32,11 @@ app.get('/', function(request, response) {
 });
 
 app.get('/db', function (request, response) {
-  pool.connect(function(err, client, done) {
-    client.query('SELECT * FROM test_table', function(err, result) {
-      done();
+  pool.query('SELECT * FROM test_table', function(err, result) {
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
        { response.render('pages/db', {results: result.rows} ); }
-    });
   });
 });
 
