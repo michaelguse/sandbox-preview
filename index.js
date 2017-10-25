@@ -32,7 +32,7 @@ app.get('/', function(request, response) {
 
 app.get('/db', function (request, response) {
   pool.connect(function(err, client, done) {
-    client.query('SELECT * FROM test_table', ['pg-pool'], function(err, result) {
+    client.query('SELECT * FROM test_table', function(err, result) {
       done();
       if (err)
        { console.error(err); response.send("Error " + err); }
