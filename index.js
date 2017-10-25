@@ -17,7 +17,7 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-const Pool = require('pg-pool');
+const Pool = require('pg');
 const url = require('url')
 
 const params = url.parse(process.env.DATABASE_URL||'postgres://postgres:@localhost:5432/mguse');
