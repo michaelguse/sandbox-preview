@@ -1,21 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <% include ../partials/header.ejs %>
+<!--  <% include ../partials/header.ejs %> -->
+<style>
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+</style>
 </head>
 
 <body>
 
-<% include ../partials/nav.ejs %>
+<!-- <% include ../partials/nav.ejs %> -->
 
 <div class="container">
 <h2>Database Results</h2>
 
-<ul>
+<div>
+  <table>
+    <tr>
+        <th>Id</th>
+        <th>Release Number</th>
+        <th>Release Name</th>
+        <th>Org Name</th>
+        <th>Org Type</th>
+    </tr>
     <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
+    <tr>
+        <td style="align: center"><%= r.id %></td>
+        <td><%= r.internal_rel_name %></td>
+        <td><%= r.external_rel_name %></td>
+        <td><%= r.org_id %></td>
+        <td><%= r.org_type %></td>
+    </tr>    
     <% }); %>
-</ul>
+  </table>
+</div>
 
 </div>
 
