@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-src="https://code.jquery.com/jquery-1.10.2.min.js"
-integrity="sha256-C6CB9UYIS9UJeqinPHWTHVqh/E1uhG5Twh+Y5qFQmYg="
-crossorigin="anonymous"></script>
-<script type="text/javascript" src="/public/js/typeahead.bundle.js"></script>
-<script type="text/javascript" src="/public/js/the-basics.js"></script>
+    <% include ../partials/header.ejs %>
 <style>
     table, th, td {
         border: 1px solid black;
@@ -16,36 +11,22 @@ crossorigin="anonymous"></script>
 </head>
 
 <body>
+        
+    <% include ../partials/nav.ejs %>
 
 <div class="container">
-<h2>Autocomplete Typeahead Test Page</h2>
 
-<div id="the-basics">
-    <input class="typeahead" type="text" placeholder="States of USA">
-</div>
+    <form action="/input" size="10">
+        <select name="org_name">
+            <% results.forEach(function(r) { %>
+                <option value="<%= r.id %>"</option><%= r.org_id %></option>
+            <% }); %>
+        </select>
+        <br><br>
+        <input type="submit">
+    </form>
 
 <br />
-
-<div>
-  <table>
-    <tr>
-        <th>Id</th>
-        <th>Release Number</th>
-        <th>Release Name</th>
-        <th>Org Name</th>
-        <th>Org Type</th>
-    </tr>
-    <% results.forEach(function(r) { %>
-    <tr>
-        <td><%= r.id %></td>
-        <td><%= r.internal_rel_name %></td>
-        <td><%= r.external_rel_name %></td>
-        <td><%= r.org_id %></td>
-        <td><%= r.org_type %></td>
-    </tr>    
-    <% }); %>
-  </table>
-</div>
 
 </div>
 
