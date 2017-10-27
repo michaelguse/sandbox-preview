@@ -25,6 +25,7 @@
         <th>Release Name</th>
         <th>Org Name</th>
         <th>Org Type</th>
+        <th>Region</th>
     </tr>
     <% results.forEach(function(r) { %>
     <tr>
@@ -33,6 +34,7 @@
         <td><%= r.external_rel_name %></td>
         <td><%= r.org_id %></td>
         <td><%= r.org_type %></td>
+        <td><%= r.org_region %></td>
     </tr>    
     <% }); %>
   </table>
