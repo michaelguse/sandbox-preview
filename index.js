@@ -32,7 +32,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.get('/', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1 ORDER BY org_id', [210], function (err, result) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
     if (err) {
       console.error(err);
       response.send("Error " + err);
@@ -44,13 +44,13 @@ app.get('/', function (request, response) {
   });
 });
 
-app.get('/input', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1 ORDER BY org_id', [210], function (err, result) {
+app.get('/choose', function (request, response) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
     if (err) {
       console.error(err);
       response.send("Error " + err);
     } else {
-      response.render('pages/input', {
+      response.render('pages/choose', {
         results: result.rows
       });
     }

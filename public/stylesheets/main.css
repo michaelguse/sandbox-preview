@@ -1,6 +1,7 @@
 .navbar {
   margin-bottom: -5px;
 }
+
 .jumbotron {
   background: rgb(255, 255, 255);
   color: rgb(91, 140, 204);
@@ -28,6 +29,17 @@
   color: #818181;
   max-width: 75%;
   margin: 1em auto 1em;
+}
+
+p.listing-right {
+  font-weight: bold;
+  max-width: 100%;
+  margin: 0;
+}
+
+p.listing-left {
+  max-width: 100%;
+  margin: 0;
 }
 
 .navbar+.jumbotron {
