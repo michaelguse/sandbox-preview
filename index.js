@@ -57,6 +57,19 @@ app.get('/choose', function (request, response) {
   });
 });
 
+app.get('/upgrade', function (request, response) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
+    if (err) {
+      console.error(err);
+      response.send("Error " + err);
+    } else {
+      response.render('pages/upgrade', {
+        results: result.rows
+      });
+    }
+  });
+});
+
 app.get('/db', function (request, response) {
   pool.query('SELECT * FROM rel_org_type', function (err, result) {
     if (err) {
