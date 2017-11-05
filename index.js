@@ -71,7 +71,9 @@ app.get('/upgrade', function (request, response) {
 });
 
 app.get('/stay', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', 
+              [210],
+              function (err, result) {
     if (err) {
       console.error(err);
       response.send("Error " + err);
@@ -87,7 +89,7 @@ app.get('/db', function (request, response) {
   pool.query('SELECT * FROM rel_org_type', function (err, result) {
     if (err) {
       console.error(err);
-      response.send("Error " + err);
+      response.send('Error ' + err);
     } else {
       response.render('pages/db', {
         results: result.rows
