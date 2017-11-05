@@ -13,7 +13,8 @@
       <div class="container">
         <h2>Salesforce - Sandbox Preview Guide</h2>
         <p>What Org Instance do you have a question about?</p>
-        <form action="/choose" class="form-primary" size="10">
+        <form action="/choose" type="GET" class="form-primary" size="10">
+          <input type="hidden" name="" value="" />
           <div>
             <select name="org_id">
               <% results.forEach(function(r) { %>

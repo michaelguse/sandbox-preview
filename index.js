@@ -19,6 +19,7 @@ var config = {
 };
 
 var pool = new Pool(config);
+var qryres = "";
 
 var express = require('express');
 var app = express();
@@ -50,25 +51,19 @@ app.get('/choose', function(request, response) {
       console.error(err);
       response.send('Error: ' + err);
     } else {
-      console.log(result.rows);
+      qryres = result.rows;
+      console.log(qryres);
       response.render('pages/choose', {
-        results: result.rows,
+        results: qryres,
       });
     }
   });
 });
 
 app.get('/upgrade', function(request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function(err, result) {
-    if (err) {
-      console.error(err);
-      response.send('Error: ' + err);
-    } else {
-      response.render('pages/upgrade', {
-        results: result.rows,
-      });
-    }
-  });
+    response.render('pages/upgrade', {
+      results: qryres,
+    });
 });
 
 app.get('/stay', function(request, response) {

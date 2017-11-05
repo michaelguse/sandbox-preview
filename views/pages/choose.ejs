@@ -12,10 +12,16 @@
     <div class="jumbotron text-center">
       <div class="container">
         <h2>Salesforce - Sandbox Preview Guide</h2>
+
         <% results.forEach(function(r) { %>
-          
-        <p>What do you want to do with <%= r.org_id  %>?
-        </p>
+
+        <div class="row">
+          <p>Sandbox: <b><%= r.org_id  %> - <%= r.org_type  %></b></p>
+        </div> 
+        <hr style="border-top: 2px solid #ccccff; width: 75%; " />
+        <div class="row">
+          <p>What do you want to do with <%= r.org_id  %>?</p>
+        </div>
         <div class="row">
           <form action="/upgrade" class="form-primary" size="10">
             <div class="col-md-4"></div>
@@ -40,57 +46,15 @@
             <div class="col-md-3"></div>
           </form>
         </div>
-        <hr style="border-top: 2px solid #ccccff; " />
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3" style="text-align: right;">
-              <p class="listing-left">Org Instance:</p>
-              <p class="listing-left">Org Type:</p>
-            </div>
-            <div class="col-md-3" style="text-align: left;">
-              <p class="listing-right-latest" ><%= r.org_id  %></p>
-              <p class="listing-right-latest" ><%= r.org_type  %></p>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
       </div>
+
       <% }); %>
+
     </div>
     <div class="container">
-      <div class="alert alert-info text-center" role="alert">
+      <div class="alert alert-info text-center" style="display: none;" role="alert">
         Some messages / alerts for the users here.
       </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-6">
-          <h3>
-            <span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-          <ul>
-            <li>
-              <a href="https://www.heroku.com/home">Heroku</a>
-            </li>
-            <li>
-              <a href="https://devcenter.heroku.com/">Heroku Dev Center</a>
-            </li>
-            <li>
-              <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started with Node on Heroku</a>
-            </li>
-            <li>
-              <a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-6">
-          <h3>
-            <span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-          <ul>
-            <li>If you are following the
-              <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-            <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-          </ul>
-        </div>
-      </div>
-      <!-- row -->
     </div>
 
 </body>
