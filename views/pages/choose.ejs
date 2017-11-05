@@ -12,8 +12,9 @@
     <div class="jumbotron text-center">
       <div class="container">
         <h2>Salesforce - Sandbox Preview Guide</h2>
-        <p>What do you want to do with CS83
-          <%=  %>
+        <% results.forEach(function(r) { %>
+          
+        <p>What do you want to do with <%= r.org_id  %>?
         </p>
         <div class="row">
           <form action="/upgrade" class="form-primary" size="10">
@@ -47,12 +48,13 @@
               <p class="listing-left">Org Type:</p>
             </div>
             <div class="col-md-3" style="text-align: left;">
-              <p class="listing-right-latest" >CS83<%=    %></p>
-              <p class="listing-right-latest" >PREVIEW<%=    %></p>
+              <p class="listing-right-latest" ><%= r.org_id  %></p>
+              <p class="listing-right-latest" ><%= r.org_type  %></p>
             </div>
             <div class="col-md-3"></div>
         </div>
       </div>
+      <% }); %>
     </div>
     <div class="container">
       <div class="alert alert-info text-center" role="alert">

@@ -15,7 +15,7 @@ var config = {
   host: params.hostname,
   port: params.port,
   database: params.pathname.split('/')[1],
-  ssl: sslValue
+  ssl: sslValue,
 };
 
 var pool = new Pool(config);
@@ -31,73 +31,72 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.get('/', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
+app.get('/', function(request, response) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function(err, result) {
     if (err) {
       console.error(err);
-      response.send("Error " + err);
+      response.send('Error: ' + err);
     } else {
-      response.render('pages/index', {
-        results: result.rows
+        response.render('pages/index', {
+        results: result.rows,
       });
     }
   });
 });
 
-app.get('/choose', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
+app.get('/choose', function(request, response) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE id = $1', [request.query.org_id], function(err, result) {
     if (err) {
       console.error(err);
-      response.send("Error " + err);
+      response.send('Error: ' + err);
     } else {
+      console.log(result.rows);
       response.render('pages/choose', {
-        results: result.rows
+        results: result.rows,
       });
     }
   });
 });
 
-app.get('/upgrade', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function (err, result) {
+app.get('/upgrade', function(request, response) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function(err, result) {
     if (err) {
       console.error(err);
-      response.send("Error " + err);
+      response.send('Error: ' + err);
     } else {
       response.render('pages/upgrade', {
-        results: result.rows
+        results: result.rows,
       });
     }
   });
 });
 
-app.get('/stay', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', 
-              [210],
-              function (err, result) {
+app.get('/stay', function(request, response) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE internal_rel_name = $1', [210], function(err, result) {
     if (err) {
       console.error(err);
-      response.send("Error " + err);
+      response.send('Error: ' + err);
     } else {
       response.render('pages/stay', {
-        results: result.rows
+        results: result.rows,
       });
     }
   });
 });
 
-app.get('/db', function (request, response) {
-  pool.query('SELECT * FROM rel_org_type', function (err, result) {
+app.get('/db', function(request, response) {
+  pool.query('SELECT * FROM rel_org_type', function(err, result) {
     if (err) {
       console.error(err);
       response.send('Error ' + err);
     } else {
       response.render('pages/db', {
-        results: result.rows
+        results: result.rows,
       });
     }
   });
 });
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
