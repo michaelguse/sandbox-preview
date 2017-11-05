@@ -32,6 +32,11 @@
 }
 
 p.listing-right {
+  max-width: 100%;
+  margin: 0;
+}
+
+p.listing-right-latest {
   font-weight: bold;
   max-width: 100%;
   margin: 0;

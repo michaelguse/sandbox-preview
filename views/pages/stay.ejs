@@ -12,17 +12,21 @@
     <div class="jumbotron text-center">
       <div class="container">
         <h2>Salesforce - Sandbox Preview Guide</h2>
-        <p>What to do when you want to stay on the current org version?
-          <%=  %>
-        </p>
+        <div class="row">
+            <p>To stay on Summer '17 <%= %>, we require you to refresh to a NON-PREVIEW sandbox instance.</p>
+            <p><b>Please wait and refresh after 12:00am PDT on September 8, 2017 <%= %>(07:00am UTC on September 8, 2017).</b></p>
+            <p>If you refresh before this date, your sandbox may be built on a PREVIEW <%= %>instance.</p>
+          </div>
         <hr style="border-top: 2px solid #ccccff; " />
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-3" style="text-align: right;">
+              <p class="listing-left">Org Action:</p>
               <p class="listing-left">Org Instance:</p>
               <p class="listing-left">Org Type:</p>
             </div>
             <div class="col-md-3" style="text-align: left;">
+              <p class="listing-right-latest" >STAY<%=    %></p>
               <p class="listing-right" >CS83<%=    %></p>
               <p class="listing-right" >PREVIEW<%=    %></p>
             </div>
