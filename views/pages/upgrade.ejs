@@ -11,10 +11,12 @@
 
     <div class="jumbotron text-center">
       <div class="container">
-        <h2>Salesforce - Sandbox Preview Guide</h2>
 
         <% results.forEach(function(r) { %>
-          
+        <div class="row">
+            <p>Sandbox: <b><%= r.org_id  %> - <%= r.org_type  %> - Upgrade</b></p>
+        </div> 
+        <hr style="border-top: 2px solid #ccccff; width: 75%; " />          
         <div class="row">
           <p><b>No action is needed</b> as <%= r.org_id  %> is already on a <%= r.org_type  %> instance.</p>
           <p>If you need to refresh for other reasons, do so well in advance of
@@ -22,21 +24,6 @@
             to make sure your sandbox completes before the deadline.</p>
           <p>If you refresh after the deadline or your sandbox refresh doesn't complete in time,
             it will be built on a NON-PREVIEW  instance.</p>
-        </div>
-        <hr style="border-top: 2px solid #ccccff; " />
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-3" style="text-align: right;">
-              <p class="listing-left">Org Action:</p>
-              <p class="listing-left">Org Instance:</p>
-              <p class="listing-left">Org Type:</p>
-            </div>
-            <div class="col-md-3" style="text-align: left;">
-              <p class="listing-right-latest" >UPGRADE</p>
-              <p class="listing-right" ><%= r.org_id  %></p>
-              <p class="listing-right" ><%= r.org_type  %></p>
-            </div>
-            <div class="col-md-3"></div>
         </div>
           
         <% }); %>

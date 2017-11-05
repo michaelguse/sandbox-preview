@@ -8,6 +8,14 @@
   padding: 20px auto 20px;
 }
 
+p#nav-header {
+  color: rgb(91, 140, 204);
+  font-size: 2em;
+  margin: 0px;
+  padding-left: 125px;
+  padding-top: 6px;
+}
+
 .jumbotron .form-primary {
   font-size: 1.5em;
 }
