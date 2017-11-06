@@ -16,6 +16,17 @@ p#nav-header {
   padding-top: 6px;
 }
 
+div#choose-button {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  justify-content: right;
+}
+
+hr {
+  margin-top: -5px;
+  margin-bottom:  -5px;
+}
+
 .jumbotron .form-primary {
   font-size: 1.5em;
 }
