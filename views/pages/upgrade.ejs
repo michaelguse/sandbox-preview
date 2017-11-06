@@ -9,33 +9,50 @@
 
   <% include ../partials/nav.ejs %>
 
+  <% results.forEach(function(r) { %>
+    
     <div class="jumbotron text-center">
       <div class="container">
-
-        <% results.forEach(function(r) { %>
         <div class="row">
-            <p>Sandbox: <b><%= r.org_id  %> - <%= r.org_type  %> - Upgrade</b></p>
+          <p>Sandbox: <b><%= r.org_id  %> - <%= r.org_type  %></b></p>
         </div> 
-        <hr style="border-top: 2px solid #ccccff; width: 75%; " />          
+        <hr style="border-top: 2px solid #ccccff; width: 75%; " />
         <div class="row">
+          <p>What do you want to do with <%= r.org_id  %>?</p>
+        </div>
+        <div class="row">
+          <form action="/choose" class="form-primary" size="10">
+            <input type="hidden" name="org_id" value="<%= r.id  %>"/>
+            <div class="col-md-6" id="choose-button">
+              <input type="button" class="btn btn-lg btn-primary" style="float: right;" value="UPGRADE"/>
+            </div>
+            <div class="col-md-6">
+              <p style="float: left;">to Winter '18 ?</p>
+            </div>
+          </form>
+        </div>      
+        <div class="alert alert-info text-center" role="alert">
           <p><b>No action is needed</b> as <%= r.org_id  %> is already on a <%= r.org_type  %> instance.</p>
           <p>If you need to refresh for other reasons, do so well in advance of
             11:59pm PDT on September 7, 2017 (06:59am UTC on September 8, 2017)
             to make sure your sandbox completes before the deadline.</p>
           <p>If you refresh after the deadline or your sandbox refresh doesn't complete in time,
             it will be built on a NON-PREVIEW  instance.</p>
+        </div>       
+        <div class="row">
+            <form action="/stay" class="form-primary" size="10">
+              <div class="col-md-6" id="choose-button">
+                <input type="submit" class="btn btn-lg btn-primary"  style="float: right;" value="&nbsp;&nbsp;&nbsp;&nbsp;STAY&nbsp;&nbsp;&nbsp;&nbsp;" />
+              </div>
+              <div class="col-md-6">
+                <p style="float: left;">on Summer '17 ?</p>
+              </div>
+            </form>
+          </div>
         </div>
-          
-        <% }); %>
-    
-      </div>
-    </div>
-    <div class="container">
-      <div class="alert alert-info text-center" style="display: none;" role="alert">
-        Some messages / alerts for the users here.
-      </div>
-    </div>
-
-</body>
-
-</html>
+  
+    <% }); %>
+  
+  </body>
+  
+  </html>
