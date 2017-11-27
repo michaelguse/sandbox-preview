@@ -38,8 +38,9 @@ app.get('/', function(request, response) {
       console.error(err);
       response.send('Error: ' + err);
     } else {
-        response.render('pages/index', {
-        results: result.rows,
+//        response.render('pages/index', {
+        response.render('pages/index2', {
+            results: result.rows,
       });
     }
   });
