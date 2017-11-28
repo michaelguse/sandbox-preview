@@ -88,3 +88,8 @@ div.row form div.col-md-2 {
 .jumbotron .lang-logo img {
   max-width: 100%;
 }
+
+#custom-templates .empty-message {
+  padding: 5px 10px;
+  text-align: center;
+}

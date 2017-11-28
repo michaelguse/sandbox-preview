@@ -1,33 +1,21 @@
-var substringMatcher = function(strs) {
-    return function findMatches(q, cb) {
-      var matches, substringRegex;
+var sandboxorgs = new Bloodhound({
+  datumTokenizer: Bloodhound.tokenizers.whitespace,
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  // url points to a json file that contains an array of country names, see
+  // https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
+  prefetch: '/sf-sb-winter-18.json'
+});
   
-      // an array that will be populated with substring matches
-      matches = [];
-  
-      // regex used to determine if a string contains the substring `q`
-      substrRegex = new RegExp(q, 'i');
-  
-      // iterate through the pool of strings and for any string that
-      // contains the substring `q`, add it to the `matches` array
-      $.each(strs, function(i, str) {
-        if (substrRegex.test(str)) {
-          matches.push(str);
-        }
-      });
-  
-      cb(matches);
-    };
-  };
-  
-  var states = ['CS81','CS82','CS83','CS84','CS85','CS86','CS87','CS88','CS89'];
-  
-  $('#the-basics .typeahead').typeahead({
-    hint: true,
-    highlight: true,
-    minLength: 1,
-  },
-  {
-    name: 'states',
-    source: substringMatcher(states),
-  });
+$('#custom-templates .typeahead').typeahead(null, {
+  name: 'Org Instances',
+  display: 'org_id',
+  source: sandboxorgs,
+  templates: {
+    empty: [
+      '<div class="empty-message">',
+        'unable to find any org instances that match the current query',
+      '</div>'
+    ].join('\n'),
+    suggestion: Handlebars.compile('<div><strong>{{org_id}}</strong> – {{org_type}}</div>')
+  }
+});
