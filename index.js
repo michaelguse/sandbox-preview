@@ -48,7 +48,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/choose', function(request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE id = $1', [request.query.org_id], function(err, result) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = $1', [request.query.org_id], function(err, result) {
     if (err) {
       console.error(err);
       response.send('Error: ' + err);
