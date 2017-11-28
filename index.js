@@ -1,5 +1,6 @@
 var Pool = require('pg-pool');
 var url = require('url');
+require('handlebars');
 
 var params = url.parse(process.env.DATABASE_URL || 'postgres://mguse:@localhost:5432/mguse');
 var auth = params.auth.split(':');
