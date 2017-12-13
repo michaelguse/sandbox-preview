@@ -1,39 +1,39 @@
 {
-  "name": "sf-sandbox-preview",
-  "version": "0.2.6",
-  "description": "A sandbox preview Node.js app using Express 4",
-  "engines": {
-    "node": "8.1.2"
-  },
+  "name": "sandbox-preview",
+  "version": "1.0.0",
+  "description": "Sandbox Preview app",
+  "author": "Michelle Lamoureaux",
   "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
-  },
   "dependencies": {
-    "autocomplete": "0.0.1",
-    "ejs": "2.5.6",
-    "eslint": "^4.9.0",
-    "express": "4.15.2",
-    "handlebars": "^4.0.11",
-    "pg": "^6.4.2",
-    "pg-pool": "^2.0.3",
-    "typeahead": "^0.2.2",
-    "url": "^0.11.0"
+    "express": "^4.15.2",
+    "express-basic-auth": "^1.0.2",
+    "file-system": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-compass": "^2.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-file-include": "^0.14.0",
+    "gulp-gzip": "^1.4.0",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-nunjucks-render": "^2.2.1",
+    "gulp-s3": "^0.3.0",
+    "gulp-server-livereload": "^1.9.2",
+    "gulp-watch": "^4.3.9",
+    "imagemin-pngquant": "^5.0.0",
+    "path": "^0.12.7"
   },
-  "devDependencies": {
-    "eslint-config-google": "^0.9.1",
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "ttps://git.heroku.com/sf-sandbox-preview.git"
+    "url": "git+https://github.com/michaelguse/sandbox-preview.git"
   },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ],
-  "license": "MIT"
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaelguse/sandbox-preview/issues"
+  },
+  "homepage": "https://github.com/michaelguse/sandbox-preview#readme"
 }

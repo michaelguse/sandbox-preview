@@ -5,8 +5,12 @@ npm-debug.log
 # Local development
 *.env
 *.dev
+*.log
 .DS_Store
 .eslintrc.js
+.sass-cache
+/html
+/old-app
 
 # Docker
 Dockerfile

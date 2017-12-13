@@ -1,0 +1,46 @@
+// RESET COLUMNS
+
+@mixin resetColums () {
+  $page-margin: 20px;
+  $total-columns: 12;
+  $column-width: (100 /$total-columns) * 1%;
+}
+
+// BREAKPOINTS
+
+@mixin at-breakpoint($viewport) {
+
+  @if nth($viewport, 1) == small-screen {
+    $total-columns: 6;
+    $column-width: (100 /$total-columns) * 1%;
+  }
+
+  @else if nth($viewport, 1) == medium-screen {
+    $total-columns: 12;
+    $column-width: (100 /$total-columns) * 1%;
+  }
+
+  @else if nth($viewport, 1) == large-screen {
+    $total-columns: 12;
+    $column-width: (100 /$total-columns) * 1%;
+  }
+
+  @else if nth($viewport, 1) == xlarge-screen {
+    $total-columns: 12;
+    $column-width: (100 /$total-columns) * 1%;
+  }
+
+  @if length($viewport) == 2 {
+    @media all and (min-width: nth($viewport, 2)) {
+      @content;
+    }
+  }
+  @else {
+    @media all and (min-width: nth($viewport, 2)) and (max-width: nth($viewport, 3)) {
+      @content;
+    }
+  }
+
+  @include resetColums;
+
+}
