@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+
+  <% results.forEach(function(r) { %>
+    
+    <div class="jumbotron text-center">
+      <div class="container">
+        <div class="row">
+          <p>Sandbox: <b><%= r.org_id  %> - <%= r.org_type  %></b></p>
+        </div> 
+        <hr style="border-top: 2px solid #ccccff; width: 75%; " />
+        <div class="row">
+          <p>What do you want to do with <%= r.org_id  %>?</p>
+        </div>
+        <div class="row">
+          <form action="/upgrade" class="form-primary" size="10">
+            <div class="col-md-6" id="choose-button">
+              <input type="submit" class="btn btn-lg btn-primary"  onclick="history.back()" style="float: right;" value="UPGRADE"/>
+            </div>
+            <div class="col-md-6">
+              <p style="float: left;">to Winter '18 ?</p>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <form>
+            <div class="col-md-6" id="choose-button">
+              <input type="button" onclick="history.back()" class="btn btn-lg btn-primary"  style="float: right;" value="&nbsp;&nbsp;&nbsp;&nbsp;STAY&nbsp;&nbsp;&nbsp;&nbsp;" />
+            </div>
+            <div class="col-md-6">
+              <p style="float: left;">on Summer '17 ?</p>
+            </div>
+          </form>
+        </div> 
+        <div class="alert alert-info text-center" role="alert">
+            <p>To stay on Summer '17 <%= %>, we require you to refresh to a NON-PREVIEW sandbox instance.</p>
+            <p><b>Please wait and refresh after 12:00am PDT on September 8, 2017 <%= %>(07:00am UTC on September 8, 2017).</b></p>
+            <p>If you refresh before this date, your sandbox may be built on a PREVIEW <%= %>instance.</p>
+          </div>
+      </div>
+    </div>
+ 
+    <% }); %>
+
+</body>
+
+</html>

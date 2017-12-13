@@ -1,0 +1,8 @@
+{
+  "name": "Salesforce Sandbox Preview Guide",
+  "description": "A simple app to allow Salesforce users to determine what to do with a sandbox",
+  "repository": "https://github.com/michaelguse/sandbox-preview.git",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "express", "heroku", "sandbox", "salesforce", "preview", "guide"],
+  "image": "heroku/nodejs"
+}

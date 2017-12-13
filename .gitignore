@@ -10,7 +10,6 @@ npm-debug.log
 .eslintrc.js
 .sass-cache
 /html
-/old-app
 
 # Docker
 Dockerfile

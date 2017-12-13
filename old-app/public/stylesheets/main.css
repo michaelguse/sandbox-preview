@@ -1,0 +1,95 @@
+.navbar {
+  margin-bottom: -5px;
+}
+
+.jumbotron {
+  background: rgb(255, 255, 255);
+  color: rgb(91, 140, 204);
+  padding: 20px auto 20px;
+}
+
+p#nav-header {
+  color: rgb(91, 140, 204);
+  font-size: 2em;
+  margin: 0px;
+  padding-left: 125px;
+  padding-top: 6px;
+}
+
+div#choose-button {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  justify-content: right;
+}
+
+hr {
+  margin-top: -5px;
+  margin-bottom:  -5px;
+}
+
+.jumbotron .form-primary {
+  font-size: 1.5em;
+}
+
+.jumbotron .form-primary select{
+  margin: 0em auto 1em;
+}
+
+.jumbotron .btn-primary {
+  background: #5582b9;
+  border-color: #5582b9;
+}
+
+.jumbotron .btn-primary:hover {
+  background: #0053be;
+}
+
+.jumbotron p {
+  color: #818181;
+  max-width: 75%;
+  margin: 1em auto 1em;
+}
+
+p.listing-right {
+  max-width: 100%;
+  margin: 0;
+}
+
+p.listing-right-latest {
+  font-weight: bold;
+  max-width: 100%;
+  margin: 0;
+}
+
+p.listing-left {
+  max-width: 100%;
+  margin: 0;
+}
+
+div.row form div.col-md-2 {
+  padding-top: 13px;
+} 
+
+.navbar+.jumbotron {
+  margin-top: -20px;
+}
+
+.jumbotron .lang-logo {
+  display: block;
+  background: #B01302;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border: 2px solid white;
+}
+
+.jumbotron .lang-logo img {
+  max-width: 100%;
+}
+
+#custom-templates .empty-message {
+  padding: 5px 10px;
+  text-align: center;
+}
