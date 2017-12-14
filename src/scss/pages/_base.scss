@@ -93,7 +93,7 @@ p {
 }
 
 p + p {
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 a, a:visited, a:active {
@@ -117,10 +117,19 @@ strong {
 .component {
   background: $karl-the-fog;
   border-top: 2px solid $sf-blue;
-  margin-bottom: 50px;
+  margin: 0 auto 50px;
   padding: 20px;
   text-align: center;
   width: 100%;
+
+  &.upgrade-info {
+    width: 70%;
+    display: none;
+
+    &.reveal {
+      display: block;
+    }
+  }
 }
 
 .sf-logo {
@@ -130,11 +139,31 @@ strong {
 .header-container {
   background: $sf-blue;
   margin-bottom: 25px;
+  overflow: auto;
   padding: 50px 0;
 
+  .content-wrapper {
+    height: 100%;
+    overflow: none;
+  }
+
   h1 {
+    color: $color-white;
     font-family: $sf-thin;
     line-height: 1.25em;
+  }
+
+  .half {
+    width: 50%;
+    float: left;
+
+    p {
+      font-family: $sf-light;
+    }
+
+    &:nth-child(2) {
+      padding: 0 0 0 80px;
+    }
   }
 }
 
@@ -142,7 +171,7 @@ strong {
   margin: 35px 0;
 
   h4 {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
   }
 
   img {
@@ -158,6 +187,7 @@ strong {
 }
 
 .upgrade-content {
+  text-align: center;
 
   .component {
     margin-bottom: 50px;
@@ -165,6 +195,18 @@ strong {
 
   h3, p {
     margin-bottom: 25px;
+  }
+
+  .upgrade-option {
+    border: 2px solid $sf-blue;
+    margin: 25px auto;
+    padding: 15px 20px;
+    width: 350px;
+
+    &:hover {
+      background: $sf-blue;
+      color: $color-white;
+    }
   }
 }
 
@@ -220,6 +262,20 @@ input.button {
   }
 }
 
+@include at-breakpoint($small-screen) {
+
+  .header-container {
+
+    .half {
+      width: 100%;
+
+      &:nth-child(2) {
+        padding: 25px 0 0;
+      }
+    }
+  }
+}
+
 @include at-breakpoint($medium-screen) {
 
   .content-wrapper {
@@ -251,6 +307,17 @@ input.button {
 
     img {
       width: 65%;
+    }
+  }
+
+  .header-container {
+
+    .half {
+      max-width: 500px;
+
+      &:nth-child(2) {
+        float: right;
+      }
     }
   }
 }
