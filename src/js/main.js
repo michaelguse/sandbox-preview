@@ -1,3 +1,4 @@
 $('.upgrade-option').click(function(){
-  $(this).closest('.upgrade-info').addClass('reveal');
+  var link = $(this);
+  link.next('.upgrade-info').toggleClass('reveal');
 });
