@@ -124,7 +124,24 @@ strong {
 }
 
 .sf-logo {
+  display: inline-block;
   margin: 10px 0;
+}
+
+.nav-container {
+
+  .back-link {
+    display: none;
+
+    &.reveal {
+      display: inline-block;
+      margin-left: 25px;
+
+      a {
+        font-weight: 500;
+      }
+    }
+  }
 }
 
 .header-container {
@@ -282,7 +299,12 @@ input.button {
 
 @include at-breakpoint($small-screen) {
 
+  h1 {
+    font-size: 42px;
+  }
+
   .header-container {
+    padding: 30px 0;
 
     .half {
       width: 100%;
