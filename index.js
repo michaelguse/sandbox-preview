@@ -24,6 +24,8 @@ var pool = new Pool(config);
 var qryres = "";
 
 var express = require('express');
+var upperCase = require('upper-case');
+
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -49,7 +51,7 @@ app.get('/', function(request, response) {
 });
 
 app.get('/upgrade', function(request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = $1 and internal_rel_name = $2', [request.query.org_id, 210], function(err, result) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = $1 and internal_rel_name = $2', [upperCase(request.query.org_id), 210], function(err, result) {
     if (err) {
       console.error(err);
       response.send('Error: ' + err);
