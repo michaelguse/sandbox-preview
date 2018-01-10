@@ -63,18 +63,6 @@ app.get('/upgrade', function(request, response) {
   });
 });
 
-app.get('/upgrade-old', function(request, response) {
-    response.render('pages/upgrade', {
-      results: qryres,
-    });
-});
-
-app.get('/stay-old', function(request, response) {
-  response.render('pages/stay', {
-    results: qryres,
-  });
-});
-
 app.get('/db', function(request, response) {
   pool.query('SELECT * FROM rel_org_type', function(err, result) {
     if (err) {

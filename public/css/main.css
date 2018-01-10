@@ -390,4 +390,10 @@ input.button:hover {
   .header-container .half:nth-child(2) {
     float: right;
   }
+  
+  #scrollable-dropdown-menu .tt-menu {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+
 }
