@@ -41,7 +41,7 @@ app.get('/', function(request, response) {
       response.send('Error: ' + err);
     } else {
 //        response.render('pages/index', {
-        response.render('pages/index2', {
+        response.render('pages/index', {
             results: result.rows,
       });
     }
