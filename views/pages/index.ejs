@@ -1,39 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Sandbox Refresh</title>
-  <link rel="stylesheet" href="/css/main.css">
-</head>
+<% include ../partials/head.ejs %>
 
 <body>
 
   <div class="wrapper">
     <div class="body-wrapper">
 
-      <nav class="nav-container">
-        <div class="content-wrapper">
-          <div class="sf-logo">
-            <img src="/images/sf-logo.png" alt="Salesforce" />
-          </div>
-        </div>
-      </nav>
+      <% include ../partials/nav.ejs %>
 
-      <header class="header-container">
-        <div class="content-wrapper">
-          <div class="half">
-            <h1>Salesforce Sandbox
-              <br />Preview Guide</h1>
-          </div>
-          <div class="half">
-            <p>Are you taking advantage of the Sandbox Preview window to test, catch, and report bugs before they bite? Enter
-              your Sandbox instance below to determine what needs to be done, based on what instance your sandbox org is
-              currently on.</p>
-          </div>
-        </div>
-      </header>
+      <% include ../partials/header.ejs %>
 
       <div class="content-wrapper">
         <div class="component">
@@ -64,27 +41,11 @@
           </div>
         </div>
 
-        <footer class="footer-wrapper">
-          <div class="content-wrapper">
-            <div class="footer-links">
-              <a href="https://www.salesforce.com/company/privacy/" target="_blank">Privacy</a>&nbsp;|&nbsp;
-              <a href="https://www.salesforce.com/company/disclosure/" target="_blank">Responsible Disclosure</a>&nbsp;|&nbsp;
-              <a href="https://trust.salesforce.com/en/" target="_blank">Trust</a>&nbsp;|&nbsp;
-              <a href="https://www.salesforce.com/form/contact/contactme.jsp" target="_blank">Contact</a>
-            </div>
-            <div class="footer-legal">
-              <p>&copy;Copyright 2017 Salesforce.com, inc. All rights reserved. Various trademarks held by their respective
-                owners. Salesforce.com, inc. The Landmark at One Market, Suite 300, San Francisco, CA 94105, United States</p>
-            </div>
-          </div>
-        </footer>
+        <% include ../partials/footer.ejs %>
 
       </div>
 
-      <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
-        crossorigin="anonymous"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.bundle.js"></script>
-      <script src="/js/main.js"></script>
+    <% include ../partials/script_section.ejs %>
 
 </body>
 
