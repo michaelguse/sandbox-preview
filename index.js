@@ -73,6 +73,7 @@ app.get('/upgrade',
             response.send('Error: ' + err);
           } else {
             qryres = result.rows;
+            // check for empyt result set
             if (qryres.length > 0) {
               console.log(qryres);
               response.render('pages/upgrade', {
