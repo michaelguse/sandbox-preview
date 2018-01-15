@@ -353,6 +353,10 @@ input.button:hover {
   color: #fff;
 }
 
+.form-error-msg {
+  border: 2px solid #ff0000;
+}
+
 @media all and (min-width: 0) and (max-width: 767px) {
   .header-container .half {
     width: 100%;
