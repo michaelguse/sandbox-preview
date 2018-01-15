@@ -40,6 +40,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+// Home page request
 app.get('/',
   function (request, response) {
     pool.query('SELECT internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type', function (err, result) {
@@ -53,6 +54,7 @@ app.get('/',
   }
 );
 
+//Sandbox upgrade page request
 app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
@@ -71,10 +73,15 @@ app.get('/upgrade',
             response.send('Error: ' + err);
           } else {
             qryres = result.rows;
-            console.log(qryres);
-            response.render('pages/upgrade', {
-              results: qryres,
-            });
+            if (qryres.length > 0) {
+              console.log(qryres);
+              response.render('pages/upgrade', {
+                results: qryres,
+              });
+            } else {
+              console.log("[ 'Invalid entry - try again!' ]");
+              response.render('pages/index.ejs', { errors: [ 'Invalid entry - try again!' ] });
+            }
           }
         });
       }
