@@ -1,10 +1,4 @@
 /* ------------------
-    GRID
--------------------*/
-/* ------------------
-    COLORS
--------------------*/
-/* ------------------
     FONTS
 -------------------*/
 @font-face {
@@ -35,9 +29,7 @@
   font-weight: normal;
   font-style: normal;
 }
-/* ------------------
-    FONT SIZES
--------------------*/
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -176,6 +168,7 @@ p {
   font-size: 15px;
   line-height: 1.5em;
 }
+
 p.upgrade-option {
   color: #3290c5;
   cursor: pointer;
@@ -214,7 +207,19 @@ strong {
 }
 
 .sf-logo {
+  display: inline-block;
   margin: 10px 0;
+}
+
+.nav-container .back-link {
+  display: none;
+}
+.nav-container .back-link.reveal {
+  display: inline-block;
+  margin-left: 25px;
+}
+.nav-container .back-link.reveal a {
+  font-weight: 500;
 }
 
 .header-container {
@@ -353,11 +358,14 @@ input.button:hover {
   color: #fff;
 }
 
-.form-error-msg {
-  border: 2px solid #ff0000;
-}
-
 @media all and (min-width: 0) and (max-width: 767px) {
+  h1 {
+    font-size: 42px;
+  }
+
+  .header-container {
+    padding: 30px 0;
+  }
   .header-container .half {
     width: 100%;
   }
@@ -394,10 +402,4 @@ input.button:hover {
   .header-container .half:nth-child(2) {
     float: right;
   }
-  
-  #scrollable-dropdown-menu .tt-menu {
-    max-height: 150px;
-    overflow-y: auto;
-  }
-
 }

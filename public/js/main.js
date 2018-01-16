@@ -3,6 +3,11 @@ $('.upgrade-option').click(function(){
   link.next('.upgrade-info').toggleClass('reveal');
 });
 
+var currentPage = $(location).attr('pathname');
+if(currentPage.indexOf('upgrade') > -1){
+  $('.back-link').addClass('reveal');
+}
+
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substringRegex;
