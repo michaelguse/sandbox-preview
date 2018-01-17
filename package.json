@@ -14,6 +14,7 @@
     "autocomplete": "0.0.1",
     "body-parser": "^1.18.2",
     "ejs": "2.5.6",
+    "eslint": "^4.15.0",
     "express": "4.15.2",
     "express-form": "^0.12.6",
     "handlebars": "^4.0.11",
