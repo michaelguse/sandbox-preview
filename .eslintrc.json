@@ -1,3 +1,8 @@
 {
-    "extends": "standard"
+    "extends": "standard",
+    
+    "rules": {
+        "no-undef": 1,
+        "no-unused-vars": 1
+    }
 }
