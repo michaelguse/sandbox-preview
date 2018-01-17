@@ -87,21 +87,22 @@ app.get('/upgrade',
           }
         });
       }
-    });
+    }
+);
 
-    app.get('/db', function (request, response) {
-      pool.query('SELECT * FROM rel_org_type', function (err, result) {
-        if (err) {
-          console.error(err);
-          response.send('Error ' + err);
-        } else {
-          response.render('pages/db', {
-            results: result.rows,
-          });
-        }
+app.get('/db', function (request, response) {
+  pool.query('SELECT * FROM rel_org_type', function (err, result) {
+    if (err) {
+      console.error(err);
+      response.send('Error ' + err);
+    } else {
+      response.render('pages/db', {
+        results: result.rows,
       });
-    });
+    }
+  });
+});
 
-    app.listen(app.get('port'), function () {
-      console.log('Node app is running on port', app.get('port'));
-    });
+app.listen(app.get('port'), function () {
+  console.log('Node app is running on port', app.get('port'));
+});
