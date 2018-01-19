@@ -3,7 +3,7 @@ var url = require('url');
 require('handlebars');
 
 // Change the local Postgres DB connection string to your own setup for local testing
-//var params = url.parse(process.env.DATABASE_URL || postgres://mguse:@localhost:5432/mguse');
+//var params = url.parse(process.env.DATABASE_URL || 'postgres://mguse:@localhost:5432/mguse');
 var params = url.parse(process.env.DATABASE_URL || 'postgres://osxdwyswpfhgum:3c484b79e2e1e149624aa4e174b54d93db079122590874c92e5f9f2461f3b832@ec2-54-163-227-202.compute-1.amazonaws.com:5432/d2tre79jqmq0vu');
 var auth = params.auth.split(':');
 var sslValue = true;
