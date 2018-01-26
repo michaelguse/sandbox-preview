@@ -52,7 +52,9 @@ app.use('/upgrade',function (req, res, next) {
     path: '/v1/instances/CS80/status',
     method: 'GET'
   };
+  
   var output = '';
+  
   https.request(options, function(res) {
     console.log('STATUS: ' + res.statusCode);
     console.log('HEADERS: ' + JSON.stringify(res.headers));
