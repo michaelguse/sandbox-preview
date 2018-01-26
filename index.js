@@ -53,7 +53,7 @@ app.use('/upgrade',function (req, res, next) {
     method: 'GET'
   };
   var output = '';
-  var reqGet = https.request(options, function(res) {
+  https.request(options, function(res) {
     console.log('STATUS: ' + res.statusCode);
     console.log('HEADERS: ' + JSON.stringify(res.headers));
     res.setEncoding('utf8');
@@ -67,8 +67,6 @@ app.use('/upgrade',function (req, res, next) {
       console.error(e);
     });
   }).end();
-
-  
 
   next();
 })
