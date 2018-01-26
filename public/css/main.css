@@ -150,6 +150,11 @@ p.upgrade-option {
   cursor: pointer;
   font-size: 1.5em;
 }
+p.large {
+  font-size: 1.5em;
+  margin: 0 auto;
+  width: 90%;
+}
 p + p {
   margin-top: 15px;
 }
@@ -239,7 +244,7 @@ strong {
 .upgrade-content .component.upgrade-info {
   border: 0 none;
   padding: 0;
-  width: 70%;
+  width: 100%;
   margin: 0 auto 0;
   max-height: 0;
   overflow: hidden;
@@ -252,17 +257,17 @@ strong {
 .upgrade-content .component.upgrade-info.reveal {
   border-top: 2px solid #00A1E0;
   height: auto;
-  margin: 0 auto 50px;
+  margin: 0 auto 20px;
   max-height: 500px;
   overflow: hidden;
-  padding: 25px 35px;
+  padding: 20px;
   -moz-transition-duration: 0.3s;
   -webkit-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
   transition-duration: 0.3s;
 }
 .upgrade-content h3, .upgrade-content p {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 .upgrade-content .upgrade-option {
   border: 2px solid #00A1E0;
@@ -347,13 +352,29 @@ input.button:hover {
   .content-wrapper {
     width: 972px;
   }
+  p.large {
+    width: 65%;
+  }
   .general-content img {
     width: 65%;
+  }
+  .upgrade-content p {
+    margin-bottom: 25px;
+  }
+  .upgrade-content .component.upgrade-info {
+    width: 70%;
+  }
+  .upgrade-content .component.upgrade-info.reveal {
+    margin: 0 auto 50px;
+    padding: 25px 35px;
   }
 }
 @media all and (min-width: 1312px) {
   .content-wrapper {
     width: 1312px;
+  }
+  p.large {
+    width: 65%;
   }
   .general-content p {
     margin: 0 auto;
@@ -367,5 +388,15 @@ input.button:hover {
   }
   .header-container .half:nth-child(2) {
     float: right;
+  }
+  .upgrade-content p {
+    margin-bottom: 25px;
+  }
+  .upgrade-content .component.upgrade-info {
+    width: 70%;
+  }
+  .upgrade-content .component.upgrade-info.reveal {
+    margin: 0 auto 50px;
+    padding: 25px 35px;
   }
 }
