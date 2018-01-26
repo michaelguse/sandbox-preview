@@ -41,6 +41,38 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+// Application-level middleware
+app.use('/upgrade',function (req, res, next) {
+  
+  var https = require('https');
+
+  var options = {
+    host: 'api.status.salesforce.com',
+    port: 443,
+    path: '/v1/instances/CS80/status',
+    method: 'GET'
+  };
+  var output = '';
+  var reqGet = https.request(options, function(res) {
+    console.log('STATUS: ' + res.statusCode);
+    console.log('HEADERS: ' + JSON.stringify(res.headers));
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      output += chunk;
+    });
+    res.on('end', function () {
+      console.log('Response Data:\n ' + output);
+    })
+    res.on('error', function(e) {
+      console.error(e);
+    });
+  }).end();
+
+  
+
+  next();
+})
+
 // Home page request
 app.get('/',
   function (request, response) {
