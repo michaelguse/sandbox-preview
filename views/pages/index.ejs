@@ -7,36 +7,45 @@
       <% include ../partials/nav.ejs %>
       <% include ../partials/header.ejs %>
       <div class="content-wrapper">
-        <div class="component">
-          <h3>What is your Sandbox instance?</h3>
-          <form action="/upgrade" type="GET" class="form-primary">
-            <% if (locals.errors) { %>
-              <% errors.forEach(function(r) { %>
-                <input class="form-error-msg"name="org_id" placeholder="<%= r %>" type="text" autocomplete="off" autofocus required />
-              <% }); %>
-            <% } else { %>
-              <input name="org_id" placeholder="Instance name, eg CS81" type="text" autocomplete="off" autofocus required />
-            <% }; %>
-            <input type="submit" class="button" value="submit" />
-          </form>
-          <div class="general-content">
-            <h4>Unsure of your Sandbox Instance?</h4>
-            <p>To determine which instance your Sandbox is on, log into your production org and navigate to your Sandbox List page (Search "Sandbox" in the Quick Find bar on the Setup Home Page).</p>
-            <img src="/images/listpage.png" alt="list page" />
-            <p>Your sandbox instance is listed in the <strong>Location</strong> column above.</p>
-          </div>
-          <div class="divider"></div>
-          <div class="general-content helpful-links">
-            <h4>Additional Information</h4>
-            <p>Get more in-depth information about the Sandbox Preview on the <a href="https://www.salesforce.com/blog/2017/12/salesforce-spring-18-sandbox-preview-instructions" target="_blank">Salesforce Blog</a>.</p>
-            <p>Watch a video on <a href="http://salesforce.vidyard.com/watch/dzC5Xx9GF8dJEM8wUqGim5" target="_blank">Demystifying Sandbox Preview</a>.</p>
-            <p>For more resources, to ask questions, and engage with experts around release readiness, please join the <a href="http://www.salesforce.com/success-releasereadiness" target="_blank"> Release Readiness &amp; Feature Adoption</a> group in the Trailblazer Community.</p>
+        <div class="upgrade-content">
+          <div class="content-wrapper">
+            <h3>What is your Sandbox instance?</h3>
+            <form action="/upgrade" type="GET" class="form-primary">
+              <% if (locals.errors) { %>
+                <% errors.forEach(function(r) { %>
+                  <input class="form-error-msg"name="org_id" placeholder="<%= r %>" type="text" autocomplete="off" autofocus required />
+                <% }); %>
+              <% } else { %>
+                <input name="org_id" placeholder="Instance name, eg CS81" type="text" autocomplete="off" autofocus required />
+              <% }; %>
+              <input type="submit" class="button" value="submit" />
+            </form>
+            <div class="general-content">
+              <h4>Unsure of your Sandbox Instance?</h4>
+              <p>To determine which instance your Sandbox is on, log into your production org and navigate to your Sandbox List page (Search "Sandbox" in the Quick Find bar on the Setup Home Page).</p>
+              <img class="shadow" src="/images/listpage.png" alt="sandbox list page" />
+              <p>Your sandbox instance is listed in the <strong>Location</strong> column above.</p>
+            </div>
           </div>
         </div>
       </div>
+      <div class="component">
+        <div class="general-content helpful-links">
+          <h4>Additional Information</h4>
+          <p>Get more in-depth information about the Sandbox Preview on the
+            <a href="https://www.salesforce.com/blog/2017/12/salesforce-spring-18-sandbox-preview-instructions" target="_blank">Salesforce Blog</a>.</p>
+          <p>Watch a video on
+            <a href="http://salesforce.vidyard.com/watch/dzC5Xx9GF8dJEM8wUqGim5" target="_blank">Demystifying Sandbox Preview</a>.</p>
+          <p>For more resources, to ask questions and engage with experts around release readiness, please join the
+              <a href="http://www.salesforce.com/success-releasereadiness" target="_blank"> Release Readiness & Feature Adoption</a> group 
+              in the Trailblazer Community.</p>
+        </div>
+      </div>
     </div>
+
     <% include ../partials/footer.ejs %>
     <% include ../partials/script_section.ejs %>
+  
   </div>
 </body>
 </html>

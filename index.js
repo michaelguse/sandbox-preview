@@ -3,7 +3,7 @@ var url = require('url');
 require('handlebars');
 
 // Change the local Postgres DB connection string to your own setup for local testing
-//var params = url.parse(process.env.DATABASE_URL || postgres://mguse:@localhost:5432/mguse');
+//var params = url.parse(process.env.DATABASE_URL || 'postgres://mguse:@localhost:5432/mguse');
 var params = url.parse(process.env.DATABASE_URL || 'postgres://osxdwyswpfhgum:3c484b79e2e1e149624aa4e174b54d93db079122590874c92e5f9f2461f3b832@ec2-54-163-227-202.compute-1.amazonaws.com:5432/d2tre79jqmq0vu');
 var auth = params.auth.split(':');
 var sslValue = true;
@@ -40,6 +40,38 @@ app.use(express.static(__dirname + '/public'));
 // views is directory for all template files
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
+
+// Application-level middleware
+app.use('/upgrade',function (req, res, next) {
+  
+  var https = require('https');
+
+  var options = {
+    host: 'api.status.salesforce.com',
+    port: 443,
+    path: '/v1/instances/CS80/status',
+    method: 'GET'
+  };
+  
+  var output = '';
+  
+  https.request(options, function(res) {
+    console.log('STATUS: ' + res.statusCode);
+    console.log('HEADERS: ' + JSON.stringify(res.headers));
+    res.setEncoding('utf8');
+    res.on('data', function (chunk) {
+      output += chunk;
+    });
+    res.on('end', function () {
+      console.log('Response Data:\n ' + output);
+    })
+    res.on('error', function(e) {
+      console.error(e);
+    });
+  }).end();
+
+  next();
+})
 
 // Home page request
 app.get('/',
