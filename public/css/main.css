@@ -105,8 +105,8 @@ textarea {
   text-overflow: '';
 }
 h1 {
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 30px;
+  line-height: 1em;
 }
 h2 {
   font-size: 42px;
@@ -196,7 +196,7 @@ strong {
   background: #00A1E0;
   margin-bottom: 25px;
   overflow: auto;
-  padding: 50px 0;
+  padding: 25px 0;
 }
 .header-container .content-wrapper {
   height: 100%;
@@ -238,9 +238,6 @@ strong {
 .upgrade-content {
   text-align: center;
 }
-.upgrade-content .component {
-  text-align: left;
-}
 .upgrade-content .component.upgrade-info {
   border: 0 none;
   padding: 0;
@@ -275,12 +272,19 @@ strong {
   padding: 15px 20px;
   width: 350px;
 }
+.upgrade-content .upgrade-option:first-of-type {
+  margin: 25px auto 0;
+}
 .upgrade-content .upgrade-option:hover {
   background: #00A1E0;
   color: #fff;
 }
 .helpful-links {
-  margin-bottom: 50px;
+  margin: 25px auto 50px;
+  width: 65%;
+}
+.helpful-links h4 {
+  margin-bottom: 15px;
 }
 
 .footer-wrapper {
@@ -326,8 +330,11 @@ input.button:hover {
   color: #fff;
 }
 @media all and (min-width: 0) and (max-width: 767px) {
-  h1 {
-    font-size: 42px;
+  h3 {
+    font-size: 28px;
+  }
+  p.large {
+    line-height: 1em;
   }
   .header-container {
     padding: 30px 0;
@@ -336,24 +343,54 @@ input.button:hover {
     width: 100%;
   }
   .header-container .half:nth-child(2) {
-    padding: 25px 0 0;
+    padding: 10px 0 0;
   }
   #scrollable-dropdown-menu .tt-menu {
     max-height: 150px;
     overflow-y: auto;
+  }
+  .general-content {
+    margin: 15px 0;
+  }
+  .upgrade-content .component {
+    text-align: left;
+  }
+  .upgrade-content .upgrade-option {
+    margin: 15px auto 10px;
+  }
+  .upgrade-content .upgrade-option#stay {
+    margin: 0 auto 15px;
+  }
+  .helpful-links {
+    margin: 35px auto;
+    width: 90%;
+  }
+  .helpful-links p {
+    text-align: left;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1023px) {
   .content-wrapper {
     width: 752px;
   }
+  h1 {
+    font-size: 50px;
+    line-height: 1em;
+  }
 }
 @media all and (min-width: 1024px) and (max-width: 1311px) {
   .content-wrapper {
     width: 972px;
   }
+  h1 {
+    font-size: 50px;
+    line-height: 1em;
+  }
   p.large {
     width: 65%;
+  }
+  .header-container {
+    padding: 50px 0;
   }
   .general-content img {
     width: 65%;
@@ -373,8 +410,15 @@ input.button:hover {
   .content-wrapper {
     width: 1312px;
   }
+  h1 {
+    font-size: 50px;
+    line-height: 1em;
+  }
   p.large {
     width: 65%;
+  }
+  .header-container {
+    padding: 50px 0;
   }
   .general-content p {
     margin: 0 auto;
