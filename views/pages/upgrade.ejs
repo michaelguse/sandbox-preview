@@ -11,33 +11,20 @@
           <div class="content-wrapper">
               <p class="large">Your Sandbox <strong><%= r.org_id  %></strong> is a <%= r.org_type  %> Instance,<br/>on <%= r.external_rel_name  %></p>
             <h3>What would you like information on?</h3>
-<<<<<<< HEAD
-            <p class="upgrade-option" id="upgrade">Upgrade to Spring '18<br />(get the Preview)</p>
-=======
             <p class="upgrade-option" id="upgrade">Upgrade to Summer '18
               <br />(get the Preview)</p>
->>>>>>> Updates for 214 release
             <div class="component upgrade-info" id="upgrade">
               <% if (r.org_type == "PREVIEW") { %>
                 <!-- replace text below with dynamic data from CSV file -->
-<<<<<<< HEAD
-                <p><strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
-                <p>If you need to refresh for other reasons, do so well in advance of 11:59pm PT on January 4, 2018 (7:59 UTC on January 5, 2018) to make sure your Sandbox completes before the deadline. If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built on a Non-Preview Instance.</p>
-=======
                 <p>
                   <strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
                 <p>If you need to refresh for other reasons, do so well in advance of 11:59pm PT on May 4, 2018 (7:59 UTC
                   on May 5, 2018) to make sure your Sandbox completes before the deadline. If you refresh after the deadline
                   or your Sandbox doesn't complete in time, it will be built on a Non-Preview Instance.</p>
 
->>>>>>> Updates for 214 release
               <% } %>
               <% if (r.org_type == "NON-PREVIEW") { %>
                 <!-- replace text below with dynamic data from CSV file -->
-<<<<<<< HEAD
-                <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early to Spring '18.</p>
-                <p><strong>Please refresh well in advance of 11:59p.m. PT on January 4, 2018 (07:59 UTC on January 5, 2018)</strong>. If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built on a Non-Preview instance.</p>
-=======
                 <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early to Summer
                   '18.</p>
 
@@ -46,44 +33,28 @@
                   If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built on a Non-Preview
                   instance.</p>
 
->>>>>>> Updates for 214 release
               <% } %>
             </div>
-<<<<<<< HEAD
-            <p class="upgrade-option" id="stay">Stay on Winter '18<br />(no Preview)</p>
-=======
             <p class="upgrade-option" id="stay">Stay on Spring '18
               <br />(no Preview)</p>
->>>>>>> Updates for 214 release
             <div class="component upgrade-info" id="stay">
               <% if (r.org_type == "PREVIEW") { %>
                 <!-- replace text below with dynamic data from CSV file -->
-<<<<<<< HEAD
-                <p>To stay on Winter '18, we require you to refresh to a Non-Preview Sandbox Instance.</p>
-                <p><strong>Please wait and refresh after 12:00am PT on January 5, 2018 (8:00 UTC on January 5, 2018).</strong> If you refresh before this date, your Sandbox may be built on a Preview Instance.</p>
-=======
                 <p>To stay on Spring '18, we require you to refresh to a Non-Preview Sandbox Instance.</p>
                 <p>
                   <strong>Please wait and refresh after 12:00am PT on May 5, 2018 (8:00 UTC on May 5, 2018).</strong> If
                   you refresh before this date, your Sandbox may be built on a Preview Instance.</p>
 
->>>>>>> Updates for 214 release
               <% } %>
               <% if (r.org_type == "NON-PREVIEW") { %>
                 <!-- replace text below with dynamic data from CSV file -->
-<<<<<<< HEAD
-                <p><strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
-                <p>If you need to refresh for other reasons, please wait and refresh after 12:00 a.m. PT on January 5, 2018 (8:00 UTC on January 5, 2018) to remain on a Non-Preview Instance.</p>
-=======
                 <p>
                   <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
                 <p>If you need to refresh for other reasons, please wait and refresh after 12:00 a.m. PT on May 5, 2018
                   (8:00 UTC on May 5, 2018) to remain on a Non-Preview Instance.</p>
 
->>>>>>> Updates for 214 release
               <% } %>
             </div>
-<<<<<<< HEAD
             <p class="large"><strong>Note: </strong> If you decide to stay on the current Winter ‘18 release, your Sandbox will not be upgraded to Spring ‘18 until February 10, 2018.</p>
           <% }); %>
           <div class="component">
@@ -94,13 +65,6 @@
               <p>Watch a video on <a href="http://salesforce.vidyard.com/watch/dzC5Xx9GF8dJEM8wUqGim5" target="_blank">Demystifying Sandbox Preview</a>.</p>
               <p>For more resources, to ask questions and engage with experts around release readiness, please join the <a href="http://www.salesforce.com/success-releasereadiness" target="_blank"> Release Readiness &amp; Feature Adoption</a> group in the Trailblazer Community.</p>
             </div>
-=======
-
-            <p style="font-size:1.5em"><strong>Note: </strong> If you decide to stay on the current Spring ‘18 release, your Sandbox will not be upgraded to
-              Summer ‘18 until June 9, 2018.
-            </p>
-
->>>>>>> Updates for 214 release
           </div>
         </div>
       </div>
