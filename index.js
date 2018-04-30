@@ -90,6 +90,13 @@ app.get('/upgrade',
     }
 );
 
+// Cheatsheet request
+app.get('/cheatsheet',
+  function (request, response) {
+    response.render('pages/cheatsheet');
+  }
+);
+
 app.get('/db', function (request, response) {
   pool.query('SELECT * FROM rel_org_type', function (err, result) {
     if (err) {
