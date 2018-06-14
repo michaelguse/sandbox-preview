@@ -18,6 +18,7 @@
     "express": "4.15.2",
     "express-form": "^0.12.6",
     "handlebars": "^4.0.11",
+    "hoek": "^5.0.3",
     "pg": "^6.4.2",
     "pg-pool": "^2.0.3",
     "typeahead": "^0.2.2",
