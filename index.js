@@ -2,9 +2,8 @@ var Pool = require('pg-pool');
 var url = require('url');
 require('handlebars');
 
-// Change the local Postgres DB connection string to your own setup for local testing
-//var params = url.parse(process.env.DATABASE_URL || postgres://mguse:@localhost:5432/mguse');
-var params = url.parse(process.env.DATABASE_URL || 'postgres://osxdwyswpfhgum:3c484b79e2e1e149624aa4e174b54d93db079122590874c92e5f9f2461f3b832@ec2-54-163-227-202.compute-1.amazonaws.com:5432/d2tre79jqmq0vu');
+// Change the DATABASE_URL in local .env file to your own setup for local testing
+var params = url.parse(process.env.DATABASE_URL);
 var auth = params.auth.split(':');
 var sslValue = true;
 
@@ -112,7 +111,7 @@ app.get('/sandbox/types', function (request, response) {
 });
 
 app.get('/sandbox/instances', function (request, response) {
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type,external_rel_name,id', function (err, result) {
+  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type,external_rel_name,  id', function (err, result) {
     if (err) {
       console.error(err);
       response.send('Error ' + err);
