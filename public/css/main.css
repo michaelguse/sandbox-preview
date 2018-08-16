@@ -329,6 +329,30 @@ input.button:hover {
   background: #00A1E0;
   color: #fff;
 }
+
+#sandboxes {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#sandboxes td, #sandboxes th {
+  border: 1px solid #333;
+  padding: 8px;
+}
+
+#sandboxes tr:nth-child(even){background-color: #f2f2f2;}
+
+#sandboxes tr:hover {background-color: #ddd;}
+
+#sandboxes th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #00A1E0;
+  color: white;
+}
+
 @media all and (min-width: 0) and (max-width: 767px) {
   h3 {
     font-size: 28px;

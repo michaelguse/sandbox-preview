@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+    <body>
+        <div class="wrapper">
+            <div class="body-wrapper">
+                <% include ../partials/nav.ejs %>
+                    <% include ../partials/header.ejs %>
+                        <div class="content-wrapper">
+                            <div class="container">
+                                <h3>Sandbox Instances</h3>
+                                <br/>
+                                <div>
+                                    <table id="sandboxes">
+                                        <tr>
+                                            <th>Instance</th>
+                                            <th>Org Type</th>
+                                            <th>Release Name</th>
+                                        </tr>
+                                        <% results.forEach(function(r) { %>
+                                            <tr>
+                                                <td>
+                                                    <%= r.Instance %>
+                                                </td>
+                                                <td>
+                                                    <%= r.Type %>
+                                                </td>
+                                                <td>
+                                                    <%= r.Release %>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <% include ../partials/footer.ejs %>
+                <% include ../partials/script_section.ejs %>
+        </div>
+    </body>
+
+</html>

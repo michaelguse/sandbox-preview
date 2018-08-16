@@ -97,13 +97,28 @@ app.get('/cheatsheet',
   }
 );
 
-app.get('/db', function (request, response) {
-  pool.query('SELECT * FROM rel_org_type', function (err, result) {
+app.get('/sandbox/types', function (request, response) {
+  pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type,external_rel_name', function (err, result) {
     if (err) {
       console.error(err);
       response.send('Error ' + err);
     } else {
-      response.render('pages/db', {
+      console.log(result.rows);
+      response.render('pages/sandboxtypes', {
+        results: result.rows,
+      });
+    }
+  });
+});
+
+app.get('/sandbox/instances', function (request, response) {
+  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type,external_rel_name,id', function (err, result) {
+    if (err) {
+      console.error(err);
+      response.send('Error ' + err);
+    } else {
+      //console.log(result);
+      response.render('pages/sandboxinstances', {
         results: result.rows,
       });
     }
