@@ -353,6 +353,12 @@ input.button:hover {
   color: white;
 }
 
+#beta-ribbon {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+
 @media all and (min-width: 0) and (max-width: 767px) {
   h3 {
     font-size: 28px;
