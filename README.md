@@ -12,7 +12,7 @@ The purpose of this app is to provide Salesforce customers with
 * easily determine if it is a PREVIEW or NON-PREVIEW instance and 
 * to determine what they need to do by what date.
 
-Today's process consists of a [blog post](https://www.salesforce.com/blog/2017/08/salesforce-winter-18-sandbox-preview-instructions.html) by Salesforce that informs customers about the process involved. It is not the most intuitive process and the goal of this application to leverage the same information but simlify it for our customers to consume and process the information.
+Today's process consists of a [blog post](https://www.salesforce.com/blog/2017/08/salesforce-winter-18-sandbox-preview-instructions.html) by Salesforce that informs customers about the process involved. It is not the most intuitive process and the goal of this application to leverage the same information but simplify it for our customers - both internal and external to Salesforce - to consume and process the information.
 
 ## Running Locally
 
