@@ -30,13 +30,11 @@ var express = require('express'),
   validate = form.validate;
 
 var app = express();
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
 
 app.set('port', (process.env.PORT || 5000));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
