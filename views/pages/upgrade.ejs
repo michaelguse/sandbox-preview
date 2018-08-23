@@ -10,16 +10,9 @@
             <% results.forEach(function(r) { %>
               <div class="upgrade-content">
                 <div class="content-wrapper">
-                  <p class="large">Your Sandbox
-                    <strong>
-                      <%= r.org_id  %>
-                    </strong> is a
-                    <%= r.org_type  %> Instance,
-                      <br/>on
-                      <%= r.external_rel_name  %>
-                  </p>
-                  
-                  <h3>What would you like information on?</h3>
+                  <p class="large">What do you want to do 
+                    <br />with your <strong ><%= r.org_id  %> - <%= r.external_rel_name  %> - <%= r.org_type  %></strong> sandbox 
+                    <br/>for the next release?</p>
                   <p class="upgrade-option" id="upgrade">Upgrade to Winter '19
                     <br />by Sep 8, 2018</p>
                   <div class="component upgrade-info" id="upgrade">
@@ -63,7 +56,7 @@
                           <% } %>
                   </div>
                   <p class="large">
-                    <strong>Note: </strong> All production and sandbox environments will be upgraded<br />to Winter '19 by Oct 13, 2018.</p>
+                    <strong>Note: </strong> All production and sandbox environments will be upgraded to sWinter '19 by Oct 13, 2018.</p>
                   <% }); %>
                 
                     <div class="component">
