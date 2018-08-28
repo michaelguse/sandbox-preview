@@ -2,103 +2,101 @@
 <html lang="en">
 <% include ../partials/head.ejs %>
 
-  <body>
-    <div class="wrapper">
-      <div class="body-wrapper">
-        <% include ../partials/nav.ejs %>
-          <% include ../partials/header.ejs %>
-            <% results.forEach(function(r) { %>
-              <div class="upgrade-content">
-                <div class="content-wrapper">
-                  <div class="instance-display">
-                    <div class="instance-block">
-                      <!-- Instance block -->
-                      <p class="instance-header">Instance</p>
-                      <p class="instance-text">
-                        <%= r.org_id  %>
-                      </p>
-                    </div>
-                    <div class="instance-type-block">
-                      <!-- Instance type block-->
-                      <p class="instance-header">Instance Type</p>
-                      <p class="rel-type-text">
-                        <%= r.org_type  %>
-                      </p>
-                    </div>
-                    <div class="release-name-block">
-                      <!-- Release name block -->
-                      <p class="instance-header">Release</p>
-                      <p class="rel-type-text">
-                        <%= r.external_rel_name  %>
-                      </p>
-                    </div>
-                    <div class="release-logo-block">
-                      <!-- Release logo block -->
-                      <% if (r.internal_rel_name == 216) {  %>
-                        <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
-                      <% } %>
-                      <% if (r.internal_rel_name == 214) { %>
-                        <img src="/images/sf_rel_logo_summer18.png" height="50" width="50" alt="Winter '19 Logo" />
-                      <% } %>
-                    </div>
-                  </div>
-                  <h4>What would you like to do with your sandbox?</h4>
-                  <p class="upgrade-option" id="upgrade">Upgrade to Winter '19
-                    <br />by Sep 8, 2018</p>
-                  <div class="component upgrade-info" id="upgrade">
-                    <% if (r.org_type == "Preview") {  %>
-                      <p>
-                        <strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
-                      <p>If you need to refresh for other reasons, do so well in advance of 11:59pm PT on Sep 7, 2018 (7:59
-                        UTC on Sep 8, 2018) to make sure your Sandbox completes before the deadline. If you refresh after
-                        the deadline or your Sandbox doesn't complete in time, it will be built on a Non-Preview Instance.</p>
+<body>
+  <div class="wrapper">
+    <div class="body-wrapper">
+      <% include ../partials/nav.ejs %>
+      <% include ../partials/header.ejs %>
+      <% results.forEach(function(r) { %>
+      <div class="upgrade-content">
+        <div class="content-wrapper">
+          <div class="instance-display">
+            <div class="instance-block">
+              <!-- Instance block -->
+              <p class="instance-header">Instance</p>
+              <p class="instance-text">
+                <%= r.org_id  %>
+              </p>
+            </div>
+            <div class="instance-type-block">
+              <!-- Instance type block-->
+              <p class="instance-header">Instance Type</p>
+              <p class="rel-type-text">
+                <%= r.org_type  %>
+              </p>
+            </div>
+            <div class="release-name-block">
+              <!-- Release name block -->
+              <p class="instance-header">Release</p>
+              <p class="rel-type-text">
+                <%= r.external_rel_name  %>
+              </p>
+            </div>
+            <div class="release-logo-block">
+              <!-- Release logo block -->
+              <% if (r.internal_rel_name == 216) {  %>
+              <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
+              <% } %>
+              <% if (r.internal_rel_name == 214) { %>
+              <img src="/images/sf_rel_logo_summer18.png" height="50" width="50" alt="Winter '19 Logo" />
+              <% } %>
+            </div>
+          </div>
+          <h4>What would you like to do with your sandbox?</h4>
+          <p class="upgrade-option" id="upgrade">Upgrade to Winter '19
+            <br />by Sep 8, 2018</p>
+          <div class="component upgrade-info" id="upgrade">
+            <% if (r.org_type == "Preview") {  %>
+            <p>
+              <strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
+            <p>If you need to refresh for other reasons, do so well in advance of 11:59pm PT on Sep 7, 2018 (7:59
+              UTC on Sep 8, 2018) to make sure your Sandbox completes before the deadline. If you refresh after
+              the deadline or your Sandbox doesn't complete in time, it will be built on a Non-Preview Instance.</p>
 
-                      <% } %>
-                        <% if (r.org_type == "Non-Preview") { %>
-                          <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early
-                            to Winter '19.
-                          </p>
+            <% } %>
+            <% if (r.org_type == "Non-Preview") { %>
+            <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early
+              to Winter '19.
+            </p>
 
-                          <p>
-                            <strong>Please refresh well in advance of 11:59p.m. PT on Sep 7, 2018 (07:59 UTC on Sep 8, 2018)</strong>.
-                            If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built
-                            on a Non-Preview instance.
-                          </p>
+            <p>
+              <strong>Please refresh well in advance of 11:59p.m. PT on Sep 7, 2018 (07:59 UTC on Sep 8, 2018)</strong>.
+              If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built
+              on a Non-Preview instance.
+            </p>
 
-                          <% } %>
-                  </div>
-                  <p class="upgrade-option" id="stay">Stay on Summer '18
-                    <br />until Oct 13, 2018</p>
-                  <div class="component upgrade-info" id="stay">
-                    <% if (r.org_type == "Preview") { %>
-                      <p>To stay on Summer '18, we require you to refresh to a Non-Preview Sandbox Instance.</p>
-                      <p>
-                        <strong>Please wait and refresh after 12:00am PT on Sep 8, 2018 (8:00 UTC on Sep 8, 2018).</strong> If you
-                        refresh before this date, your Sandbox may be built on a Preview Instance.</p>
-
-                      <% } %>
-                        <% if (r.org_type == "Non-Preview") { %>
-                          <p>
-                            <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
-                          <p>If you need to refresh for other reasons, please wait and refresh after 12:00 a.m. PT on Sep 8,
-                            2018 (8:00 UTC on Sep 8, 2018) to remain on a Non-Preview Instance.</p>
-
-                          <% } %>
-                  </div>
-                  <p class="large">
-                    <strong>Note: </strong> All production and sandbox environments will be upgraded to Winter '19 by Oct 13, 2018.</p>
-                  <% }); %>
-
-                    <div class="component">
-                      <div class="divider"></div>
-                      <% include ../partials/helpful-links.ejs %>
-                    </div>
-                </div>
-              </div>
+            <% } %>
+          </div>
+          <p class="upgrade-option" id="stay">Stay on Summer '18
+            <br />until Oct 13, 2018</p>
+          <div class="component upgrade-info" id="stay">
+            <% if (r.org_type == "Preview") { %>
+            <p>To stay on Summer '18, we require you to refresh to a Non-Preview Sandbox Instance.</p>
+            <p>
+              <strong>Please wait and refresh after 12:00am PT on Sep 8, 2018 (8:00 UTC on Sep 8, 2018).</strong> If you
+              refresh before this date, your Sandbox may be built on a Preview Instance.</p>
+            <% } %>
+            <% if (r.org_type == "Non-Preview") { %>
+            <p>
+              <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
+            <p>If you need to refresh for other reasons, please wait and refresh after 12:00 a.m. PT on Sep 8,
+              2018 (8:00 UTC on Sep 8, 2018) to remain on a Non-Preview Instance.</p>
+            <% } %>
+          </div>
+          <p class="large">
+            <strong>Note: </strong> All production and sandbox environments will be upgraded to Winter '19 by Oct 13, 2018.
+          </p>
+          <% }); %>
+          <div class="component">
+            <div class="divider"></div>
+            <% include ../partials/helpful-links.ejs %>
+          </div>
+        </div>
       </div>
-      <% include ../partials/footer.ejs %>
-        <% include ../partials/script_section.ejs %>
     </div>
-  </body>
+    <% include ../partials/footer.ejs %>
+    <% include ../partials/script_section.ejs %>
+  </div>
+</body>
 
 </html>

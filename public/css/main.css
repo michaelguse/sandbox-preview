@@ -341,7 +341,7 @@ input.button:hover {
 .instance-block {
   height: 60px;
   padding: 5px 5px 5px 5px;
-  background-color: white;
+  background-color: rgb(231,231,231);
   text-align: left;
   vertical-align: top;
   border-width: 1px 0px 1px 1px; 
@@ -352,7 +352,7 @@ input.button:hover {
 .instance-type-block {
   height: 60px;
   padding: 5px 5px 5px 5px;
-  background-color: rgb(231,231,231);
+  background-color: white;
   text-align: left;
   vertical-align: top;
   border: 1px solid darkgrey;
@@ -380,7 +380,7 @@ input.button:hover {
 p.instance-header {  
   /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 10pt;
-  color: rgb(186,186,186);
+  color: rgb(141, 141, 141);
   text-transform: uppercase;
   margin-bottom: 0px !important;
   line-height: 1.0em;
