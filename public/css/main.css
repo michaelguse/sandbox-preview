@@ -330,6 +330,84 @@ input.button:hover {
   color: #fff;
 }
 
+.instance-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 0px;
+  margin-bottom: 25px;
+}
+
+.instance-block {
+  height: 60px;
+  padding: 5px 50px 5px 5px;
+  background-color: white;
+  text-align: left;
+  vertical-align: top;
+  border-width: 1px 0px 1px 1px; 
+  border-style: solid;
+  border-color: darkgrey;
+}
+
+.instance-type-block {
+  height: 60px;
+  padding: 5px 50px 5px 5px;
+  background-color: rgb(231,231,231);
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid darkgrey;
+}
+
+.release-logo-block {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  background-color: rgb(156, 226, 207);
+  border: 1px solid darkgrey;
+}
+
+.release-name-block{
+  height: 60px;
+  padding: 5px 50px 5px 5px;
+  background-color: white;
+  text-align: left;
+  vertical-align: top;
+  border-width: 1px 0px 1px 0px; 
+  border-style: solid;
+  border-color: grey;
+}
+
+p.instance-header {  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  color: rgb(186,186,186);
+  text-transform: uppercase;
+  margin-bottom: 0px !important;
+  line-height: 1.0em;
+}
+
+p.instance-text {  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24pt;
+  font-weight: bold;
+  color: black;
+  text-transform: uppercase;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  line-height: 1.0em;
+}
+
+p.rel-type-text {  
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20pt;
+  font-weight: lighter;
+  color: black;
+  text-transform: uppercase;
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+  line-height: 1.0em;
+}
+
 #sandboxes {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;

@@ -10,9 +10,39 @@
             <% results.forEach(function(r) { %>
               <div class="upgrade-content">
                 <div class="content-wrapper">
-                  <p class="large">What do you want to do 
-                    <br />with your <strong ><%= r.org_id  %> - <%= r.external_rel_name  %> - <%= r.org_type  %></strong> sandbox 
-                    <br/>for the next release?</p>
+                  <div class="instance-display">
+                    <div class="instance-block">
+                      <!-- Instance block -->
+                      <p class="instance-header">Instance</p>
+                      <p class="instance-text">
+                        <%= r.org_id  %>
+                      </p>
+                    </div>
+                    <div class="release-logo-block">
+                      <!-- Release logo block -->
+                      <% if (r.internal_rel_name == 216) {  %>
+                        <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
+                      <% } %>
+                      <% if (r.internal_rel_name == 214) { %>
+                        <img src="/images/sf_rel_logo_summer18.png" height="50" width="50" alt="Winter '19 Logo" />
+                      <% } %>
+                    </div>
+                    <div class="release-name-block">
+                      <!-- Release name block -->
+                      <p class="instance-header">Release</p>
+                      <p class="rel-type-text">
+                        <%= r.external_rel_name  %>
+                      </p>
+                    </div>
+                    <div class="instance-type-block">
+                      <!-- Instance type block-->
+                      <p class="instance-header">Instance Type</p>
+                      <p class="rel-type-text">
+                        <%= r.org_type  %>
+                      </p>
+                    </div>
+                  </div>
+                  <h4>What would you like to do with your sandbox?</h4>
                   <p class="upgrade-option" id="upgrade">Upgrade to Winter '19
                     <br />by Sep 8, 2018</p>
                   <div class="component upgrade-info" id="upgrade">
@@ -56,17 +86,17 @@
                           <% } %>
                   </div>
                   <p class="large">
-                    <strong>Note: </strong> All production and sandbox environments will be upgraded to sWinter '19 by Oct 13, 2018.</p>
+                    <strong>Note: </strong> All production and sandbox environments will be upgraded to Winter '19 by Oct 13, 2018.</p>
                   <% }); %>
-                
+
                     <div class="component">
                       <div class="divider"></div>
                       <% include ../partials/helpful-links.ejs %>
                     </div>
                 </div>
-            </div>
-        </div>
-        <% include ../partials/footer.ejs %>
+              </div>
+      </div>
+      <% include ../partials/footer.ejs %>
         <% include ../partials/script_section.ejs %>
     </div>
   </body>
