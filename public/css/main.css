@@ -340,7 +340,7 @@ input.button:hover {
 
 .instance-block {
   height: 60px;
-  padding: 5px 50px 5px 5px;
+  padding: 5px 5px 5px 5px;
   background-color: white;
   text-align: left;
   vertical-align: top;
@@ -351,7 +351,7 @@ input.button:hover {
 
 .instance-type-block {
   height: 60px;
-  padding: 5px 50px 5px 5px;
+  padding: 5px 5px 5px 5px;
   background-color: rgb(231,231,231);
   text-align: left;
   vertical-align: top;
@@ -368,7 +368,7 @@ input.button:hover {
 
 .release-name-block{
   height: 60px;
-  padding: 5px 50px 5px 5px;
+  padding: 5px 5px 5px 5px;
   background-color: white;
   text-align: left;
   vertical-align: top;
@@ -378,7 +378,7 @@ input.button:hover {
 }
 
 p.instance-header {  
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 10pt;
   color: rgb(186,186,186);
   text-transform: uppercase;
@@ -387,7 +387,7 @@ p.instance-header {
 }
 
 p.instance-text {  
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 24pt;
   font-weight: bold;
   color: black;
@@ -398,11 +398,10 @@ p.instance-text {
 }
 
 p.rel-type-text {  
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 20pt;
   font-weight: lighter;
   color: black;
-  text-transform: uppercase;
   margin-bottom: 2px !important;
   margin-top: 2px !important;
   line-height: 1.0em;
