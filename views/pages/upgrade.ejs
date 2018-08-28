@@ -46,7 +46,7 @@
                   <p class="upgrade-option" id="upgrade">Upgrade to Winter '19
                     <br />by Sep 8, 2018</p>
                   <div class="component upgrade-info" id="upgrade">
-                    <% if (r.org_type == "PREVIEW") {  %>
+                    <% if (r.org_type == "Preview") {  %>
                       <p>
                         <strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
                       <p>If you need to refresh for other reasons, do so well in advance of 11:59pm PT on Sep 7, 2018 (7:59
@@ -54,7 +54,7 @@
                         the deadline or your Sandbox doesn't complete in time, it will be built on a Non-Preview Instance.</p>
 
                       <% } %>
-                        <% if (r.org_type == "NON-PREVIEW") { %>
+                        <% if (r.org_type == "Non-Preview") { %>
                           <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early
                             to Winter '19.
                           </p>
@@ -70,14 +70,14 @@
                   <p class="upgrade-option" id="stay">Stay on Summer '18
                     <br />until Oct 13, 2018</p>
                   <div class="component upgrade-info" id="stay">
-                    <% if (r.org_type == "PREVIEW") { %>
+                    <% if (r.org_type == "Preview") { %>
                       <p>To stay on Summer '18, we require you to refresh to a Non-Preview Sandbox Instance.</p>
                       <p>
                         <strong>Please wait and refresh after 12:00am PT on Sep 8, 2018 (8:00 UTC on Sep 8, 2018).</strong> If you
                         refresh before this date, your Sandbox may be built on a Preview Instance.</p>
 
                       <% } %>
-                        <% if (r.org_type == "NON-PREVIEW") { %>
+                        <% if (r.org_type == "Non-Preview") { %>
                           <p>
                             <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
                           <p>If you need to refresh for other reasons, please wait and refresh after 12:00 a.m. PT on Sep 8,
