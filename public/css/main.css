@@ -351,10 +351,11 @@ input.button:hover {
 
 .instance-type-block {
   height: 60px;
-  padding: 5px 15px 5px 5px;
+  padding: 5px 5px 5px 5px;
   background-color: white;
   text-align: left;
   vertical-align: top;
+  white-space: nowrap;
   border: 1px solid darkgrey;
 }
 
@@ -368,10 +369,11 @@ input.button:hover {
 
 .release-name-block{
   height: 60px;
-  padding: 5px 15px 5px 5px;
+  padding: 5px 5px 5px 5px;
   background-color: white;
   text-align: left;
   vertical-align: top;
+  white-space: nowrap;
   border-width: 1px 0px 1px 0px; 
   border-style: solid;
   border-color: grey;
