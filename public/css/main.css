@@ -173,7 +173,7 @@ strong {
   padding: 0 16px;
 }
 .component {
-  margin: 0 auto 50px;
+  margin: 0 auto 30px;
   text-align: center;
   width: 100%;
 }
@@ -254,7 +254,7 @@ strong {
 .upgrade-content .component.upgrade-info.reveal {
   border-top: 2px solid #00A1E0;
   height: auto;
-  margin: 0 auto 20px;
+  margin: -25px auto 0px;
   max-height: 500px;
   overflow: hidden;
   padding: 20px;
@@ -272,7 +272,7 @@ strong {
   padding: 15px 20px;
   width: 350px;
 }
-.upgrade-content .upgrade-option:first-of-type {
+.upgrade-content .component.upgrade-info.reveal:first-of-type {
   margin: 25px auto 0;
 }
 .upgrade-content .upgrade-option:hover {
@@ -280,7 +280,7 @@ strong {
   color: #fff;
 }
 .helpful-links {
-  margin: 25px auto 50px;
+  margin: 25px auto 25px;
   width: 65%;
 }
 .helpful-links h4 {
@@ -291,7 +291,7 @@ strong {
   background: #081e29;
   color: #fff;
   font-size: 12px;
-  margin-top: 35px;
+  margin-top: 25px;
   padding: 35px 0;
   width: 100%;
 }
@@ -313,7 +313,7 @@ input {
   color: #032E61;
   font-family: "sf regular", Helvetica, Arial, sans-serif;
   font-size: 15px;
-  margin: 30px 0;
+  margin: 20px 0 0px;
   outline: none;
   padding: 10px;
   -webkit-appearance: none;
@@ -470,12 +470,6 @@ p.rel-type-text {
   .upgrade-content .component {
     text-align: left;
   }
-  .upgrade-content .upgrade-option {
-    margin: 15px auto 10px;
-  }
-  .upgrade-content .upgrade-option#stay {
-    margin: 0 auto 15px;
-  }
   .helpful-links {
     margin: 35px auto;
     width: 90%;
@@ -516,10 +510,6 @@ p.rel-type-text {
   .upgrade-content .component.upgrade-info {
     width: 70%;
   }
-  .upgrade-content .component.upgrade-info.reveal {
-    margin: 0 auto 50px;
-    padding: 25px 35px;
-  }
 }
 @media all and (min-width: 1312px) {
   .content-wrapper {
@@ -553,9 +543,5 @@ p.rel-type-text {
   }
   .upgrade-content .component.upgrade-info {
     width: 70%;
-  }
-  .upgrade-content .component.upgrade-info.reveal {
-    margin: 0 auto 50px;
-    padding: 25px 35px;
   }
 }
