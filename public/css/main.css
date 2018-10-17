@@ -192,6 +192,10 @@ strong {
 .nav-container .back-link.reveal a {
   font-weight: 500;
 }
+.nav-container .feedback {
+  display: inline-block;
+  margin-left: 25px;
+}
 .header-container {
   background: #00A1E0;
   margin-bottom: 25px;
