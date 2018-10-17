@@ -42,8 +42,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 // Home page request
-app.get('/',
-  function (request, response) {
+app.get('/', function (request, response) {
     pool.query('SELECT internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type', function (err, result) {
       if (err) {
         console.error(err);
@@ -91,8 +90,7 @@ app.get('/upgrade',
 );
 
 // Cheatsheet request
-app.get('/cheatsheet',
-  function (request, response) {
+app.get('/cheatsheet', function (request, response) {
     response.render('pages/cheatsheet');
   }
 );
