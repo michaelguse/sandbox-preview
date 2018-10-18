@@ -192,10 +192,6 @@ strong {
 .nav-container .back-link.reveal a {
   font-weight: 500;
 }
-.nav-container .feedback {
-  display: inline-block;
-  margin-left: 25px;
-}
 .header-container {
   background: #00A1E0;
   margin-bottom: 25px;
@@ -290,7 +286,6 @@ strong {
 .helpful-links h4 {
   margin-bottom: 15px;
 }
-
 .footer-wrapper {
   background: #081e29;
   color: #fff;
@@ -434,6 +429,12 @@ p.rel-type-text {
   text-align: left;
   background-color: #00A1E0;
   color: white;
+}
+
+#feedback {
+  position: fixed;
+  top: 0px;
+  left: 40%;
 }
 
 #beta-ribbon {
