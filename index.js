@@ -43,11 +43,12 @@ app.set('view engine', 'ejs');
 
 // Home page request
 app.get('/', function (request, response) {
-    pool.query('SELECT internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type', function (err, result) {
+    pool.query('SELECT release_name, release_preview_date, release_prod_date, release_refresh_datetime FROM rel_name_map WHERE release_name = $1', [`Winter '19`], function (err, result) {
       if (err) {
         console.error(err);
         response.send('Error: ' + err);
       } else {
+        console.log(result.rows);
         response.render('pages/index', { results: result.rows  });
       }
     });
@@ -59,8 +60,8 @@ app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
       filter("org_id").trim().toUpper(),
-      validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]{1,2})$/,"Invalid %s - try again!")
-    ),
+      validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]{1,2})$/,"Oops I can't find that instance number! Please enter a valid instance number using the guide below!")
+   ),
     function (request, response) {
       if (!request.form.isValid) {
         // Handle errors
@@ -76,9 +77,7 @@ app.get('/upgrade',
             // check for empyt result set
             if (qryres.length > 0) {
               console.log(qryres);
-              response.render('pages/upgrade', {
-                results: qryres,
-              });
+              response.render('pages/upgrade', { results: qryres });
             } else {
               console.log("[ 'Invalid entry - try again!' ]");
               response.render('pages/index.ejs', { errors: [ 'Invalid entry - try again!' ] });

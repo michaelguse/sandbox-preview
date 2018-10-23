@@ -12,13 +12,15 @@
                 <h3>What is your Sandbox instance?</h3>
                 <form action="/upgrade" type="GET" class="form-primary">
                   <% if (locals.errors) { %>
+                    <input class="form-error-msg" name="org_id" id="org_id" placeholder="" type="text" autocomplete="off" autofocus required />
+                    <input type="submit" class="button" value="submit" />
                     <% errors.forEach(function(r) { %>
-                      <input class="form-error-msg" name="org_id" placeholder="<%= r %>" type="text" autocomplete="off" autofocus required />
-                      <% }); %>
-                        <% } else { %>
-                          <input name="org_id" placeholder="Instance name, eg CS81" type="text" autocomplete="off" autofocus required />
-                          <% }; %>
-                            <input type="submit" class="button" value="submit" />
+                      <br/><label for="org_id" style="color: red"><%= r %></label>
+                  <% }); %>
+                  <% } else { %>
+                    <input name="org_id" placeholder="Instance name, eg CS87" type="text" autocomplete="off" autofocus required />
+                    <input type="submit" class="button" value="submit" />
+                  <% }; %>
                 </form>
                 <div class="general-content">
                   <h4>Unsure of your Sandbox Instance?</h4>
