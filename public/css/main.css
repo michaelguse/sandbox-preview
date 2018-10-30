@@ -330,11 +330,22 @@ input.button:hover {
 }
 
 .instance-display {
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 0px;
   margin-bottom: 25px;
+}
+
+.instance-display-home {
+  background: lightsalmon;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 25px;
+  margin-top: -25px;
 }
 
 .instance-block {
@@ -351,7 +362,6 @@ input.button:hover {
 .instance-type-block {
   height: 60px;
   padding: 5px 5px 5px 5px;
-  background-color: white;
   text-align: left;
   vertical-align: top;
   white-space: nowrap;
@@ -362,14 +372,12 @@ input.button:hover {
   width: 60px;
   height: 60px;
   padding: 5px;
-  background-color: rgb(156, 226, 207);
   border: 1px solid darkgrey;
 }
 
 .release-name-block{
   height: 60px;
   padding: 5px 5px 5px 5px;
-  background-color: white;
   text-align: left;
   vertical-align: top;
   white-space: nowrap;
