@@ -43,7 +43,7 @@ app.set('view engine', 'ejs');
 
 // Home page request
 app.get('/', function (request, response) {
-  pool.query('SELECT internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type LIMIT 1', function (err, result) {  
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type LIMIT 1', function (err, result) {  
   // pool.query('SELECT release_name, release_preview_date, release_prod_date, release_refresh_datetime FROM rel_name_map WHERE release_name = $1', [`Winter '19`], function (err, result) {
       if (err) {
         console.error(err);
@@ -80,8 +80,8 @@ app.get('/upgrade',
               console.log(qryres);
               response.render('pages/upgrade', { results: qryres });
             } else {
-              console.log("[ 'Invalid entry - try again!' ]");
-              response.render('pages/index.ejs', { errors: [ 'Invalid entry - try again!' ] });
+              console.log("[ 'Result less than zero - try again!' ]");
+              response.render('pages/index.ejs', { errors: [ 'Result less than zero - try again!' ] });
             }
           }
         });

@@ -34,58 +34,57 @@
             </div>
             <div class="release-logo-block">
               <!-- Release logo block -->
-              <% if (r.internal_rel_name == 216) {  %>
-              <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
+              <% if (r.internal_rel_name == 218) {  %>
+              <img src="/images/sf_rel_logo_spring19.png" height="50" width="50" alt="Winter '19 Logo" />
               <% } %>
-              <% if (r.internal_rel_name == 214) { %>
-              <img src="/images/sf_rel_logo_summer18.png" height="50" width="50" alt="Winter '19 Logo" />
+              <% if (r.internal_rel_name == 216) { %>
+              <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
               <% } %>
             </div>
           </div>
           <h4>What would you like to do with your sandbox?</h4>
-            <p class="upgrade-option" id="upgrade">Upgrade to Winter '19
-            <br />by Sep 8, 2018</p>
+            <p class="upgrade-option" id="upgrade">Upgrade to Spring '19
+            <br />by Jan 5, 2019</p>
           <div class="component upgrade-info" id="upgrade">
             <% if (r.org_type == "Preview") {  %>
             <p>
               <strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
-            <p>If you need to refresh for other reasons, do so well in advance of <strong>September 7, 2018</strong> to make 
-              sure your Sandbox completes before <strong>12:00 p.m. PT on September 7, 2018 (19:00 UTC on September 7, 2018)</strong>. 
+            <p>If you need to refresh for other reasons, do so well in advance of <strong>January 4, 2019</strong> to make 
+              sure your Sandbox completes before <strong>12:00 p.m. PT on January 4, 2019 (19:00 UTC on January 4, 2019)</strong>. 
               If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built 
               on a Non-Preview Instance.</p>
 
             <% } %>
             <% if (r.org_type == "Non-Preview") { %>
             <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early
-              to Winter '19.
+              to Spring '19.
             </p>
-
             <p>
-              <strong>Please refresh well in advance of September 7, 2018</strong>. If you refresh after 
-              <strong>12:00 p.m. PT on September 7, 2018 (19:00 UTC on September 7, 2018)</strong> 
+              <strong>Please refresh well in advance of January 4, 2019</strong>. If you refresh after 
+              <strong>12:00 p.m. PT on January 4, 2019 (19:00 UTC on January 4, 2019)</strong> 
               or your Sandbox doesn't complete in time, it will be built on a Non-Preview instance.
             </p>
 
             <% } %>
           </div>
-          <p class="upgrade-option" id="stay">Stay on Summer '18
-            <br />until Oct 13, 2018</p>
+          <p class="upgrade-option" id="stay">Stay on Winter '19
+            <br />until Feb 9, 2019</p>
           <div class="component upgrade-info" id="stay">
             <% if (r.org_type == "Preview") { %>
-            <p>To stay on Summer '18, we require you to refresh to a Non-Preview Sandbox Instance.</p>
-            <p><strong>Please wait and refresh after 12:00 p.m. PT on September 7, 2018 
-              (19:00 UTC on September 7, 2018).</strong> If you refresh before this time, 
+            <p>To stay on Winter '19, we require you to refresh to a Non-Preview Sandbox Instance.</p>
+            <p><strong>Please wait and refresh after 12:00 p.m. PT on January 4, 2019 
+              (19:00 UTC on January 4, 2019).</strong> If you refresh before this time, 
               your Sandbox may be built on a Preview Instance.</p>
             <% } %>
             <% if (r.org_type == "Non-Preview") { %>
             <p>
               <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
-            <p>If you need to refresh for other reasons, please wait and refresh after 12:00 p.m. PT on September 7,
-              2018 (19:00 UTC on September 7, 2018) to remain on a Non-Preview Instance.</p>
+            <p>If you need to refresh for other reasons, please wait and refresh after 12:00 p.m. PT on January 4,
+              2019 (19:00 UTC on January 4, 2019) to remain on a Non-Preview Instance.</p>
             <% } %>
           </div>
           <p class="large">
-            <strong>Note: </strong> All production and sandbox environments will be upgraded to Winter '19 by Oct 13, 2018.
+            <strong>Note: </strong> All production and sandbox environments will be upgraded to Spring '19 by Feb 9, 2019.
           </p>
           <% }); %>
           <div class="component">

@@ -7,7 +7,34 @@
       <div class="body-wrapper">
         <% include ../partials/nav.ejs %>
           <% include ../partials/header.ejs %>
+          <% results.forEach(function(r) { %>
             <div class="content-wrapper">
+              <div class="instance-display">
+                <div class="instance-block">
+                  <!-- Instance block -->
+                  <p class="instance-header">Current</p>
+                  <p class="instance-text">
+                    All Orgs
+                  </p>
+                </div>
+                <div class="release-name-block">
+                  <!-- Release name block -->
+                  <p class="instance-header">Release</p>
+                  <p class="rel-type-text">
+                    <%= r.external_rel_name  %>
+                  </p>
+                </div>
+                <div class="release-logo-block">
+                  <!-- Release logo block -->
+                  <% if (r.internal_rel_name == 218) {  %>
+                  <img src="/images/sf_rel_logo_spring19.png" height="50" width="50" alt="Winter '19 Logo" />
+                  <% } %>
+                  <% if (r.internal_rel_name == 216) { %>
+                  <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
+                  <% } %>
+                </div>
+              </div>
+              <% }); %>
               <div class="component">
                 <h3>What is your Sandbox instance?</h3>
                 <form action="/upgrade" type="GET" class="form-primary">
