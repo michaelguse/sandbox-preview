@@ -12,9 +12,16 @@
               <div class="instance-display">
                 <div class="instance-block">
                   <!-- Instance block -->
-                  <p class="instance-header">Current</p>
+                  <p class="instance-header">Instance</p>
                   <p class="instance-text">
-                    All Orgs
+                    All
+                  </p>
+                </div>
+                <div class="instance-type-block">
+                  <!-- Instance type block-->
+                  <p class="instance-header">Instance Type</p>
+                  <p class="rel-type-text">
+                    All
                   </p>
                 </div>
                 <div class="release-name-block">
@@ -25,13 +32,13 @@
                   </p>
                 </div>
                 <div class="release-logo-block">
-                  <!-- Release logo block -->
-                  <% if (r.internal_rel_name == 218) {  %>
-                  <img src="/images/sf_rel_logo_spring19.png" height="50" width="50" alt="Winter '19 Logo" />
-                  <% } %>
-                  <% if (r.internal_rel_name == 216) { %>
-                  <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
-                  <% } %>
+                    <!-- Release logo block -->
+                    <% if (r.internal_rel_name == 218) {  %>
+                    <img src="/images/sf_rel_logo_spring19.png" height="50" width="50" alt="Winter '19 Logo" />
+                    <% } %>
+                    <% if (r.internal_rel_name == 216) { %>
+                    <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
+                    <% } %>
                 </div>
               </div>
               <% }); %>
