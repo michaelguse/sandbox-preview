@@ -339,7 +339,7 @@ input.button:hover {
 }
 
 .instance-display-home {
-  background: lightsalmon;
+  background-color: lightsalmon;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -369,6 +369,7 @@ input.button:hover {
 }
 
 .release-logo-block {
+  background-color: white;
   width: 60px;
   height: 60px;
   padding: 5px;
