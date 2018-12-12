@@ -4,5 +4,6 @@
   "repository": "https://github.com/michaelguse/sandbox-preview.git",
   "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
   "keywords": ["node", "express", "heroku", "sandbox", "salesforce", "preview", "guide"],
-  "image": "heroku/nodejs"
+  "image": "heroku/nodejs",
+  "stack": "heroku-18"
 }
