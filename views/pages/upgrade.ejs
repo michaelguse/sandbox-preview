@@ -9,7 +9,14 @@
       <% include ../partials/header.ejs %>
       <% results.forEach(function(r) { %>
       <div class="upgrade-content">
-          <div class="instance-display">
+          <div class="instance-display-home">
+              <div class="release-name-block">
+                <!-- Release name block -->
+                <p class="instance-header" style="color: white;">Current Production Release</p>
+                <p class="rel-type-text" style="color: white; text-align: center;"><%= r.external_rel_name  %></p>
+              </div>
+          </div>
+          <div class="instance-display-site" style="margin-top:-20px">
             <div class="instance-block">
               <!-- Instance block -->
               <p class="instance-header">Instance</p>
@@ -41,10 +48,15 @@
               <% } %>
             </div>
           </div>
-          <div>
-            <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Upcoming Maintenance Info</a>
+          <div class="instance-display-site" style="margin-top:-11px; margin-bottom:20px;">
+            <div class="trust-site-block" >
+              <p class="instance-header">Trust Site (External Link)</p>
+              <p class="trust-site-text">
+                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Upcoming Maintenance Info</a>
+              </p>
+            </div>
           </div>
-          <div class="content-wrapper">
+        <div class="content-wrapper">
           <h4>What would you like to do with your sandbox?</h4>
             <p class="upgrade-option" id="upgrade">Upgrade to Spring '19
             <br />by Jan 5, 2019</p>

@@ -339,13 +339,21 @@ input.button:hover {
 }
 
 .instance-display-home {
-  background-color: lightsalmon;
+  background-color: blue;
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 5px;
   margin-bottom: 25px;
-  margin-top: -25px;
+  margin-top: -20px;
+}
+
+.instance-display-site {
+  background-color: lightsalmon;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
 }
 
 .instance-block {
@@ -387,6 +395,17 @@ input.button:hover {
   border-color: grey;
 }
 
+.trust-site-block{
+  height: 60px;
+  padding: 5px 19px 5px 19px;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+  border-width: 1px 1px 1px 1px; 
+  border-style: solid;
+  border-color: grey;
+}
+
 p.instance-header {  
   /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 10pt;
@@ -410,6 +429,16 @@ p.instance-text {
 p.rel-type-text {  
   /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 20pt;
+  font-weight: lighter;
+  color: black;
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+  line-height: 1.0em;
+}
+
+p.trust-site-text {  
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 18pt;
   font-weight: lighter;
   color: black;
   margin-bottom: 2px !important;
