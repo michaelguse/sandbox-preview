@@ -339,7 +339,7 @@ input.button:hover {
 }
 
 .instance-display-home {
-  background-color: blue;
+  background-color: rgb(0, 116, 161);
   display: flex;
   flex-direction: row;
   justify-content: center;
