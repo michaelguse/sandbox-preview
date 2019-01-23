@@ -7,55 +7,30 @@
     <div class="body-wrapper">
       <% include ../partials/nav.ejs %>
       <% include ../partials/header.ejs %>
-      <% results.forEach(function(r) { %>
       <div class="upgrade-content">
-          <div class="instance-display-home">
-              <div class="release-name-block">
-                <!-- Release name block -->
-                <p class="instance-header" style="color: white;">Current Production Release</p>
-                <p class="rel-type-text" style="color: white; text-align: center;"><%= r.external_rel_name  %></p>
-              </div>
-          </div>
           <div class="instance-display-site" style="margin-top:-20px">
-            <div class="instance-block">
-              <!-- Instance block -->
-              <p class="instance-header">Instance</p>
-              <p class="instance-text">
-                <%= r.org_id  %>
-              </p>
-            </div>
-            <div class="instance-type-block">
-              <!-- Instance type block-->
-              <p class="instance-header" style="color:white">Instance Type</p>
-              <p class="rel-type-text">
-                <%= r.org_type  %>
-              </p>
-            </div>
             <div class="release-name-block">
               <!-- Release name block -->
-              <p class="instance-header" style="color:white">Release</p>
-              <p class="rel-type-text">
-                <%= r.external_rel_name  %>
-              </p>
-            </div>
-            <div class="release-logo-block">
-              <!-- Release logo block -->
-              <% if (r.internal_rel_name == 218) {  %>
-              <img src="/images/sf_rel_logo_spring19.png" height="50" width="50" alt="Spring '19 Logo" />
-              <% } %>
-              <% if (r.internal_rel_name == 216) { %>
-              <img src="/images/sf_rel_logo_winter19.png" height="50" width="50" alt="Winter '19 Logo" />
-              <% } %>
+              <p class="instance-header" style="color: black;">Your Sandbox Inquiry Results</p>
             </div>
           </div>
-          <div class="instance-display-site" style="margin-top:-11px; margin-bottom:20px;">
-            <div class="trust-site-block" >
-              <p class="instance-header" style="color:white">Trust Site (External Link)</p>
-              <p class="trust-site-text">
-                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Upcoming Maintenance Info</a>
-              </p>
-            </div>
-          </div>
+          <div class="sandbox-table"><table>
+            <tr>
+              <th class="sandbox-table-col-header">Instance</th>
+              <th class="sandbox-table-col-header">Instance Type</th>
+              <th class="sandbox-table-col-header">Release</th>
+              <th class="sandbox-table-col-header">Trust Info</th>
+            </tr>
+            <% results.forEach(function(r) { %>
+            <tr>
+              <td class="sandbox-table-col-data"><%= r.org_id  %></td>
+              <td class="sandbox-table-col-data"><%= r.org_type  %></td>
+              <td class="sandbox-table-col-data"><%= r.external_rel_name  %></td>
+              <td class="sandbox-table-col-data">
+                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">ext. link</a>
+              </td>
+            </tr>
+          </table></div>
         <div class="content-wrapper">
           <h4>What would you like to do with your sandbox?</h4>
             <p class="upgrade-option" id="upgrade">Upgrade to Spring '19

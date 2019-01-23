@@ -13,9 +13,10 @@
   "dependencies": {
     "autocomplete": "0.0.1",
     "body-parser": "^1.18.2",
+    "client-sessions": "^0.8.0",
     "ejs": "2.5.6",
     "eslint": "^4.15.0",
-    "express": "4.15.2",
+    "express": "^4.16.4",
     "express-form": "^0.12.6",
     "handlebars": "^4.0.11",
     "hoek": "^5.0.3",
@@ -32,7 +33,7 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "request": "^2.81.0",
+    "request": "^2.88.0",
     "tape": "^4.7.0"
   },
   "repository": {

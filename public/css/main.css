@@ -273,7 +273,7 @@ strong {
   width: 350px;
 }
 .upgrade-content .component.upgrade-info.reveal:first-of-type {
-  margin: 25px auto 0;
+  margin: -25px auto 0;
 }
 .upgrade-content .upgrade-option:hover {
   background: #00A1E0;
@@ -356,6 +356,41 @@ input.button:hover {
   padding: 5px;
 }
 
+.sandbox-table {
+  margin: 20px 0px 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.sandbox-table-col-header {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 12pt;
+  color: rgb(141, 141, 141);
+  text-transform: uppercase;
+  margin-bottom: 0px !important;
+  line-height: 1.0em;
+  border: 1px solid darkgrey;
+  padding: 5px;
+}
+
+.sandbox-table-col-data {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 16pt;
+  font-weight: lighter;
+  color: black;
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+  line-height: 1.0em;
+  border: 1px solid darkgrey;
+  padding: 5px;
+}
+
 .instance-block {
   height: 60px;
   padding: 5px 5px 5px 5px;
@@ -368,7 +403,7 @@ input.button:hover {
 }
 
 .instance-type-block {
-  height: 60px;
+  height: 50px;
   padding: 5px 5px 5px 5px;
   text-align: left;
   vertical-align: top;
@@ -385,7 +420,7 @@ input.button:hover {
 }
 
 .release-name-block{
-  height: 60px;
+
   padding: 5px 5px 5px 5px;
   text-align: left;
   vertical-align: top;
@@ -542,7 +577,7 @@ p.trust-site-text {
     width: 65%;
   }
   .header-container {
-    padding: 50px 0;
+    padding: 30px 0;
   }
   .general-content img {
     width: 65%;
@@ -566,7 +601,7 @@ p.trust-site-text {
     width: 65%;
   }
   .header-container {
-    padding: 50px 0;
+    padding: 30px 0;
   }
   .general-content p {
     margin: 0 auto;
