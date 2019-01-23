@@ -373,6 +373,7 @@ tr:nth-child(even) {
   font-size: 12pt;
   color: rgb(141, 141, 141);
   text-transform: uppercase;
+  text-align: center;
   margin-bottom: 0px !important;
   line-height: 1.0em;
   border: 1px solid darkgrey;
