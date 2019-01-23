@@ -182,16 +182,14 @@ strong {
   display: inline-block;
   margin: 10px 0;
 }
-.nav-container .back-link {
-  display: none;
+.back-link {
+  position: relative;
+  color: #ddd;
+  font-size: 16pt;
+  left: 5px;
+  margin-right: 20px;
 }
-.nav-container .back-link.reveal {
-  display: inline-block;
-  margin-left: 25px;
-}
-.nav-container .back-link.reveal a {
-  font-weight: 500;
-}
+
 .header-container {
   background: #00A1E0;
   margin-bottom: 25px;
@@ -370,9 +368,9 @@ tr:nth-child(even) {
 
 .sandbox-table-col-header {
   /* font-family: Arial, Helvetica, sans-serif; */
-  font-size: 12pt;
+  /* font-size: 12pt; */
   color: rgb(141, 141, 141);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-align: center;
   margin-bottom: 0px !important;
   line-height: 1.0em;
@@ -382,9 +380,11 @@ tr:nth-child(even) {
 
 .sandbox-table-col-data {
   /* font-family: Arial, Helvetica, sans-serif; */
-  font-size: 16pt;
-  font-weight: lighter;
+  /* font-size: 16pt; */
+  font-weight: bold;
+  font-size: larger;
   color: black;
+  text-align: center;
   margin-bottom: 2px !important;
   margin-top: 2px !important;
   line-height: 1.0em;
@@ -444,7 +444,7 @@ tr:nth-child(even) {
 
 p.instance-header {  
   /* font-family: Arial, Helvetica, sans-serif; */
-  font-size: 10pt;
+  /* font-size: 12pt; */
   color: rgb(141, 141, 141);
   text-transform: uppercase;
   margin-bottom: 0px !important;
