@@ -5,7 +5,7 @@ $('.upgrade-option').click(function () {
 
 var currentPage = $(location).attr('pathname');
 if (currentPage.indexOf('upgrade') > -1) {
-  $('.back-link').addClass('reveal');
+  $('.back-link-header').addClass('reveal');
 }
 
 var substringMatcher = function (strs) {

@@ -182,11 +182,16 @@ strong {
   display: inline-block;
   margin: 10px 0;
 }
-.back-link {
+
+.back-link-header.reveal{
+  display: flex;
   position: relative;
   font-size: 16pt;
-  left: 5px;
-  margin-right: 20px;
+  bottom: 0px;
+}
+
+.back-link-header {
+  display: none;
 }
 
 .header-container {
@@ -210,6 +215,7 @@ strong {
 }
 .header-container .half p {
   font-family: "sf light", Helvetica, Arial, sans-serif;
+  margin-bottom: 10px;
 }
 .header-container .half:nth-child(2) {
   padding: 0 0 0 80px;
@@ -318,9 +324,11 @@ input {
   box-sizing: border-box;
   width: 250px;
 }
+
 input.button {
   width: auto;
 }
+
 input.button:hover {
   background: #00A1E0;
   color: #fff;
@@ -554,6 +562,9 @@ p.trust-site-text {
   }
   .helpful-links p {
     text-align: left;
+  }
+  .back-link-header.reveal {
+    justify-content: center;
   }
 }
 @media all and (min-width: 768px) and (max-width: 1023px) {
