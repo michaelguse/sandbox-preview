@@ -14,7 +14,7 @@
                   <input class="form-error-msg" name="org_id" id="org_id" placeholder="" type="text" autocomplete="off" autofocus required />
                   <input type="submit" class="button" value="submit" />
                   <% errors.forEach(function(r) { %>
-                    <br/><label for="org_id" style="color: red"><%= r %></label>
+                    <br/><br/><label for="org_id" style="color: red;"><%= r %></label>
                 <% }); %>
                 <% } else { %>
                   <input name="org_id" placeholder="Instance name, eg CS87" type="text" autocomplete="off" autofocus required />
