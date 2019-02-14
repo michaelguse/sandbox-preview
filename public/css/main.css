@@ -190,6 +190,17 @@ strong {
   bottom: 0px;
 }
 
+.back-link-button {
+  font-size: 1em;
+  padding: 5px 15px;
+  background-color:white;
+  color :#215CA0;
+  border: single;
+  border-color: #215CA0;
+  border-radius: 6px;
+  box-shadow: 6px 6px 15px 5px rgba(0,0,0,0.3);
+}
+
 .back-link-header {
   display: none;
 }
@@ -349,8 +360,8 @@ input.button:hover {
   flex-direction: row;
   justify-content: center;
   padding: 5px;
-  margin-bottom: 25px;
-  margin-top: -20px;
+  margin-bottom: 15px;
+  margin-top: -25px;
 }
 
 .instance-display-site {
@@ -388,7 +399,7 @@ tr:nth-child(even) {
 .sandbox-table-col-data {
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-size: 16pt; */
-  font-weight: bold;
+  font-weight: normal;
   font-size: larger;
   color: black;
   text-align: center;
@@ -454,6 +465,7 @@ p.instance-header {
   /* font-size: 12pt; */
   color: rgb(141, 141, 141);
   text-transform: uppercase;
+
   margin-bottom: 0px !important;
   line-height: 1.0em;
 }
@@ -538,7 +550,7 @@ p.trust-site-text {
     font-size: 16pt;
   }
   .header-container {
-    padding: 30px 0;
+    padding: 25px 0;
   }
   .header-container .half {
     width: 100%;
@@ -588,7 +600,7 @@ p.trust-site-text {
     width: 65%;
   }
   .header-container {
-    padding: 30px 0;
+    padding: 25px 0;
   }
   .general-content img {
     width: 65%;
@@ -612,7 +624,7 @@ p.trust-site-text {
     width: 65%;
   }
   .header-container {
-    padding: 30px 0;
+    padding: 25px 0;
   }
   .general-content p {
     margin: 0 auto;
