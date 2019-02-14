@@ -182,16 +182,29 @@ strong {
   display: inline-block;
   margin: 10px 0;
 }
-.nav-container .back-link {
+
+.back-link-header.reveal{
+  display: flex;
+  position: relative;
+  font-size: 16pt;
+  bottom: 0px;
+}
+
+.back-link-button {
+  font-size: 1em;
+  padding: 5px 15px;
+  background-color:white;
+  color :#215CA0;
+  border: single;
+  border-color: #215CA0;
+  border-radius: 6px;
+  box-shadow: 6px 6px 15px 5px rgba(0,0,0,0.3);
+}
+
+.back-link-header {
   display: none;
 }
-.nav-container .back-link.reveal {
-  display: inline-block;
-  margin-left: 25px;
-}
-.nav-container .back-link.reveal a {
-  font-weight: 500;
-}
+
 .header-container {
   background: #00A1E0;
   margin-bottom: 25px;
@@ -213,6 +226,7 @@ strong {
 }
 .header-container .half p {
   font-family: "sf light", Helvetica, Arial, sans-serif;
+  margin-bottom: 10px;
 }
 .header-container .half:nth-child(2) {
   padding: 0 0 0 80px;
@@ -273,7 +287,7 @@ strong {
   width: 350px;
 }
 .upgrade-content .component.upgrade-info.reveal:first-of-type {
-  margin: 25px auto 0;
+  margin: -25px auto 0;
 }
 .upgrade-content .upgrade-option:hover {
   background: #00A1E0;
@@ -321,9 +335,11 @@ input {
   box-sizing: border-box;
   width: 250px;
 }
+
 input.button {
   width: auto;
 }
+
 input.button:hover {
   background: #00A1E0;
   color: #fff;
@@ -339,13 +355,59 @@ input.button:hover {
 }
 
 .instance-display-home {
+  background-color: rgb(0, 116, 161);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 15px;
+  margin-top: -25px;
+}
+
+.instance-display-site {
   background-color: lightsalmon;
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding: 5px;
-  margin-bottom: 25px;
-  margin-top: -25px;
+}
+
+.sandbox-table {
+  margin: 20px 0px 20px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.sandbox-table-col-header {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-size: 12pt; */
+  color: rgb(141, 141, 141);
+  /* text-transform: uppercase; */
+  text-align: center;
+  margin-bottom: 0px !important;
+  line-height: 1.0em;
+  border: 1px solid darkgrey;
+  padding: 5px;
+}
+
+.sandbox-table-col-data {
+  /* font-family: Arial, Helvetica, sans-serif; */
+  /* font-size: 16pt; */
+  font-weight: normal;
+  font-size: larger;
+  color: black;
+  text-align: center;
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+  line-height: 1.0em;
+  border: 1px solid darkgrey;
+  padding: 5px;
 }
 
 .instance-block {
@@ -360,7 +422,7 @@ input.button:hover {
 }
 
 .instance-type-block {
-  height: 60px;
+  height: 50px;
   padding: 5px 5px 5px 5px;
   text-align: left;
   vertical-align: top;
@@ -377,7 +439,7 @@ input.button:hover {
 }
 
 .release-name-block{
-  height: 60px;
+
   padding: 5px 5px 5px 5px;
   text-align: left;
   vertical-align: top;
@@ -387,11 +449,23 @@ input.button:hover {
   border-color: grey;
 }
 
+.trust-site-block{
+  height: 60px;
+  padding: 5px 19px 5px 19px;
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+  border-width: 1px 1px 1px 1px; 
+  border-style: solid;
+  border-color: grey;
+}
+
 p.instance-header {  
   /* font-family: Arial, Helvetica, sans-serif; */
-  font-size: 10pt;
+  /* font-size: 12pt; */
   color: rgb(141, 141, 141);
   text-transform: uppercase;
+
   margin-bottom: 0px !important;
   line-height: 1.0em;
 }
@@ -410,6 +484,16 @@ p.instance-text {
 p.rel-type-text {  
   /* font-family: Arial, Helvetica, sans-serif; */
   font-size: 20pt;
+  font-weight: lighter;
+  color: black;
+  margin-bottom: 2px !important;
+  margin-top: 2px !important;
+  line-height: 1.0em;
+}
+
+p.trust-site-text {  
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-size: 18pt;
   font-weight: lighter;
   color: black;
   margin-bottom: 2px !important;
@@ -466,7 +550,7 @@ p.rel-type-text {
     font-size: 16pt;
   }
   .header-container {
-    padding: 30px 0;
+    padding: 25px 0;
   }
   .header-container .half {
     width: 100%;
@@ -491,6 +575,9 @@ p.rel-type-text {
   .helpful-links p {
     text-align: left;
   }
+  .back-link-header.reveal {
+    justify-content: center;
+  }
 }
 @media all and (min-width: 768px) and (max-width: 1023px) {
   .content-wrapper {
@@ -513,7 +600,7 @@ p.rel-type-text {
     width: 65%;
   }
   .header-container {
-    padding: 50px 0;
+    padding: 25px 0;
   }
   .general-content img {
     width: 65%;
@@ -537,7 +624,7 @@ p.rel-type-text {
     width: 65%;
   }
   .header-container {
-    padding: 50px 0;
+    padding: 25px 0;
   }
   .general-content p {
     margin: 0 auto;

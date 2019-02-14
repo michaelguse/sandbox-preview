@@ -1,5 +1,6 @@
 var Pool = require('pg-pool');
 var url = require('url');
+var session = require('client-sessions');
 require('handlebars');
 
 // Change the DATABASE_URL in local .env file to your own setup for local testing
@@ -41,27 +42,51 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-// Home page request
-app.get('/', function (request, response) {
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type LIMIT 1', function (err, result) {  
-  // pool.query('SELECT release_name, release_preview_date, release_prod_date, release_refresh_datetime FROM rel_name_map WHERE release_name = $1', [`Winter '19`], function (err, result) {
+// Define session parameters for app
+app.use(session({
+  cookieName: 'session',
+  secret: 'xUy0ChYrMwR23B59sfok',
+  duration: 120 * 60 * 1000,
+  activeDuration: 15 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
+
+// Set current prod variable for session
+app.use(function(req, res, next) {
+  if (req.session && req.session.curr_prod_external) {
+    res.locals.curr_prod_external = req.session.curr_prod_external;
+    console.log('Existing session variable - curr_prod_external: %s',req.session.curr_prod_external); 
+    next();
+  } else {
+    req.session.reset();
+    console.log('Reset session!');
+    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_type=$1 LIMIT 1', [`Non-Preview`], function (err, result) {  
       if (err) {
         console.error(err);
-        response.send('Error: ' + err);
+        res.send('Error: ' + err);
       } else {
-        console.log(result.rows);
-        response.render('pages/index', { results: result.rows  });
+        req.session.curr_prod_external = result.rows[0].external_rel_name;
+        console.log('New session variable - curr_prod_external: %s',req.session.curr_prod_external);
+        res.locals.curr_prod_external = req.session.curr_prod_external;
+        next();
       }
-    });
+    });  
   }
-);
+});
+
+// Home page request
+app.get('/', function (request, response) {
+  response.render('pages/index');
+});
 
 //Sandbox upgrade page request
 app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
       filter("org_id").trim().toUpper(),
-      validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]{1,2})$/,"Oops I can't find that instance number! Please enter a valid instance number using the guide below!")
+      validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]?[0-9]?)$/,"We only support sandbox lookups! Please enter a valid instance number using the guide below!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -80,8 +105,8 @@ app.get('/upgrade',
               console.log(qryres);
               response.render('pages/upgrade', { results: qryres });
             } else {
-              console.log("[ 'Result less than zero - try again!' ]");
-              response.render('pages/index.ejs', { errors: [ 'Result less than zero - try again!' ] });
+              console.log("[ 'Not a valid sandbox instance - try again!' ]");
+              response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ] });
             }
           }
         });
