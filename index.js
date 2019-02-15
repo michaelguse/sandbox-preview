@@ -85,8 +85,9 @@ app.get('/', function (request, response) {
 app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
-      filter("org_id").trim().toUpper(),
-      validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]?[0-9]?)$/,"We only support sandbox lookups! Please enter a valid instance number using the guide below!")
+      filter("org_id").trim().toUpper()
+      //,
+      //validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]?[0-9]?)$/,"We only support sandbox lookups! Please enter a valid instance number using the guide below!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -94,19 +95,24 @@ app.get('/upgrade',
         console.log(request.form.errors);
         response.render('pages/index.ejs', { errors: request.form.errors });
       } else {
-        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = $1', [request.form.org_id], function (err, result) {
+        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id in $1', [request.form.org_id], function (err, result) {
           if (err) {
             console.error(err);
             response.send('Error: ' + err);
           } else {
             qryres = result.rows;
             // check for empyt result set
-            if (qryres.length > 0) {
-              console.log(qryres);
-              response.render('pages/upgrade', { results: qryres });
-            } else {
+            if (qryres.length <= 0) {
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
               response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ] });
+            } else {
+              if (qryres.length = 1) {
+                console.log(qryres);
+                response.render('pages/upgrade', { results: qryres });
+              } else {
+                console.log(qryres);
+                response.render('pages/multi-results', { results: qryres });
+              }
             }
           }
         });
