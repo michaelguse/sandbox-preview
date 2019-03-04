@@ -106,7 +106,6 @@ app.get('/upgrade',
           } else {
             qryres = result.rows;
             console.log(qryres.length);
-            console.log(qryres);
             // check for empyt result set
             if (qryres.length <= 0) {
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
