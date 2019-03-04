@@ -111,7 +111,6 @@ app.get('/upgrade',
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
               response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ] });
             } else {
-              console.log(qryres.length);
               if (qryres.length == 1) {
                 console.log("Single result");
                 console.log(qryres);
