@@ -526,12 +526,14 @@ p.trust-site-text {
 
 #feedback {
   position: fixed;
+  z-index: 1000;
   top: 0px;
   left: 40%;
 }
 
 #beta-ribbon {
   position: fixed;
+  z-index: 2000;
   top: 0px;
   right: 0px;
 }

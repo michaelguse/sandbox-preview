@@ -95,21 +95,32 @@ app.get('/upgrade',
         console.log(request.form.errors);
         response.render('pages/index.ejs', { errors: request.form.errors });
       } else {
-        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id in $1', [request.form.org_id], function (err, result) {
+        var list = request.form.org_id;
+        console.log(list);
+        list = list.split(',');
+        console.log(list);
+        list = list.map(Function.prototype.call, String.prototype.trim);
+        console.log(list);
+        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[])', [list], function (err, result) {
           if (err) {
             console.error(err);
             response.send('Error: ' + err);
           } else {
             qryres = result.rows;
+            console.log(qryres.length);
+            console.log(qryres);
             // check for empyt result set
             if (qryres.length <= 0) {
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
               response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ] });
             } else {
-              if (qryres.length = 1) {
+              console.log(qryres.length);
+              if (qryres.length == 1) {
+                console.log("Single result");
                 console.log(qryres);
                 response.render('pages/upgrade', { results: qryres });
               } else {
+                console.log("Multiple results");
                 console.log(qryres);
                 response.render('pages/multi-results', { results: qryres });
               }
