@@ -96,9 +96,7 @@ app.get('/upgrade',
         response.render('pages/index.ejs', { errors: request.form.errors });
       } else {
         var list = request.form.org_id;
-        console.log(list);
         list = list.split(',');
-        console.log(list);
         list = list.map(Function.prototype.call, String.prototype.trim);
         console.log(list);
         pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[])', [list], function (err, result) {
