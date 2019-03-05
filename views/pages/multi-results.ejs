@@ -8,31 +8,39 @@
       <% include ../partials/nav.ejs %>
       <% include ../partials/header.ejs %>
       <div class="upgrade-content">
-          <div class="instance-display-site" style="margin-top:-40px">
-            <div class="release-name-block">
-              <p class="instance-header" style="color: black;">Your Sandbox Inquiry Results</p>
-            </div>
+        <div class="instance-display-site" style="margin-top:-40px">
+          <div class="release-name-block">
+            <p class="instance-header" style="color: black;">Your Sandbox Inquiry Results</p>
           </div>
+        </div>
+        <div class="content-wrapper">
           <div class="sandbox-table">
             <table>
-            <tr>
-              <th class="sandbox-table-col-header">Instance</th>
-              <th class="sandbox-table-col-header">Instance Type</th>
-              <th class="sandbox-table-col-header">Release</th>
-              <th class="sandbox-table-col-header">Trust Info</th>
-            </tr>
-            <% results.forEach(function(r) { %>
-            <tr>
-              <td class="sandbox-table-col-data"><%= r.org_id  %></td>
-              <td class="sandbox-table-col-data"><%= r.org_type  %></td>
-              <td class="sandbox-table-col-data"><%= r.external_rel_name  %></td>
-              <td class="sandbox-table-col-data">
-                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance Schedule</a>
-              </td>
-            </tr>
-            <% }); %>
+              <tr>
+                <th class="sandbox-table-col-header">Instance</th>
+                <th class="sandbox-table-col-header">Instance Type</th>
+                <th class="sandbox-table-col-header">Release</th>
+                <th class="sandbox-table-col-header">Trust Info</th>
+              </tr>
+              <% results.forEach(function(r) { %>
+              <tr>
+                <td class="sandbox-table-col-data"><%= r.org_id  %></td>
+                <td class="sandbox-table-col-data"><%= r.org_type  %></td>
+                <td class="sandbox-table-col-data"><%= r.external_rel_name  %></td>
+                <td class="sandbox-table-col-data">
+                  <a target="_blank"
+                    href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance
+                    Schedule</a>
+                </td>
+              </tr>
+              <% }); %>
             </table>
           </div>
+          <div class="component">
+            <div class="divider"></div>
+            <% include ../partials/helpful-links.ejs %>
+          </div>
+        </div>
       </div>
     </div>
     <% include ../partials/footer.ejs %>

@@ -96,16 +96,18 @@ app.get('/upgrade',
         response.render('pages/index.ejs', { errors: request.form.errors });
       } else {
         var list = request.form.org_id;
+        console.log("Instance lookup entry: ", list);
         list = list.split(',');
         list = list.map(Function.prototype.call, String.prototype.trim);
-        console.log(list);
+        console.log("List of sandbox instances: ", list);
+        console.log("Number of sandbox instances: ", list.length);
         pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[])', [list], function (err, result) {
           if (err) {
             console.error(err);
             response.send('Error: ' + err);
           } else {
             qryres = result.rows;
-            console.log(qryres.length);
+            console.log("Number of results: ", qryres.length);
             // check for empyt result set
             if (qryres.length <= 0) {
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
@@ -113,11 +115,11 @@ app.get('/upgrade',
             } else {
               if (qryres.length == 1) {
                 console.log("Single result");
-                console.log(qryres);
+                // console.log(qryres);
                 response.render('pages/upgrade', { results: qryres });
               } else {
                 console.log("Multiple results");
-                console.log(qryres);
+                // console.log(qryres);
                 response.render('pages/multi-results', { results: qryres });
               }
             }
