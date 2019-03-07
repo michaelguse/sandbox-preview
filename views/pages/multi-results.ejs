@@ -36,6 +36,13 @@
               <% }); %>
             </table>
           </div>
+          <% if (locals.errors) { %>
+            <div style="margin: -10px 0px 10px 0px;">
+                <% errors.forEach(function(r) { %>
+                  <label for="sandbox-table" style="color: red;"><%= r %></label>
+                <% }); %>
+            </div>
+          <% }; %>
           <div class="component">
             <div class="divider"></div>
             <% include ../partials/helpful-links.ejs %>

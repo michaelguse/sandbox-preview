@@ -85,9 +85,8 @@ app.get('/', function (request, response) {
 app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
-      filter("org_id").trim().toUpper()
-      //,
-      //validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]?[0-9]?)$/,"We only support sandbox lookups! Please enter a valid instance number using the guide below!")
+      filter("org_id").trim().toUpper(),
+      validate("org_id").required().is(/^(\s*CS[0-9]{1,3}\s*,?)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -111,7 +110,7 @@ app.get('/upgrade',
             // check for empyt result set
             if (qryres.length <= 0) {
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
-              response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ] });
+              response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ], input: list });
             } else {
               if (qryres.length == 1) {
                 console.log("Single result");
@@ -120,7 +119,11 @@ app.get('/upgrade',
               } else {
                 console.log("Multiple results");
                 // console.log(qryres);
-                response.render('pages/multi-results', { results: qryres });
+                if (qryres.length == list.length) {
+                  response.render('pages/multi-results', { results: qryres });
+                } else {
+                  response.render('pages/multi-results', { results: qryres, errors: [ 'Some instances were not valid and were ignored!.' ]});
+                }
               }
             }
           }
