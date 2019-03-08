@@ -86,7 +86,7 @@ app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
       filter("org_id").trim().toUpper(),
-      validate("org_id").required().is(/^(\s*CS[0-9]{1,3}\s*,?)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
+      validate("org_id").required().is(/^(\s*CS[0-9]{1,3}\s*[\s,]?)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -118,12 +118,7 @@ app.get('/upgrade',
                 response.render('pages/upgrade', { results: qryres });
               } else {
                 console.log("Multiple results");
-                // console.log(qryres);
-                if (qryres.length == list.length) {
-                  response.render('pages/multi-results', { results: qryres });
-                } else {
-                  response.render('pages/multi-results', { results: qryres, errors: [ 'Some instances were not valid and were ignored!.' ]});
-                }
+                response.render('pages/multi-results', { results: qryres });
               }
             }
           }
