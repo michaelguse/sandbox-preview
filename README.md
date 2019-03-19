@@ -12,7 +12,7 @@ The purpose of this website is to provide Salesforce customers with
 
 ### Homepage screenshot
 
-![Screenshot of SRC Home Page](docs/sandbox_homepage.png)
+[![Screenshot of SRC Home Page](docs/sandbox_homepage.png)](https://sandbox-preview.herokuapp.com/)
 
 ## Background
 
