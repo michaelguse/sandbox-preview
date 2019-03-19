@@ -1,6 +1,6 @@
 # Sandbox Refresh Calculator
 
-The sandbox refresh calculator is a website that helps Salesforce customers to identify what __type__ of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
+The [sandbox refresh calculator](https://sandbox-preview.herokuapp.com/) is a website that helps Salesforce customers to identify what __type__ of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
 
 ## Applcation Overview
 
