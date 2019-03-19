@@ -1,6 +1,6 @@
-# sandbox-preview
+# Sandbox Refresh Calculator
 
-Is an application that helps Salesforce sandbox users to identify what type of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
+The sandbox refresh calculator is a website that helps Salesforce customers to identify what __type__ of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
 
 ## Applcation Overview
 
