@@ -10,6 +10,8 @@ The purpose of this website is to provide Salesforce customers with
 * easily determine if it is a PREVIEW or NON-PREVIEW instance and 
 * to determine what they need to do by what date.
 
+[Overview of home page:](docs/sandbox_homepage.png)
+
 Today's process consists of a per release [blog post](https://www.salesforce.com/blog/2018/12/spring-19-release-sandbox-preview-instructions.html) by Salesforce that informs customers about the process involved. 
 
 The blog post is very informative and has been around for a long time and many users are familiar with it. But during our research phase we realized that the content is not provided in the most intuitive way possible to our customers, which typically requires a customer to re-process the blog post each release period.
