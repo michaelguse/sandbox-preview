@@ -62,7 +62,7 @@ app.use(function(req, res, next) {
   } else {
     req.session.reset();
     console.log('Reset session!');
-    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_type=$1 LIMIT 1', [`Non-Preview`], function (err, result) {  
+    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_type=$1 LIMIT 1', ['Non-Preview'], function (err, result) {  
       if (err) {
         console.error(err);
         res.send('Error: ' + err);
