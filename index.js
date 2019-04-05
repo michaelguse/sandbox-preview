@@ -100,7 +100,7 @@ app.get('/upgrade',
         list = list.map(Function.prototype.call, String.prototype.trim);
         console.log("List of sandbox instances: ", list);
         console.log("Number of sandbox instances: ", list.length);
-        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[])', [list], function (err, result) {
+        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type, org_id', [list], function (err, result) {
           if (err) {
             console.error(err);
             response.send('Error: ' + err);
