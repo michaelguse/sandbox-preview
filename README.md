@@ -1,28 +1,35 @@
-# sf-sandbox-preview
+# Sandbox Refresh Calculator
 
-A barebones Node.js app using [Express 4](http://expressjs.com/) with EJS templating engine and Bootstrap and typeahead javascript libraries.
-
-This application was cloned from the [Getting Started with Node on Heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs) article.
+The [sandbox refresh calculator](https://sandbox-preview.herokuapp.com/) is a website that helps Salesforce customers to identify what __type__ of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
 
 ## Applcation Overview
 
-The purpose of this app is to provide Salesforce customers with 
+The purpose of this website is to provide Salesforce customers with 
 
 * the ability to easily lookup their sandbox org and 
 * easily determine if it is a PREVIEW or NON-PREVIEW instance and 
 * to determine what they need to do by what date.
 
-Today's process consists of a [blog post](https://www.salesforce.com/blog/2017/08/salesforce-winter-18-sandbox-preview-instructions.html) by Salesforce that informs customers about the process involved. It is not the most intuitive process and the goal of this application to leverage the same information but simplify it for our customers - both internal and external to Salesforce - to consume and process the information.
+### Homepage screenshot
 
-## Running Locally
+[![Screenshot of SRC Home Page](docs/sandbox_homepage.png)](https://sandbox-preview.herokuapp.com/)
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+## Background
 
-```sh
-$ git clone git@github.com:michaelguse/sandbox-preview.git # or clone your own fork
-$ cd sandbox-preview
-$ npm install
-$ npm start
-```
+Today's process to communicate sandbox type information to customers consists of a per release [blog post](https://www.salesforce.com/blog/2018/12/spring-19-release-sandbox-preview-instructions.html) by Salesforce that informs customers about the process and steps required to change a sandbox type. 
 
-Your app should now be running on [localhost:5000](http://localhost:5000/).
+The blog post is very informative and has been around for a long time and many users are familiar with it. But during our research phase we realized that the content is not provided in the most intuitive way possible to our customers, which typically requires a customer to re-process the blog post each release period.
+
+## Goals
+
+The goal of this website is to leverage the great information from the blog post, but simplify it for our customers - both internal and external to Salesforce - to consume and process the information. 
+
+### Result page screenshot
+
+![Screenshot of Sandbox Inquiry Result Page](docs/sandbox_result_fullpage.png)
+
+We also incorporated hyperlinks against the [Salesforce Trust website](https://trust.salesforce.com/), to provide our customers with an easy way to find upcoming release windows for the sandbox in question.
+
+![Screenshot of Trust link](docs/sandbox_inquiry_result.png)
+
+
