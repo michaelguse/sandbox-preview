@@ -55,13 +55,12 @@ app.use(session({
 
 // Set current prod variable for session
 app.use(function(req, res, next) {
-  if (req.session && req.session.curr_prod_external) {
+  if (req.session.curr_prod_external) {
     res.locals.curr_prod_external = req.session.curr_prod_external;
-    console.log('Existing session variable - curr_prod_external: %s',req.session.curr_prod_external); 
     next();
   } else {
     req.session.reset();
-    console.log('Reset session!');
+    console.log('Initialize session!');
     pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_type=$1 LIMIT 1', ['Non-Preview'], function (err, result) {  
       if (err) {
         console.error(err);
