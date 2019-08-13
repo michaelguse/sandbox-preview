@@ -24,35 +24,83 @@
               </tr>
               <% results.forEach(function(r) { %>
               <tr>
-                <td class="sandbox-table-col-data"><%= r.org_id  %></td>
-                <td class="sandbox-table-col-data"><%= r.org_type  %></td>
-                <td class="sandbox-table-col-data"><%= r.external_rel_name  %></td>
                 <td class="sandbox-table-col-data">
-                  <a target="_blank"
-                    href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance
+                  <%= r.org_id  %>
+                </td>
+                <td class="sandbox-table-col-data">
+                  <%= r.org_type  %>
+                </td>
+                <td class="sandbox-table-col-data">
+                  <%= r.external_rel_name  %>
+                </td>
+                <td class="sandbox-table-col-data">
+                  <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance
                     Schedule</a>
                 </td>
               </tr>
-              <% }); %>
+              <% }); %>  
             </table>
           </div>
           <% if (locals.errors) { %>
-            <div style="margin: -10px 0px 10px 0px;">
-                <% errors.forEach(function(r) { %>
-                  <label for="sandbox-table" style="color: red;"><%= r %></label>
-                <% }); %>
-            </div>
+          <div style="margin: -10px 0px 10px 0px;">
+            <% errors.forEach(function(r) { %>
+            <label for="sandbox-table" style="color: red;">
+              <%= r %></label>
+            <% }); %>
+          </div>
           <% }; %>
+          <div class="content-wrapper">
+            <h4>What would you like to do with your sandbox?
+            </h4>
+            
+                <p class="upgrade-option" id="upgrade">Upgrade to Winter '20
+                <br />by September 6, 2019</p>
+              <div class="component upgrade-info" id="upgrade">
+                <p><u><strong>Preview</strong> sandbox:</u></p>
+                <p>
+                  <strong>No action is needed</strong> as your Sandbox is already on a Preview Instance</p>
+                <p>If you need to refresh for other reasons, do so well in advance of <strong>September 6, 2019</strong> to make 
+                  sure your Sandbox completes before <strong>12:00 p.m. PT on September 6, 2019 (19:00 UTC on September 6, 2019)</strong>. 
+                  If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built 
+                  on a Non-Preview Instance.</p>
+
+                <p><u><strong>Non-Preview</strong> sandbox:</u></p>  
+                <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early
+                  to Winter '20.
+                </p>
+                <p>
+                  <strong>Please refresh well in advance of September 6, 2019</strong>. If you refresh after 
+                  <strong>12:00 p.m. PT on September 6, 2019 (19:00 UTC on September 6, 2019)</strong> 
+                  or your Sandbox doesn't complete in time, it will be built on a Non-Preview instance.
+                </p>
+              </div>
+              <p class="upgrade-option" id="stay">Stay on Summer '19
+                <br />until October 12, 2019</p>
+              <div class="component upgrade-info" id="stay">
+                <p><u></u><strong>Preview</strong> sandbox:</u></p>
+                <p>To stay on Summer '19, we require you to refresh to a Non-Preview Sandbox Instance.</p>
+                <p><strong>Please wait and refresh after 12:00 p.m. PT on September 6, 2019 
+                  (19:00 UTC on September 6, 2019).</strong> If you refresh before this time, 
+                  your Sandbox may be built on a Preview Instance.</p>
+                <p><u><strong>Non-Preview</strong> sandbox:</u></p>  
+                <p>
+                  <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
+                <p>If you need to refresh for other reasons, please wait and refresh after 12:00 p.m. PT on September 6,
+                  2019 (19:00 UTC on September 6, 2019) to remain on a Non-Preview Instance.</p>
+              </div>
+              <p class="large">
+                <strong>Note: </strong> All production and sandbox environments will be upgraded to Winter '20 by October 12, 2019.
+              </p>
+          
           <div class="component">
             <div class="divider"></div>
             <% include ../partials/helpful-links.ejs %>
           </div>
         </div>
       </div>
+      <% include ../partials/footer.ejs %>
+      <% include ../partials/script_section.ejs %>
     </div>
-    <% include ../partials/footer.ejs %>
-    <% include ../partials/script_section.ejs %>
-  </div>
 </body>
 
 </html>

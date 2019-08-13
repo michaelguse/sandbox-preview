@@ -117,7 +117,7 @@ app.get('/upgrade',
                 response.render('pages/upgrade', { results: qryres });
               } else {
                 console.log("Multiple results");
-                response.render('pages/upgrade', { results: qryres });
+                response.render('pages/multi-results', { results: qryres });
               }
             }
           }

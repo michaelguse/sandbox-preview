@@ -8,57 +8,32 @@
       <% include ../partials/nav.ejs %>
       <% include ../partials/header.ejs %>
       <div class="upgrade-content">
-        <div class="instance-display-site" style="margin-top:-40px">
-          <div class="release-name-block">
-            <p class="instance-header" style="color: black;">Your Sandbox Inquiry Results</p>
+          <div class="instance-display-site" style="margin-top:-40px">
+            <div class="release-name-block">
+              <p class="instance-header" style="color: black;">Your Sandbox Inquiry Results</p>
+            </div>
           </div>
-        </div>
-        <div class="content-wrapper">
-          <div class="sandbox-table">
-            <table>
-              <tr>
-                <th class="sandbox-table-col-header">Instance</th>
-                <th class="sandbox-table-col-header">Instance Type</th>
-                <th class="sandbox-table-col-header">Release</th>
-                <th class="sandbox-table-col-header">Trust Info</th>
-              </tr>
-              <% results.forEach(function(r) { %>
-              <tr>
-                <td class="sandbox-table-col-data">
-                  <%= r.org_id  %>
-                </td>
-                <td class="sandbox-table-col-data">
-                  <%= r.org_type  %>
-                </td>
-                <td class="sandbox-table-col-data">
-                  <%= r.external_rel_name  %>
-                </td>
-                <td class="sandbox-table-col-data">
-                  <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance
-                    Schedule</a>
-                </td>
-              </tr>
-              <% }); %>  
-            </table>
-          </div>
-          <% if (locals.errors) { %>
-          <div style="margin: -10px 0px 10px 0px;">
-            <% errors.forEach(function(r) { %>
-            <label for="sandbox-table" style="color: red;">
-              <%= r %></label>
-            <% }); %>
-          </div>
-          <% }; %>
-          <div class="content-wrapper">
-            <h4>What would you like to do with your 
-              <select name="org_type_list" style="font-size: 18px; padding: 3px 10px 3px 10px;">
-                <option value="Preview">Preview</option>
-                <option value="Non-Preview">Non-Preview</option>
-              </select> sandbox?
-            </h4>
+          <div class="sandbox-table"><table>
+            <tr>
+              <th class="sandbox-table-col-header">Instance</th>
+              <th class="sandbox-table-col-header">Instance Type</th>
+              <th class="sandbox-table-col-header">Release</th>
+              <th class="sandbox-table-col-header">Trust Info</th>
+            </tr>
             <% results.forEach(function(r) { %>
-            <p class="upgrade-option" id="upgrade">Upgrade to Summer '19
-            <br />by May 3, 2019</p>
+            <tr>
+              <td class="sandbox-table-col-data"><%= r.org_id  %></td>
+              <td class="sandbox-table-col-data"><%= r.org_type  %></td>
+              <td class="sandbox-table-col-data"><%= r.external_rel_name  %></td>
+              <td class="sandbox-table-col-data">
+                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance Schedule</a>
+              </td>
+            </tr>
+          </table></div>
+        <div class="content-wrapper">
+          <h4>What would you like to do with your sandbox?</h4>
+          <p class="upgrade-option" id="upgrade">Upgrade to Winter '20
+            <br />by September 6, 2019</p>
           <div class="component upgrade-info" id="upgrade">
             <% if (r.org_type == "Preview") {  %>
             <p>
@@ -67,7 +42,6 @@
               sure your Sandbox completes before <strong>12:00 p.m. PT on September 6, 2019 (19:00 UTC on September 6, 2019)</strong>. 
               If you refresh after the deadline or your Sandbox doesn't complete in time, it will be built 
               on a Non-Preview Instance.</p>
-
             <% } %>
             <% if (r.org_type == "Non-Preview") { %>
             <p>To get the preview, we require you to refresh to a Sandbox instance that will be upgraded early
@@ -85,15 +59,15 @@
           <div class="component upgrade-info" id="stay">
             <% if (r.org_type == "Preview") { %>
             <p>To stay on Summer '19, we require you to refresh to a Non-Preview Sandbox Instance.</p>
-            <p><strong>Please wait and refresh after 12:00 p.m. PT on September 6, 2019 
-              (19:00 UTC on September 6, 2019).</strong> If you refresh before this time, 
+            <p><strong>Please wait and refresh after 1:00 p.m. PT on September 6, 2019 
+              (20:00 UTC on September 6, 2019).</strong> If you refresh before this time, 
               your Sandbox may be built on a Preview Instance.</p>
             <% } %>
             <% if (r.org_type == "Non-Preview") { %>
             <p>
               <strong>No action is needed</strong> as your Sandbox is already on a Non-Preview Instance</p>
-            <p>If you need to refresh for other reasons, please wait and refresh after 12:00 p.m. PT on September 6,
-              2019 (19:00 UTC on September 6, 2019) to remain on a Non-Preview Instance.</p>
+            <p>If you need to refresh for other reasons, please wait and refresh after 1:00 p.m. PT on September 6,
+              2019 (20:00 UTC on September 6, 2019) to remain on a Non-Preview Instance.</p>
             <% } %>
           </div>
           <p class="large">
@@ -106,9 +80,9 @@
           </div>
         </div>
       </div>
-      <% include ../partials/footer.ejs %>
-      <% include ../partials/script_section.ejs %>
     </div>
+    <% include ../partials/footer.ejs %>
+    <% include ../partials/script_section.ejs %>
+  </div>
 </body>
-
 </html>
