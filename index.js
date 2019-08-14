@@ -152,7 +152,7 @@ app.get('/sandbox/instances', function (request, response) {
       console.error(err);
       response.send('Error ' + err);
     } else {
-      //console.log(result);
+      console.log("List of sandbox instances: ",result.rows.length);
       response.render('pages/sandboxinstances', {
         results: result.rows,
       });

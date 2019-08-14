@@ -8,20 +8,24 @@
         <% include ../partials/header.ejs %>
           <div class="content-wrapper">
             <div class="component">
-              <h3>What is your Sandbox instance?</h3>
-              <form action="/upgrade" type="GET" class="form-primary">
-                <% if (locals.errors) { %>
-                  <input class="form-error-msg" name="org_id" id="org_id" placeholder="" type="text" autocomplete="off" autofocus required />
-                  <input type="submit" class="button" value="submit" />
-                  <% errors.forEach(function(r) { %>
-                    <br/><br/><label for="org_id" style="color: red;"><%= r %></label>
-                <% }); %>
-                <% } else { %>
-                  <input name="org_id" placeholder="eg CS87 or CS87 CS88,CS89;CS90" type="text" autocomplete="off" autofocus required />
-                  <input type="submit" class="button" value="submit" />
-                <% }; %>
-              </form>
               <div class="general-content">
+                <h4>What is your Sandbox instance?</h4>
+                <p>Enter a single sandbox instance name - e.g. CS87 - 
+                  or multiple sandboxes separated by a character such as a 
+                  space, comma, semi-colon or pipe - e.g. [&nbsp;cs87 cs88,cs89;cs90|cs91&nbsp;]</p>
+                <form action="/upgrade" type="GET" class="form-primary">
+                  <% if (locals.errors) { %>
+                    <input class="form-error-msg" name="org_id" id="org_id" placeholder="" type="text" autocomplete="off" autofocus required />
+                    <input type="submit" class="button" value="submit" />
+                    <% errors.forEach(function(r) { %>
+                      <br/><br/><label for="org_id" style="color: red;"><%= r %></label>
+                  <% }); %>
+                  <% } else { %>
+                    <input name="org_id" placeholder="Enter one or more sandbox instance names" type="text" autocomplete="off" autofocus required />
+                    <input type="submit" class="button" value="submit" />
+                  <% }; %>
+                </form>
+                <p>&nbsp;</p>
                 <h4>Unsure of your Sandbox Instance?</h4>
                 <p>To determine which instance your Sandbox is on, log into your production org and navigate to your Sandbox
                   List page (Search "Sandbox" in the Quick Find bar on the Setup Home Page).</p>
