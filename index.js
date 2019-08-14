@@ -147,7 +147,7 @@ app.get('/sandbox/types', function (request, response) {
 });
 
 app.get('/sandbox/instances', function (request, response) {
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type,external_rel_name,  id', function (err, result) {
+  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type,external_rel_name, substring(org_id, 3)::INTEGER', function (err, result) {
     if (err) {
       console.error(err);
       response.send('Error ' + err);
