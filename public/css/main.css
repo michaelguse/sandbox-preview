@@ -269,7 +269,7 @@ strong {
   border-top: 2px solid #00A1E0;
   height: auto;
   margin: -25px auto 0px;
-  max-height: 500px;
+  max-height: 600px;
   overflow: hidden;
   padding: 20px;
   -moz-transition-duration: 0.3s;
@@ -526,12 +526,14 @@ p.trust-site-text {
 
 #feedback {
   position: fixed;
+  z-index: 1000;
   top: 0px;
   left: 40%;
 }
 
 #beta-ribbon {
   position: fixed;
+  z-index: 2000;
   top: 0px;
   right: 0px;
 }

@@ -85,7 +85,7 @@ app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
       filter("org_id").trim().toUpper(),
-      validate("org_id").required().is(/^([csCS]{2}[1]?[0-9]?[0-9]?)$/,"We only support sandbox lookups! Please enter a valid instance number using the guide below!")
+      validate("org_id").required().is(/^[\s,;|]*(CS[0-9]{1,3}[\s,;|]*)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -93,19 +93,32 @@ app.get('/upgrade',
         console.log(request.form.errors);
         response.render('pages/index.ejs', { errors: request.form.errors });
       } else {
-        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = $1', [request.form.org_id], function (err, result) {
+        var list = request.form.org_id;
+        console.log("Instance lookup entry: ", list);
+        list = list.split(/[\s,;|]+/);
+        list = list.map(Function.prototype.call, String.prototype.trim);
+        console.log("List of sandbox instances: ", list);
+        console.log("Number of sandbox instances: ", list.length);
+        pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY substring(org_id, 3)::INTEGER', [list], function (err, result) {
           if (err) {
             console.error(err);
             response.send('Error: ' + err);
           } else {
             qryres = result.rows;
+            console.log("Number of results: ", qryres.length);
             // check for empyt result set
-            if (qryres.length > 0) {
-              console.log(qryres);
-              response.render('pages/upgrade', { results: qryres });
-            } else {
+            if (qryres.length <= 0) {
               console.log("[ 'Not a valid sandbox instance - try again!' ]");
-              response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ] });
+              response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ], input: list });
+            } else {
+              if (qryres.length == 1) {
+                console.log("Single result");
+                // console.log(qryres);
+                response.render('pages/upgrade', { results: qryres });
+              } else {
+                console.log("Multiple results");
+                response.render('pages/multi-results', { results: qryres });
+              }
             }
           }
         });
