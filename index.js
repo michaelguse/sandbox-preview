@@ -85,7 +85,7 @@ app.get('/upgrade',
     // Form filter and validation for upgrade page 
     form(
       filter("org_id").trim().toUpper(),
-      validate("org_id").required().is(/^(\s*CS[0-9]{1,3}\s*[\s,]?)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
+      validate("org_id").required().is(/^(\s*CS[0-9]{1,3}\s*[\s,;|]?)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -95,7 +95,7 @@ app.get('/upgrade',
       } else {
         var list = request.form.org_id;
         console.log("Instance lookup entry: ", list);
-        list = list.split(',');
+        list = list.split(/[\s,;|]+/);
         list = list.map(Function.prototype.call, String.prototype.trim);
         console.log("List of sandbox instances: ", list);
         console.log("Number of sandbox instances: ", list.length);
