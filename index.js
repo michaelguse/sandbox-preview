@@ -90,6 +90,7 @@ app.get('/upgrade',
     function (request, response) {
       if (!request.form.isValid) {
         // Handle errors
+        console.log("Instance lookup entry: ", request.form.org_id);
         console.log(request.form.errors);
         response.render('pages/index.ejs', { errors: request.form.errors });
       } else {
@@ -133,7 +134,7 @@ app.get('/cheatsheet', function (request, response) {
 );
 
 app.get('/sandbox/types', function (request, response) {
-  pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type,external_rel_name', function (err, result) {
+  pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, external_rel_name', function (err, result) {
     if (err) {
       console.error(err);
       response.send('Error ' + err);
@@ -147,7 +148,7 @@ app.get('/sandbox/types', function (request, response) {
 });
 
 app.get('/sandbox/instances', function (request, response) {
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type,external_rel_name, substring(org_id, 3)::INTEGER', function (err, result) {
+  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, external_rel_name, substring(org_id, 3)::INTEGER', function (err, result) {
     if (err) {
       console.error(err);
       response.send('Error ' + err);
@@ -156,6 +157,18 @@ app.get('/sandbox/instances', function (request, response) {
       response.render('pages/sandboxinstances', {
         results: result.rows,
       });
+    }
+  });
+});
+
+app.get('/sandbox/:id', function (request, response) {
+  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type WHERE org_id = upper($1)', [request.params.id], function (err, result) {
+    if (err) {
+      console.error(err);
+      response.send('Error ' + err);
+    } else {
+      console.log("Sandbox instances: ",request.params.id);
+      response.send(result.rows);
     }
   });
 });
