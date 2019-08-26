@@ -1,5 +1,6 @@
 var Pool = require('pg-pool');
 var url = require('url');
+var dns = require('dns');
 var session = require('client-sessions');
 require('handlebars');
 
@@ -80,6 +81,11 @@ app.get('/', function (request, response) {
   response.render('pages/index');
 });
 
+// Home page request
+app.get('/domain', function (request, response) {
+  response.render('pages/domain');
+});
+
 //Sandbox upgrade page request
 app.get('/upgrade',
     // Form filter and validation for upgrade page 
@@ -126,6 +132,65 @@ app.get('/upgrade',
       }
     }
 );
+
+// Invoke nslookup against domain name
+app.get('/domainlookup', 
+    // Form filter and validation for upgrade page 
+    form(
+      filter("org_id").trim(),
+      validate("org_id").required().is(/^[\s,;|]*(\w[--\w]*[\s,;|]*)+$/,"We only support domain lookups! Please enter only valid domain names!")
+   ),
+    function (request, response) {
+      if (!request.form.isValid) {
+        // Handle errors
+        console.log("Domain lookup entry: ", request.form.org_id);
+        console.log(request.form.errors);
+        response.render('pages/index.ejs', { errors: request.form.errors });
+      } else {
+        var domains = request.form.org_id;
+        var list = [];
+        console.log("Domain lookup entry: ", domains);
+        domains = domains.split(/[\s,;|]+/);
+        domains = domains.map(Function.prototype.call, String.prototype.trim);  
+        var lookupDomain = domains[0] + '.my.salesforce.com';
+        console.log('Domain URL: ', lookupDomain);
+        dns.resolveCname(lookupDomain, function (err, addresses) {
+          if (err) {
+            console.error(err);
+            response.send('Error ' + err);
+          } else {
+            console.log('Cname resolve: ' + addresses);
+            var org_id = addresses[0].split(".")[0];
+            console.log('Org_Id: ' + org_id);
+            list[0] = org_id;
+
+            pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type, $2::TEXT as org_domain FROM rel_org_type WHERE org_id = upper($1) ORDER BY substring(org_id, 3)::INTEGER', [list[0], lookupDomain.split('.')[0]], function (err, result) {
+              if (err) {
+                console.error(err);
+                response.send('Error: ' + err);
+              } else {
+                qryres = result.rows;
+                console.log("Number of results: ", qryres.length);
+                // check for empyt result set
+                if (qryres.length <= 0) {
+                  console.log("[ 'Not a valid domain name - try again!' ]");
+                  response.render('pages/index.ejs', { errors: [ 'Not a valid domain name - try again!' ], input: list });
+                } else {
+                  if (qryres.length == 1) {
+                    console.log("Single result");
+                    console.log(qryres);
+                    response.render('pages/domainlookup', { results: qryres });
+                  } else {
+                    console.log("Multiple results");
+                    response.render('pages/multi-results', { results: qryres });
+                  }
+                }
+              }
+            });
+          }
+        });
+    }
+});
 
 // Cheatsheet request
 app.get('/cheatsheet', function (request, response) {
