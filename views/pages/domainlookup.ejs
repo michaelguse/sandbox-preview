@@ -15,18 +15,20 @@
           </div>
           <div class="sandbox-table"><table>
             <tr>
-              <th class="sandbox-table-col-header">Instance (Domain)</th>
+              <th class="sandbox-table-col-header">Domain</th>
+              <th class="sandbox-table-col-header">Instance</th>
               <th class="sandbox-table-col-header">Instance Type</th>
               <th class="sandbox-table-col-header">Release</th>
-              <th class="sandbox-table-col-header">Trust Info</th>
+              <th class="sandbox-table-col-header">Trust</th>
             </tr>
             <% results.forEach(function(r) { %>
             <tr>
-              <td class="sandbox-table-col-data"><%= r.org_id  %> (<%= r.org_domain  %>)</td>
+              <td class="sandbox-table-col-data"><%= r.org_domain  %></td>
+              <td class="sandbox-table-col-data"><%= r.org_id  %></td>
               <td class="sandbox-table-col-data"><%= r.org_type  %></td>
               <td class="sandbox-table-col-data"><%= r.external_rel_name  %></td>
               <td class="sandbox-table-col-data">
-                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances">Maintenance Schedule</a>
+                <a target="_blank" href="https://status.salesforce.com/instances/<%= r.org_id  %>/maintenances"><img src="/images/sf-status-logo.png" alt="SF Trust Status" height="35" title="Maintenance Info"/></a>
               </td>
             </tr>
           </table></div>

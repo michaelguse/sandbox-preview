@@ -1,6 +1,7 @@
 var Pool = require('pg-pool');
 var url = require('url');
 var dns = require('dns');
+
 var session = require('client-sessions');
 require('handlebars');
 
@@ -81,7 +82,7 @@ app.get('/', function (request, response) {
   response.render('pages/index');
 });
 
-// Home page request
+// Domain home page request
 app.get('/domain', function (request, response) {
   response.render('pages/domain');
 });
