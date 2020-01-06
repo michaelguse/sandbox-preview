@@ -6,35 +6,35 @@
         <div class="wrapper">
             <div class="body-wrapper">
                 <% include ../partials/nav.ejs %>
-                    <% include ../partials/header.ejs %>
-                        <div class="content-wrapper">
-                            <div class="container">
-                                <h3>Sandbox Instances by Type</h3>
-                                <br/>
-                                <div>
-                                    <table id="sandboxes">
+                <% include ../partials/header.ejs %>
+                    <div class="content-wrapper">
+                        <div class="container">
+                            <h3>Sandbox Instances by Type</h3>
+                            <br/>
+                            <div>
+                                <table id="sandboxes">
+                                    <tr>
+                                        <th>Count</th>
+                                        <th>Instance Type</th>
+                                        <th>Release Name</th>
+                                    </tr>
+                                    <% results.forEach(function(r) { %>
                                         <tr>
-                                            <th>Count</th>
-                                            <th>Instance Type</th>
-                                            <th>Release Name</th>
+                                            <td>
+                                                <%= r.Count %>
+                                            </td>
+                                            <td>
+                                                <%= r.Type %>
+                                            </td>
+                                            <td>
+                                                <%= r.Release %>
+                                            </td>
                                         </tr>
-                                        <% results.forEach(function(r) { %>
-                                            <tr>
-                                                <td>
-                                                    <%= r.Count %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Type %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Release %>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
-                                    </table>
-                                </div>
+                                        <% }); %>
+                                </table>
                             </div>
                         </div>
+                    </div>
                 </div>
                 <% include ../partials/footer.ejs %>
                 <% include ../partials/script_section.ejs %>
