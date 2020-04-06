@@ -42,6 +42,38 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+function lookupResult(list, response) {
+  console.log("Instance lookup entry: ", list);
+  list = list.split(/[\s,;|]+/);
+  list = list.map(Function.prototype.call, String.prototype.trim);
+  list = list.map(Function.prototype.call, String.prototype.toUpperCase);
+  console.log("List of sandbox instances: ", list);
+  console.log("Number of sandbox instances: ", list.length);
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY substring(org_id, 3)::INTEGER', [list], function (err, result) {
+    if (err) {
+      console.error(err);
+      response.send('Error: ' + err);
+    } else {
+      qryres = result.rows;
+      console.log("Number of results: ", qryres.length);
+      // check for empyt result set
+      if (qryres.length <= 0) {
+        console.log("[ 'Not a valid sandbox instance - try again!' ]");
+        response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ], input: list });
+      } else {
+        if (qryres.length == 1) {
+          console.log("Single result");
+          // console.log(qryres);
+          response.render('pages/upgrade', { results: qryres });
+        } else {
+          console.log("Multiple results");
+          response.render('pages/multi-results', { results: qryres });
+        }
+      }
+    }
+  });
+}
+
 // Define session parameters for app
 app.use(session({
   cookieName: 'session',
@@ -87,7 +119,7 @@ app.get('/upgrade',
     filter("org_id").trim().toUpper(),
     validate("org_id").required().is(/^[\s,;|]*(CS[0-9]{1,3}[\s,;|]*)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
   ),
-  function (request, response) {
+  function(request, response) {
     if (!request.form.isValid) {
       // Handle errors
       console.log("Instance lookup entry: ", request.form.org_id);
@@ -95,34 +127,7 @@ app.get('/upgrade',
       response.render('pages/index.ejs', { errors: request.form.errors });
     } else {
       var list = request.form.org_id;
-      console.log("Instance lookup entry: ", list);
-      list = list.split(/[\s,;|]+/);
-      list = list.map(Function.prototype.call, String.prototype.trim);
-      console.log("List of sandbox instances: ", list);
-      console.log("Number of sandbox instances: ", list.length);
-      pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY substring(org_id, 3)::INTEGER', [list], function (err, result) {
-        if (err) {
-          console.error(err);
-          response.send('Error: ' + err);
-        } else {
-          qryres = result.rows;
-          console.log("Number of results: ", qryres.length);
-          // check for empyt result set
-          if (qryres.length <= 0) {
-            console.log("[ 'Not a valid sandbox instance - try again!' ]");
-            response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ], input: list });
-          } else {
-            if (qryres.length == 1) {
-              console.log("Single result");
-              // console.log(qryres);
-              response.render('pages/upgrade', { results: qryres });
-            } else {
-              console.log("Multiple results");
-              response.render('pages/multi-results', { results: qryres });
-            }
-          }
-        }
-      });
+      lookupResult(list, response);
     }
   }
 );
@@ -161,15 +166,8 @@ app.get('/sandbox/instances', function (request, response) {
 });
 
 app.get('/sandbox/:id', function (request, response) {
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type WHERE org_id = upper($1)', [request.params.id], function (err, result) {
-    if (err) {
-      console.error(err);
-      response.send('Error ' + err);
-    } else {
-      console.log("Sandbox instances: ",request.params.id);
-      response.send(result.rows);
-    }
-  });
+  var list = request.params.id;
+  lookupResult(list, response);
 });
 
 app.listen(app.get('port'), function () {
