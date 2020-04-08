@@ -137,8 +137,8 @@ app.get('/cheatsheet', function (request, response) {
     response.render('pages/cheatsheet');
 });
 
-app.get('/sandbox/types', function (request, response) {
-  logger.info('Sandbox Type report page visit', {visit: 'sandboxtypes'});
+app.get('/sandbox', function (request, response) {
+  logger.info('Sandbox main page visit', {visit: 'sandboxhome'});
   pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, external_rel_name', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
