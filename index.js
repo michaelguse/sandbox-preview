@@ -138,7 +138,12 @@ app.get('/cheatsheet', function (request, response) {
 });
 
 app.get('/sandbox', function (request, response) {
-  logger.info('Sandbox main page visit', {visit: 'sandboxhome'});
+  logger.info('Redirect to sandbox instance page', {visit: 'sandboxhome'});
+  response.redirect('/sandbox/instances');
+});
+
+app.get('/sandbox/types', function (request, response) {
+  logger.info('Sandbox Type Overview page visit', {visit: 'sandboxtypes'});
   pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, external_rel_name', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
@@ -150,7 +155,7 @@ app.get('/sandbox', function (request, response) {
 });
 
 app.get('/sandbox/instances', function (request, response) {
-  logger.info('Sandbox Instance report page visit', {visit: 'sandboxinstances'});
+  logger.info('Sandbox Instances page visit', {visit: 'sandboxinstances'});
   pool.query('SELECT org_id AS "Instance",org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, external_rel_name, substring(org_id, 3)::INTEGER', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
