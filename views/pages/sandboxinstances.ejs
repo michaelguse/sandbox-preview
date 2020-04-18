@@ -9,22 +9,26 @@
                     <% include ../partials/header.ejs %>
                         <div class="content-wrapper">
                             <div class="container">
-                                <h3>Sandbox Instances</h3>
+                                <h3><a href="/sandbox/types">Sandbox Type Overview</a> | Sandbox Instances</h3>
                                 <br/>
                                 <div>
                                     <table id="sandboxes">
                                         <tr>
                                             <th>Instance</th>
-                                            <th>Org Type</th>
+                                            <th>Type</th>
+                                            <th>Region</th>
                                             <th>Release Name</th>
                                         </tr>
                                         <% results.forEach(function(r) { %>
                                             <tr>
                                                 <td>
-                                                    <%= r.Instance %>
+                                                    <a href="/sandbox/<%= r.Instance %>"><%= r.Instance %></a>
                                                 </td>
                                                 <td>
                                                     <%= r.Type %>
+                                                </td>
+                                                <td>
+                                                    <%= r.Region %>
                                                 </td>
                                                 <td>
                                                     <%= r.Release %>
