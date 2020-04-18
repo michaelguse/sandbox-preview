@@ -1,8 +1,10 @@
-var Pool = require('pg-pool');
-var url = require('url');
-var dns = require('dns');
+const Pool = require('pg-pool');
+const url = require('url');
+const dns = require('dns');
+const jq = require('node-jq');
+const trustcall = require('request');
 
-var session = require('client-sessions');
+const session = require('client-sessions');
 require('handlebars');
 
 // Change the DATABASE_URL in local .env file to your own setup for local testing
@@ -138,15 +140,15 @@ app.get('/upgrade',
 app.get('/domainlookup', 
     // Form filter and validation for upgrade page 
     form(
-      filter("org_id").trim(),
-      validate("org_id").required().is(/^[\s,;|]*(\w[--\w]*[\s,;|]*)+$/,"We only support domain lookups! Please enter only valid domain names!")
+      filter("org_id").trim()
+    //  , validate("org_id").required().is(/^(\w*[\s,;]?)+$/,"We support instance and domain name lookups!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
         // Handle errors
         console.log("Domain lookup entry: ", request.form.org_id);
         console.log(request.form.errors);
-        response.render('pages/index.ejs', { errors: request.form.errors });
+        response.render('pages/domain.ejs', { errors: request.form.errors });
       } else {
         var domains = request.form.org_id;
         var list = [];
@@ -158,13 +160,38 @@ app.get('/domainlookup',
         dns.resolveCname(lookupDomain, function (err, addresses) {
           if (err) {
             console.error(err);
-            response.send('Error ' + err);
+            response.send(`resolveCname Lookup Error - ${err}`);
           } else {
             console.log('Cname resolve: ' + addresses);
-            var org_id = addresses[0].split(".")[0];
+            var org_id = addresses[0].split(".")[0].split("-")[0];
             console.log('Org_Id: ' + org_id);
             list[0] = org_id;
 
+            trustcall(`https://api.status.salesforce.com/v1/instances/${org_id}/status?childProducts=false`, function (error, resp, body) {
+              if (!error && resp.statusCode == 200) {
+                //console.log(body); 
+                //response.send(`Response Body --- ${body}`);
+
+                var filter = '.Maintenances[] | select(.isCore == true) | select(.message.maintenanceType == "release") | select(.name | contains("Major Release")) | { "name" : .name, "start" : .plannedStartTime }';
+                
+                jq.run(filter, body, { input: 'string' })
+                  .then((output) => {
+                    console.log(output);
+                    response.send(output);
+                  }) 
+                  .catch((error) => {
+                    console.error(error);
+                    response.send(`JQ error --- ${error}`);
+                    // Something went wrong...
+                  });       
+              } else {
+                console.log(`Error - Response Status Code: ${resp.statusCode}`);
+                console.log(request.form.errors);
+                response.render('pages/domain.ejs', { errors: request.form.errors });
+              }
+            });
+
+            /*
             pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type, $2::TEXT as org_domain FROM rel_org_type WHERE org_id = upper($1) ORDER BY substring(org_id, 3)::INTEGER', [list[0], lookupDomain.split('.')[0]], function (err, result) {
               if (err) {
                 console.error(err);
@@ -187,7 +214,7 @@ app.get('/domainlookup',
                   }
                 }
               }
-            });
+            }); */
           }
         });
     }
