@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+<body>
+  <div class="wrapper">
+    <div class="body-wrapper">
+      <% include ../partials/nav.ejs %>
+      <% include ../partials/header.ejs %>
+      <div class="upgrade-content">
+          <div class="instance-display-site" style="margin-top:-40px">
+            <div class="release-name-block">
+              <p class="instance-header" style="color: black;">Your Domain Lookup Results</p>
+            </div>
+          </div>
+          <div class="sandbox-table">
+              <table>
+                <tr>
+                    <th class="sandbox-table-col-header">Key</th>
+                    <th class="sandbox-table-col-header">Location</th>
+                    <th class="sandbox-table-col-header">Environment</th>
+                    <th class="sandbox-table-col-header">Release Version</th>
+                    <th class="sandbox-table-col-header">Status</th>
+                  </tr>
+                  <% results.forEach(function(r) { %>
+                  <tr>
+                    <td class="sandbox-table-col-data"><%= r.key  %></td>
+                    <td class="sandbox-table-col-data"><%= r.location  %></td>
+                    <td class="sandbox-table-col-data"><%= r.environment  %></td>
+                    <td class="sandbox-table-col-data"><%= r.releaseVersion  %></td>
+                    <td class="sandbox-table-col-data"><%= r.status  %></td>
+                  </tr>
+                  <% }); %>
+              </table>
+          </div>
+      </div>
+    </div>
+    <% include ../partials/footer.ejs %>
+    <% include ../partials/script_section.ejs %>
+  </div>
+</body>
+</html>
