@@ -1,6 +1,7 @@
 var { qryres } = require("./index");
 const { logger } = require("./index");
 const { pool } = require("./index");
+var qryres = "";
 
 function lookupResult(list, response) {
     list = list.split(/[\s,;|]+/);

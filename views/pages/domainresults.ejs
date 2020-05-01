@@ -10,25 +10,23 @@
       <div class="upgrade-content">
           <div class="instance-display-site" style="margin-top:-40px">
             <div class="release-name-block">
-              <p class="instance-header" style="color: black;">Your Domain Lookup Results</p>
+              <p class="instance-header" style="color: black;">Your Lookup Results</p>
             </div>
           </div>
           <div class="sandbox-table">
               <table>
                 <tr>
-                    <th class="sandbox-table-col-header">Key</th>
+                    <th class="sandbox-table-col-header">Instance</th>
                     <th class="sandbox-table-col-header">Location</th>
-                    <th class="sandbox-table-col-header">Environment</th>
-                    <th class="sandbox-table-col-header">Release Version</th>
-                    <th class="sandbox-table-col-header">Status</th>
+                    <th class="sandbox-table-col-header">Next Release</th>
+                    <th class="sandbox-table-col-header">Next Release Date</th>
                   </tr>
                   <% results.forEach(function(r) { %>
                   <tr>
-                    <td class="sandbox-table-col-data"><%= r.key  %></td>
+                    <td class="sandbox-table-col-data"><%= r.instance  %></td>                      
                     <td class="sandbox-table-col-data"><%= r.location  %></td>
-                    <td class="sandbox-table-col-data"><%= r.environment  %></td>
-                    <td class="sandbox-table-col-data"><%= r.releaseVersion  %></td>
-                    <td class="sandbox-table-col-data"><%= r.status  %></td>
+                    <td class="sandbox-table-col-data"><%= r.nextRelease  %></td>
+                    <td class="sandbox-table-col-data"><%= r.nextReleaseDate %></td>
                   </tr>
                   <% }); %>
               </table>

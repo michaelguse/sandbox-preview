@@ -3,15 +3,12 @@ const { lookupResult } = require("./lookupResult");
 
 const Pool = require('pg-pool');
 const url = require('url');
-const dns = require('dns');
-const jq = require('node-jq');
-const trustcall = require('request');
 const session = require('client-sessions');
 const logger = require('heroku-logger');
 require('handlebars');
 
 // Change the DATABASE_URL in local .env file to your own setup for local testing
-var params = url.parse(process.env.DATABASE_URL);
+const params = url.parse(process.env.DATABASE_URL);
 var auth = params.auth.split(':');
 var sslValue = true;
 
@@ -29,7 +26,6 @@ var config = {
 };
 
 var pool = new Pool(config);
-var qryres = "";
 
 var express = require('express'),
     bodyParser = require('body-parser'),
@@ -117,10 +113,10 @@ app.get('/upgrade',
 
 // Invoke nslookup against domain name
 app.get('/domainlookup', 
-    // Form filter and validation for upgrade page 
+    // Form filter and validation for domain lookup page 
     form(
       filter("org_id").trim()
-    //  , validate("org_id").required().is(/^(\w*[\s,;]?)+$/,"We support instance and domain name lookups!")
+      //validate("org_id").required().is(/^(\w*[\s,;]?)+$/,"We support instance and domain name lookups!")
    ),
     function (request, response) {
       if (!request.form.isValid) {
@@ -130,62 +126,22 @@ app.get('/domainlookup',
         response.render('pages/domain.ejs', { errors: request.form.errors });
       } else {
         var domains = request.form.org_id;
-        var list = [];
+        
         console.log("Domain lookup entry: ", domains);
         domains = domains.split(/[\s,;|]+/);
         domains = domains.map(Function.prototype.call, String.prototype.trim);  
-        var lookupDomain = domains[0] + '.my.salesforce.com';
-        console.log('Domain URL: ', lookupDomain);
-        dns.resolveCname(lookupDomain, function (err, addresses) {
-          if (err) {
-            console.error(err);
-            response.send(`resolveCname Lookup Error - ${err}`);
-          } else {
-            console.log('Cname resolve: ' + addresses);
-            var org_id = addresses[0].split(".")[0].split("-")[0];
-            console.log('Org_Id: ' + org_id);
-            list[0] = org_id;
 
-            trustcall(`https://api.status.salesforce.com/v1/instances/${org_id}/status?childProducts=false`, function (error, resp, body) {
-              if (!error && resp.statusCode == 200) {
-                var res = prepareResults(body);
-                console.log(res);
-                response.render('pages/domainresults.ejs', { results: res });
-              } else {
-                console.log(`Error - Response Status Code: ${resp.statusCode}`);
-                console.log(request.form.errors);
-                response.render('pages/domain.ejs', { errors: request.form.errors });
-              }
-            });
+        var res = prepareResults(domains);
+        //console.log(res);
 
-            /*
-            pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type, $2::TEXT as org_domain FROM rel_org_type WHERE org_id = upper($1) ORDER BY substring(org_id, 3)::INTEGER', [list[0], lookupDomain.split('.')[0]], function (err, result) {
-              if (err) {
-                console.error(err);
-                response.send('Error: ' + err);
-              } else {
-                qryres = result.rows;
-                console.log("Number of results: ", qryres.length);
-                // check for empyt result set
-                if (qryres.length <= 0) {
-                  console.log("[ 'Not a valid domain name - try again!' ]");
-                  response.render('pages/index.ejs', { errors: [ 'Not a valid domain name - try again!' ], input: list });
-                } else {
-                  if (qryres.length == 1) {
-                    console.log("Single result");
-                    console.log(qryres);
-                    response.render('pages/domainlookup', { results: qryres });
-                  } else {
-                    console.log("Multiple results");
-                    response.render('pages/multi-results', { results: qryres });
-                  }
-                }
-              }
-            }); */
-          }
-        });
+        if (res.length > 0 && res[0] !== {}) {
+          response.render('pages/domainresults.ejs', { results: res });
+        } else {
+          response.render('pages/domain.ejs', { errors: request.form.errors });
+        }
+      }
     }
-});
+);
 
 // Cheatsheet request
 app.get('/cheatsheet', function (request, response) {

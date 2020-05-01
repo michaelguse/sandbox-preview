@@ -4,7 +4,7 @@
   "description": "A sandbox preview Node.js app using Express 4",
   "engines": {
     "node": "13.7.x",
-    "npm": "6.13.x"
+    "npm": "6.14.x"
   },
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "autocomplete": "0.0.1",
+    "axios": "^0.19.2",
+    "bent": "^7.3.0",
     "body-parser": "^1.19.0",
     "client-sessions": "^0.8.0",
     "ejs": "2.5.6",
@@ -38,7 +40,6 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "request": "^2.88.2",
     "tape": "^4.13.2"
   },
   "repository": {

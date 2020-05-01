@@ -1,59 +1,117 @@
-function prepareResults(input) {
-    var lres = [];
-    /*
-                //console.log(body);
-                //response.send(`Response Body --- ${body}`);
-                var respResult = [];
- 
-                const hdrfilter = '. | \
-                                  { "key": .key, \
-                                  "location": .location, \
-                                  "environment": .environment, \
-                                  "releaseVersion": .releaseVersion, \
-                                  "releaseNumber": .releaseNumber, \
-                                  "status": .status, \
-                                  "isActive": .isActive }';
- 
-                const relfilter = '.Maintenances[] | \
-                                    select(.isCore == true) | \
-                                    select(.message.maintenanceType == "release") | \
-                                    select(.name | contains("Major Release")) | \
-                                    { "name" : .name, "start" : .plannedStartTime }';
-                
-                jq.run(hdrfilter, body, { input: 'string' })
-                  .then((output) => {
-                    console.log(`Org Info: ${output}`);
-                    respResult.push(output);
- 
-                    // Nested jq invocation to extract release information
-                    jq.run(relfilter, body, { input: 'string' })
-                      .then((output) => {
-                        console.log(`Release Info: ${output}`);
-                        respResult.push(output);
-                        //response.send(respResult.toString());
-                        response.render('pages/domainresults.ejs', { results: respResult.toString() });
-                      })
-                      .catch((error) => {
-                        console.error(error);
-                        response.send(`JQ release error --- ${error}`);
-                        // Something went wrong...
-                      })
- 
-                  .catch((error) => {
-                    console.error(error);
-                    response.send(`JQ header error --- ${error}`);
-                    // Something went wrong...
-                  })
-    */
-    lres.push({
-        "key": "NA174",
-        "location": "NA",
-        "environment": "production",
-        "releaseVersion": "Spring '20 Patch 18.6",
-        "releaseNumber": "224.18.6",
-        "status": "OK",
-        "isActive": true
+const dns = require('dns');
+const axios = require('axios');
+// Define the upcoming release
+const nextRelease = process.env.NEXT_RELEASE;
+
+
+function getNextReleaseDate(maintenances) {
+
+    var nextReleaseDate = "Not Defined";
+
+    maintenances.forEach(element => {
+
+        if (element.name == nextRelease) {
+            nextReleaseDate = element.plannedStartTime;
+        }
     });
-    return lres;
+
+    return nextReleaseDate;
 }
+
+function lookupDomain(domain) {
+    var orgInstance;
+
+    try {
+        dns.resolveCname(domain + '.my.salesforce.com', (err, addresses) => {
+            if (err) throw err;
+            console.log(`Addresses: ${addresses}`);
+            orgInstance = addresses[0].split(".")[0].split("-")[0];
+        });
+     } catch (error) {
+        console.error(error);
+     } 
+
+     return orgInstance;
+}
+
+function lookupTrust(org_id) {
+
+    var orgInfo = {};
+
+    var url = `https://api.status.salesforce.com/v1/instances/${org_id}/status?childProducts=false`;
+        
+    axios.get(url)
+      .then(function (resp) {
+        if (resp.status == 200) {
+        
+            var lobj = resp.data;
+            console.log('Parsed response data:');
+            console.log('...');
+
+            console.log(`Lookup Trust: ${org_id}`);
+            
+            orgInfo = {
+                "instance": lobj.key,
+                "location": lobj.location,
+                "environment": lobj.environment,
+                "releaseVersion": lobj.releaseVersion,
+                "releaseNumber": lobj.releaseNumber,
+                "status": lobj.status,
+                "isActive": lobj.isActive,
+                "nextRelease": nextRelease,
+                "nextReleaseDate": getNextReleaseDate(lobj.Maintenances)
+            };
+
+            return orgInfo;
+
+        } else {
+            console.log(`Error - Response Status Code: ${resp.statusCode}`);
+        }
+    }) 
+    .catch(function (error) {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log('Error', error.message);
+        }
+        console.log(error.config);
+    }); 
+}
+
+function prepareResults(domainList) {
+
+    var orgList = [];
+    var resList = [];
+
+    // todo - add promise.all to join updates before the functiona returns 
+    // for help see Mozilla article - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
+
+    for (var domain of domainList) {        
+        orgList.push(lookupDomain(domain));  
+    }
+
+    console.log(`Org List: ${orgList}`);
+
+    for (var org of orgList) {
+        resList.push(lookupTrust(org));
+    }
+
+    console.log(`Result List: ${resList}`);
+
+    console.log('Array length: ' + resList.length);
+    console.log(resList);
+
+    return resList;
+}
+
 exports.prepareResults = prepareResults;
