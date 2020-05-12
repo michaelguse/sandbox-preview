@@ -1,5 +1,5 @@
-const { prepareResults } = require("./prepareResults");
-const { lookupResult } = require("./lookupResult");
+var { prepareResults } = require("./prepareResults");
+var { lookupResult } = require("./lookupResult");
 
 const Pool = require('pg-pool');
 const url = require('url');
@@ -81,7 +81,8 @@ app.use(function(req, res, next) {
 // Home page request
 app.get('/', function (request, response) {
   logger.info('Home page visit',{visit: 'home'});
-  response.render('pages/index');
+  //response.render('pages/index');
+  response.render('pages/domain');
 });
 
 // Domain home page request
@@ -102,7 +103,7 @@ app.get('/upgrade',
       // Handle errors
       logger.info('Invalid lookup entry', {invalid_entries: request.form.org_id} );
       logger.error('Website form errors', {form_errors: request.form.errors} );
-      response.render('pages/index.ejs', { errors: request.form.errors });
+      response.render('pages/index', { errors: request.form.errors });
     } else {
       var list = request.form.org_id;
       logger.info('Website lookup entries',{web_entries: list});

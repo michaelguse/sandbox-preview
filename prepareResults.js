@@ -1,5 +1,7 @@
 const dns = require('dns');
-const axios = require('axios');
+let rp = require('request-promise');
+var async = require('async');
+
 // Define the upcoming release
 const nextRelease = process.env.NEXT_RELEASE;
 
@@ -18,7 +20,7 @@ function getNextReleaseDate(maintenances) {
     return nextReleaseDate;
 }
 
-function lookupDomain(domain) {
+async function lookupDomain(domain) {
     var orgInstance;
 
     try {
@@ -34,13 +36,13 @@ function lookupDomain(domain) {
      return orgInstance;
 }
 
-function lookupTrust(org_id) {
+async function lookupTrust(org_id) {
 
     var orgInfo = {};
 
     var url = `https://api.status.salesforce.com/v1/instances/${org_id}/status?childProducts=false`;
         
-    axios.get(url)
+    rp.get(url)
       .then(function (resp) {
         if (resp.status == 200) {
         
