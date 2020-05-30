@@ -83,20 +83,25 @@ app.use(session({
 
 // Set current prod variable for session
 app.use(function(req, res, next) {
-  if (req.session.curr_prod_external) {
+  if (req.session.curr_prod_external && req.session.curr_preview_external) {
     res.locals.curr_prod_external = req.session.curr_prod_external;
+    res.locals.curr_preview_external = req.session.curr_preview_external;
     next();
   } else {
     req.session.reset();
-    logger.info('Query for current prod release');
-    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_type=$1 LIMIT 1', ['Non-Preview'], function (err, result) {  
+    logger.info('Query for current prod and preview release');
+    var list = ['CS87','CS89'];
+    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
       } else {
+        logger.info('Result: ',{result: result});
         req.session.curr_prod_external = result.rows[0].external_rel_name;
-        logger.info('Initialize new prod release variable' );
+        req.session.curr_preview_external = result.rows[1].external_rel_name;
+        logger.info('Initialize new prod and preview release variable' );
         res.locals.curr_prod_external = req.session.curr_prod_external;
+        res.locals.curr_preview_external = req.session.curr_preview_external;
         next();
       }
     });  
