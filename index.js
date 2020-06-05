@@ -68,10 +68,10 @@ app.use(function(req, res, next) {
     var list = ['CS87','CS89'];
     pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
       if (err) {
-        logger.error('Error executing query',{error: err.stack });
+        //logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
       } else {
-        logger.info('Result: ',{result: result});
+        //logger.info('Result: ',{result: result});
         req.session.curr_prod_external = result.rows[0].external_rel_name;
         req.session.curr_preview_external = result.rows[1].external_rel_name;
         logger.info('Initialize new prod and preview release variable' );
