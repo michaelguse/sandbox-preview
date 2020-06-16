@@ -95,7 +95,7 @@ function prepareResults(domainList) {
     var orgList = [];
     var resList = [];
 
-    // todo - add promise.all to join updates before the functiona returns 
+    // todo - add promise.all to join updates before the function returns 
     // for help see Mozilla article - https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
 
     for (var domain of domainList) {        
