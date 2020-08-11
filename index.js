@@ -71,7 +71,6 @@ app.use(function(req, res, next) {
         //logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
       } else {
-        //logger.info('Result: ',{result: result});
         req.session.curr_prod_external = result.rows[0].external_rel_name;
         req.session.curr_preview_external = result.rows[1].external_rel_name;
         logger.info('Initialize new prod and preview release variable' );
