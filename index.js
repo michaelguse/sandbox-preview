@@ -4,6 +4,9 @@ var session = require('client-sessions');
 require('handlebars');
 var logger = require('heroku-logger');
 
+// Read in session secret value from environment variable
+var session_secret = process.env.SESSION_SECRET;
+
 // Change the DATABASE_URL in local .env file to your own setup for local testing
 var params = url.parse(process.env.DATABASE_URL);
 var auth = params.auth.split(':');
@@ -73,7 +76,7 @@ function lookupResult(list, response) {
 // Define session parameters for app
 app.use(session({
   cookieName: 'session',
-  secret: 'xUy0ChYrMwR23B59sfok',
+  secret: session_secret,
   duration: 120 * 60 * 1000,
   activeDuration: 15 * 60 * 1000,
   httpOnly: true,
