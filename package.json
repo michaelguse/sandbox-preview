@@ -21,9 +21,9 @@
     "express-form": "^0.12.6",
     "handlebars": "^4.7.6",
     "heroku-logger": "^0.3.3",
-    "hoek": "^5.0.3",
+    "hoek": "^5.0.4",
     "minimist": "^1.2.5",
-    "mmenu-js": "^8.4.3",
+    "mmenu-js": "^8.5.16",
     "pg": "^6.4.2",
     "pg-pool": "^2.0.10",
     "typeahead": "^0.2.2",
@@ -32,13 +32,13 @@
   },
   "devDependencies": {
     "eslint-config-google": "^0.9.1",
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-import": "^2.15.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "request": "^2.88.0",
-    "tape": "^4.7.0"
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "request": "^2.88.2",
+    "tape": "^4.13.3"
   },
   "repository": {
     "type": "git",
