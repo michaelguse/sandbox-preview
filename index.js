@@ -51,7 +51,7 @@ function lookupResult(list, response) {
   list = list.map(Function.prototype.call, String.prototype.trim);
   list = list.map(Function.prototype.call, String.prototype.toUpperCase);
   logger.info("Number of sandbox params", {num_entries: list.length} );
-  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY substring(org_id, 3)::INTEGER', [list], function (err, result) {
+  pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[])', [list], function (err, result) {
     if (err) {
       logger.error('Error executing query', {error: err.stack} );
       response.send('Error: ' + err);
@@ -121,7 +121,7 @@ app.get('/upgrade',
   // Form filter and validation for upgrade page 
   form(
     filter("org_id").trim().toUpper(),
-    validate("org_id").required().is(/^[\s,;|]*(CS[0-9]{1,3}[\s,;|]*)+$/,"We only support sandbox lookups! Please enter only valid instance numbers starting with CS!")
+    validate("org_id").required().is(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/,"We only support sandbox lookups! Please enter valid sandbox instance numbers!")
   ),
   function(request, response) {
     logger.info('Web lookup page visit', {visit: 'weblookup'});
@@ -163,7 +163,7 @@ app.get('/sandbox/types', function (request, response) {
 
 app.get('/sandbox/instances', function (request, response) {
   logger.info('Sandbox Instances page visit', {visit: 'sandboxinstances'});
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, external_rel_name, substring(org_id, 3)::INTEGER', function (err, result) {
+  pool.query('SELECT org_id AS "Instance",org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, external_rel_name', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
       response.send('Error ' + err);
