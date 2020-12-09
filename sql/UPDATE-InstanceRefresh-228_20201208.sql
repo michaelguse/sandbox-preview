@@ -1,0 +1,11 @@
+BEGIN ;
+UPDATE public.rel_org_type SET org_id='CS173' WHERE org_id='CS82' ;
+UPDATE public.rel_org_type SET org_id='CS174' WHERE org_id='CS83' ;
+UPDATE public.rel_org_type SET org_id='CS190' WHERE org_id='CS51' ;
+UPDATE public.rel_org_type SET org_id='CS191' WHERE org_id='CS12' ;
+UPDATE public.rel_org_type SET org_id='CS192' WHERE org_id='CS13' ;
+UPDATE public.rel_org_type SET org_id='CS193' WHERE org_id='CS3' ;
+UPDATE public.rel_org_type SET org_id='CS199' WHERE org_id='CS30' ;
+UPDATE public.rel_org_type SET org_id='CS201' WHERE org_id='CS54' ;
+UPDATE public.rel_org_type SET org_id='CS203' WHERE org_id='CS71' ;
+COMMIT ;
