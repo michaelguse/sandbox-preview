@@ -1,5 +1,4 @@
 var Pool = require('pg-pool');
-var url = require('url');
 var session = require('client-sessions');
 require('handlebars');
 var logger = require('heroku-logger');
@@ -8,38 +7,35 @@ var logger = require('heroku-logger');
 var session_secret = process.env.SESSION_SECRET;
 
 // Change the DATABASE_URL in local .env file to your own setup for local testing
-var params = url.parse(process.env.DATABASE_URL);
-var auth = params.auth.split(':');
+var db_url = new URL(process.env.DATABASE_URL);
 var sslValue = true;
 
-if (params.hostname == 'localhost') {
+if (db_url.hostname == 'localhost') {
   sslValue = false;
 }
 
 var config = {
-  user: auth[0],
-  password: auth[1],
-  host: params.hostname,
-  port: params.port,
-  database: params.pathname.split('/')[1],
+  user: db_url.username,
+  password: db_url.password,
+  host: db_url.hostname,
+  port: db_url.port,
+  database: db_url.pathname.split('/')[1],
   ssl: sslValue,
 };
 
 var pool = new Pool(config);
+logger.info("DB pool info:", pool);
 var qryres = "";
 
-var express = require('express'),
-    bodyParser = require('body-parser'),
-    form = require('express-form'),
-    filter = form.filter,
-    validate = form.validate;
+var express = require('express');
+var { body } = require('express-validator');
 
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
@@ -94,7 +90,7 @@ app.use(function(req, res, next) {
     req.session.reset();
     logger.info('Query for current prod and preview release');
     var list = ['CS87','CS89'];
-    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
+    pool.query('heroku SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
@@ -119,10 +115,8 @@ app.get('/', function (request, response) {
 //Sandbox upgrade page request
 app.get('/upgrade',
   // Form filter and validation for upgrade page 
-  form(
-    filter("org_id").trim().toUpper(),
-    validate("org_id").required().is(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/,"We only support sandbox lookups! Please enter valid sandbox instance numbers!")
-  ),
+  body("org_id").trim().toUpperCase(),
+  body("org_id").notEmpty().matches(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/, 'g',"We only support valid sandbox instances!"),
   function(request, response) {
     logger.info('Web lookup page visit', {visit: 'weblookup'});
     if (!request.form.isValid) {
