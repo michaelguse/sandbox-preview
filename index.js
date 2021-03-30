@@ -24,7 +24,6 @@ var config = {
 };
 
 var pool = new Pool(config);
-logger.info("DB pool info:", pool);
 var qryres = "";
 
 var express = require('express');
