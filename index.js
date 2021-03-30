@@ -89,7 +89,7 @@ app.use(function(req, res, next) {
     req.session.reset();
     logger.info('Query for current prod and preview release');
     var list = ['CS87','CS89'];
-    pool.query('heroku SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
+    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
