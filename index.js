@@ -34,7 +34,7 @@ var app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
@@ -89,11 +89,12 @@ app.use(function(req, res, next) {
     req.session.reset();
     logger.info('Query for current prod and preview release');
     var list = ['CS87','CS89'];
-    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
+    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id IN ($1::text[]) ORDER BY org_type', [list], function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
       } else {
+        logger.info("Query result:", result);
         req.session.curr_prod_external = result.rows[0].external_rel_name;
         req.session.curr_preview_external = result.rows[1].external_rel_name;
         logger.info('Initialize new prod and preview release variable' );
