@@ -8,7 +8,7 @@ var session_secret = process.env.SESSION_SECRET;
 
 // Change the DATABASE_URL in local .env file to your own setup for local testing
 var db_url = new URL(process.env.DATABASE_URL);
-var sslValue = true;
+var sslValue = { rejectUnauthorized: false };
 
 if (db_url.hostname == 'localhost') {
   sslValue = false;
@@ -24,6 +24,7 @@ var config = {
 };
 
 var pool = new Pool(config);
+//console.log(pool);
 var qryres = "";
 
 var express = require('express');
@@ -88,8 +89,8 @@ app.use(function(req, res, next) {
   } else {
     req.session.reset();
     logger.info('Query for current prod and preview release');
-    var list = ['CS87','CS89'];
-    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id IN ($1::text[]) ORDER BY org_type', [list], function (err, result) {  
+    //Querying CS87 and CS89 for setting sessions for Preview and Non-Preview release status
+    pool.query("SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id IN ('CS87','CS89') ORDER BY org_type", function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
@@ -102,12 +103,12 @@ app.use(function(req, res, next) {
         res.locals.curr_preview_external = req.session.curr_preview_external;
         next();
       }
-    });  
+    }); 
   }
 });
 
 // Home page request
-app.get('/', function (request, response) {
+app.get('/', function (_request, response) {
   logger.info('Home page visit',{visit: 'home'});
   response.render('pages/index');
 });
@@ -119,11 +120,11 @@ app.get('/upgrade',
   body("org_id").notEmpty().matches(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/, 'g',"We only support valid sandbox instances!"),
   function(request, response) {
     logger.info('Web lookup page visit', {visit: 'weblookup'});
-    if (!request.form.isValid) {
+    if (!request.body.form.isValid) {
       // Handle errors
-      logger.info('Invalid lookup entry', {invalid_entries: request.form.org_id} );
-      logger.error('Website form errors', {form_errors: request.form.errors} );
-      response.render('pages/index.ejs', { errors: request.form.errors });
+      logger.info('Invalid lookup entry', {invalid_entries: request.body.form.org_id} );
+      logger.error('Website form errors', {form_errors: request.body.form.errors} );
+      response.render('pages/index.ejs', { errors: request.body.form.errors });
     } else {
       var list = request.form.org_id;
       logger.info('Website lookup entries',{web_entries: list});
@@ -133,17 +134,17 @@ app.get('/upgrade',
 );
 
 // Cheatsheet request
-app.get('/cheatsheet', function (request, response) {
+app.get('/cheatsheet', function (_request, response) {
     logger.info('Cheatsheet page visit', {visit: 'cheatsheet'});
     response.render('pages/cheatsheet');
 });
 
-app.get('/sandbox', function (request, response) {
+app.get('/sandbox', function (_request, response) {
   logger.info('Redirect to sandbox instance page', {visit: 'sandboxhome'});
   response.redirect('/sandbox/instances');
 });
 
-app.get('/sandbox/types', function (request, response) {
+app.get('/sandbox/types', function (_request, response) {
   logger.info('Sandbox Type Overview page visit', {visit: 'sandboxtypes'});
   pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, external_rel_name', function (err, result) {
     if (err) {
@@ -155,7 +156,7 @@ app.get('/sandbox/types', function (request, response) {
   });
 });
 
-app.get('/sandbox/instances', function (request, response) {
+app.get('/sandbox/instances', function (_request, response) {
   logger.info('Sandbox Instances page visit', {visit: 'sandboxinstances'});
   pool.query('SELECT org_id AS "Instance",org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, external_rel_name', function (err, result) {
     if (err) {
