@@ -116,14 +116,10 @@ app.get('/', function (_request, response) {
 //Sandbox upgrade page request
 app.get('/query', function(request, response) {
   var list = request.query.org_id;
-    logger.info('Web query page visit', {visit: 'web_query'});
+    logger.info('Web query page visit', {visit: 'webquery'});
     logger.info('Web query entries',{web_entries: list});
     
-    //filter and validate query parameter
-    //list.trim().toUpperCase(),
-    //list.notEmpty().matches(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/, 'g',"We only support valid sandbox instances!"),
     var lquery = "/sandbox/".concat(list);
-    logger.info('sandbox URL query',{sandbox_query: lquery});
     response.redirect(302, lquery);
 });
 
