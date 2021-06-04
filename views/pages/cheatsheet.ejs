@@ -10,7 +10,7 @@
             <div class="content-wrapper">
               <div class="component">
                 <h3>What is your Sandbox instance?</h3>
-                <form action="/upgrade" type="GET" class="form-primary">
+                <form action="/query" type="GET" class="form-primary">
                   <% if (locals.errors) { %>
                     <% errors.forEach(function(r) { %>
                       <input class="form-error-msg" name="org_id" placeholder="<%= r %>" type="text" autocomplete="off" autofocus required />

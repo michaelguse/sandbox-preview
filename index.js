@@ -28,7 +28,7 @@ var pool = new Pool(config);
 var qryres = "";
 
 var express = require('express');
-var { body } = require('express-validator');
+//var { body } = require('express-validator');
 
 var app = express();
 
@@ -57,7 +57,7 @@ function lookupResult(list, response) {
       // check for empyt result set
       if (qryres.length <= 0) {
         logger.info('Not a valid sandbox instance - try again!');
-        response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ], input: list });
+        response.render('pages/index.ejs', { errors: [ 'Invalid instance name(s) - please try again!' ], input: list });
       } else {
         if (qryres.length == 1) {
           response.render('pages/upgrade', { results: qryres });
@@ -114,24 +114,18 @@ app.get('/', function (_request, response) {
 });
 
 //Sandbox upgrade page request
-app.get('/upgrade',
-  // Form filter and validation for upgrade page 
-  body("org_id").trim().toUpperCase(),
-  body("org_id").notEmpty().matches(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/, 'g',"We only support valid sandbox instances!"),
-  function(request, response) {
-    logger.info('Web lookup page visit', {visit: 'weblookup'});
-    if (!request.body.form.isValid) {
-      // Handle errors
-      logger.info('Invalid lookup entry', {invalid_entries: request.body.form.org_id} );
-      logger.error('Website form errors', {form_errors: request.body.form.errors} );
-      response.render('pages/index.ejs', { errors: request.body.form.errors });
-    } else {
-      var list = request.form.org_id;
-      logger.info('Website lookup entries',{web_entries: list});
-      lookupResult(list, response);
-    }
-  }
-);
+app.get('/query', function(request, response) {
+  var list = request.query.org_id;
+    logger.info('Web query page visit', {visit: 'web_query'});
+    logger.info('Web query entries',{web_entries: list});
+    
+    //filter and validate query parameter
+    //list.trim().toUpperCase(),
+    //list.notEmpty().matches(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/, 'g',"We only support valid sandbox instances!"),
+    var lquery = "/sandbox/".concat(list);
+    logger.info('sandbox URL query',{sandbox_query: lquery});
+    response.redirect(302, lquery);
+});
 
 // Cheatsheet request
 app.get('/cheatsheet', function (_request, response) {
@@ -146,7 +140,7 @@ app.get('/sandbox', function (_request, response) {
 
 app.get('/sandbox/types', function (_request, response) {
   logger.info('Sandbox Type Overview page visit', {visit: 'sandboxtypes'});
-  pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, external_rel_name', function (err, result) {
+  pool.query('SELECT count(id) AS "Count", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, org_region, external_rel_name ORDER BY org_type DESC, org_region ASC', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
       response.send('Error ' + err);
@@ -158,7 +152,7 @@ app.get('/sandbox/types', function (_request, response) {
 
 app.get('/sandbox/instances', function (_request, response) {
   logger.info('Sandbox Instances page visit', {visit: 'sandboxinstances'});
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, external_rel_name', function (err, result) {
+  pool.query('SELECT org_id AS "Instance", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, org_id ASC', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
       response.send('Error ' + err);

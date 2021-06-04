@@ -4,6 +4,6 @@ $('.upgrade-option').click(function () {
 });
 
 var currentPage = $(location).attr('pathname');
-if (currentPage.indexOf('upgrade') > -1) {
+if (currentPage.indexOf('sandbox') > -1) {
   $('.back-link-header').addClass('reveal');
 }
