@@ -1,5 +1,4 @@
 var Pool = require('pg-pool');
-var url = require('url');
 var session = require('client-sessions');
 require('handlebars');
 var logger = require('heroku-logger');
@@ -8,38 +7,35 @@ var logger = require('heroku-logger');
 var session_secret = process.env.SESSION_SECRET;
 
 // Change the DATABASE_URL in local .env file to your own setup for local testing
-var params = url.parse(process.env.DATABASE_URL);
-var auth = params.auth.split(':');
-var sslValue = true;
+var db_url = new URL(process.env.DATABASE_URL);
+var sslValue = { rejectUnauthorized: false };
 
-if (params.hostname == 'localhost') {
+if (db_url.hostname == 'localhost') {
   sslValue = false;
 }
 
 var config = {
-  user: auth[0],
-  password: auth[1],
-  host: params.hostname,
-  port: params.port,
-  database: params.pathname.split('/')[1],
+  user: db_url.username,
+  password: db_url.password,
+  host: db_url.hostname,
+  port: db_url.port,
+  database: db_url.pathname.split('/')[1],
   ssl: sslValue,
 };
 
 var pool = new Pool(config);
+//console.log(pool);
 var qryres = "";
 
-var express = require('express'),
-    bodyParser = require('body-parser'),
-    form = require('express-form'),
-    filter = form.filter,
-    validate = form.validate;
+var express = require('express');
+//var { body } = require('express-validator');
 
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/public'));
 
 // views is directory for all template files
@@ -61,7 +57,7 @@ function lookupResult(list, response) {
       // check for empyt result set
       if (qryres.length <= 0) {
         logger.info('Not a valid sandbox instance - try again!');
-        response.render('pages/index.ejs', { errors: [ 'Not a valid sandbox instance - try again!' ], input: list });
+        response.render('pages/index.ejs', { errors: [ 'Invalid instance name(s) - please try again!' ], input: list });
       } else {
         if (qryres.length == 1) {
           response.render('pages/upgrade', { results: qryres });
@@ -93,12 +89,13 @@ app.use(function(req, res, next) {
   } else {
     req.session.reset();
     logger.info('Query for current prod and preview release');
-    var list = ['CS87','CS89'];
-    pool.query('SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id = ANY($1::text[]) ORDER BY org_type', [list], function (err, result) {  
+    //Querying CS87 and CS89 for setting sessions for Preview and Non-Preview release status
+    pool.query("SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id IN ('CS87','CS89') ORDER BY org_type", function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
       } else {
+        //logger.info("Query result:", result);
         req.session.curr_prod_external = result.rows[0].external_rel_name;
         req.session.curr_preview_external = result.rows[1].external_rel_name;
         logger.info('Initialize new prod and preview release variable' );
@@ -106,52 +103,39 @@ app.use(function(req, res, next) {
         res.locals.curr_preview_external = req.session.curr_preview_external;
         next();
       }
-    });  
+    }); 
   }
 });
 
 // Home page request
-app.get('/', function (request, response) {
+app.get('/', function (_request, response) {
   logger.info('Home page visit',{visit: 'home'});
   response.render('pages/index');
 });
 
 //Sandbox upgrade page request
-app.get('/upgrade',
-  // Form filter and validation for upgrade page 
-  form(
-    filter("org_id").trim().toUpper(),
-    validate("org_id").required().is(/^[\s,;|]*(\D{2,3}\d{1,3}\D{0,1}\d{0,1}[\s,;|]*)+$/,"We only support sandbox lookups! Please enter valid sandbox instance numbers!")
-  ),
-  function(request, response) {
-    logger.info('Web lookup page visit', {visit: 'weblookup'});
-    if (!request.form.isValid) {
-      // Handle errors
-      logger.info('Invalid lookup entry', {invalid_entries: request.form.org_id} );
-      logger.error('Website form errors', {form_errors: request.form.errors} );
-      response.render('pages/index.ejs', { errors: request.form.errors });
-    } else {
-      var list = request.form.org_id;
-      logger.info('Website lookup entries',{web_entries: list});
-      lookupResult(list, response);
-    }
-  }
-);
+app.get('/query', function(request, response) {
+  var list = request.query.org_id;
+    logger.info('Web query request', {visit: 'webquery'});
+    
+    var lquery = "/sandbox/".concat(list);
+    response.redirect(302, lquery);
+});
 
 // Cheatsheet request
-app.get('/cheatsheet', function (request, response) {
+app.get('/cheatsheet', function (_request, response) {
     logger.info('Cheatsheet page visit', {visit: 'cheatsheet'});
     response.render('pages/cheatsheet');
 });
 
-app.get('/sandbox', function (request, response) {
-  logger.info('Redirect to sandbox instance page', {visit: 'sandboxhome'});
+app.get('/sandbox', function (_request, response) {
+  logger.info('Sandbox home redirect', {visit: 'sandboxhome'});
   response.redirect('/sandbox/instances');
 });
 
-app.get('/sandbox/types', function (request, response) {
-  logger.info('Sandbox Type Overview page visit', {visit: 'sandboxtypes'});
-  pool.query('SELECT count(id) AS "Count",org_type AS "Type",external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, external_rel_name', function (err, result) {
+app.get('/sandbox/types', function (_request, response) {
+  logger.info('Sandbox Overview page visit', {visit: 'sandboxtypes'});
+  pool.query('SELECT count(id) AS "Count", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, org_region, external_rel_name ORDER BY org_type DESC, org_region ASC', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
       response.send('Error ' + err);
@@ -161,9 +145,9 @@ app.get('/sandbox/types', function (request, response) {
   });
 });
 
-app.get('/sandbox/instances', function (request, response) {
+app.get('/sandbox/instances', function (_request, response) {
   logger.info('Sandbox Instances page visit', {visit: 'sandboxinstances'});
-  pool.query('SELECT org_id AS "Instance",org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, external_rel_name', function (err, result) {
+  pool.query('SELECT org_id AS "Instance", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type ORDER BY org_type DESC, org_region ASC, org_id ASC', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
       response.send('Error ' + err);

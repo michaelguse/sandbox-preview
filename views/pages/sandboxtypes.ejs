@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include ../partials/head.ejs %>
-
     <body>
         <div class="wrapper">
             <div class="body-wrapper">
@@ -16,6 +15,7 @@
                                     <tr>
                                         <th>Count</th>
                                         <th>Instance Type</th>
+                                        <th>Region</th>
                                         <th>Release Name</th>
                                     </tr>
                                     <% results.forEach(function(r) { %>
@@ -25,6 +25,9 @@
                                             </td>
                                             <td>
                                                 <%= r.Type %>
+                                            </td>
+                                            <td>
+                                                <%= r.Region %>
                                             </td>
                                             <td>
                                                 <%= r.Release %>

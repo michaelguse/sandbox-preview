@@ -13,7 +13,7 @@
                 <p>Enter a single sandbox instance name - e.g. CS87 - 
                   or multiple sandboxes separated by a character such as a 
                   space, comma, semi-colon or pipe - e.g. [&nbsp;cs87 cs88,cs89;cs90|cs91&nbsp;]</p>
-                <form action="/upgrade" type="GET" class="form-primary">
+                <form action="/query" type="GET" class="form-primary">
                   <% if (locals.errors) { %>
                     <input class="form-error-msg" name="org_id" id="org_id" placeholder="" type="text" autocomplete="off" autofocus required />
                     <input type="submit" class="button" value="submit" />
@@ -21,7 +21,7 @@
                       <br/><br/><label for="org_id" style="color: red;"><%= r %></label>
                   <% }); %>
                   <% } else { %>
-                    <input name="org_id" placeholder="Enter one or more sandbox instance names" type="text" autocomplete="off" autofocus required />
+                    <input name="org_id" id="org_id" placeholder="Enter one or more sandbox instance names" type="text" autocomplete="off" autofocus required />
                     <input type="submit" class="button" value="submit" />
                   <% }; %>
                 </form>
