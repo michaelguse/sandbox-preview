@@ -116,8 +116,7 @@ app.get('/', function (_request, response) {
 //Sandbox upgrade page request
 app.get('/query', function(request, response) {
   var list = request.query.org_id;
-    logger.info('Web query page visit', {visit: 'webquery'});
-    logger.info('Web query entries',{web_entries: list});
+    logger.info('Web query request', {visit: 'webquery'});
     
     var lquery = "/sandbox/".concat(list);
     response.redirect(302, lquery);
@@ -130,12 +129,12 @@ app.get('/cheatsheet', function (_request, response) {
 });
 
 app.get('/sandbox', function (_request, response) {
-  logger.info('Redirect to sandbox instance page', {visit: 'sandboxhome'});
+  logger.info('Sandbox home redirect', {visit: 'sandboxhome'});
   response.redirect('/sandbox/instances');
 });
 
 app.get('/sandbox/types', function (_request, response) {
-  logger.info('Sandbox Type Overview page visit', {visit: 'sandboxtypes'});
+  logger.info('Sandbox Overview page visit', {visit: 'sandboxtypes'});
   pool.query('SELECT count(id) AS "Count", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type GROUP BY org_type, org_region, external_rel_name ORDER BY org_type DESC, org_region ASC', function (err, result) {
     if (err) {
       logger.error('Error executing query',{error: err.stack });
