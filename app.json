@@ -6,3 +6,6 @@
   "keywords": ["node", "express", "heroku", "sandbox", "salesforce", "preview", "guide"],
   "image": "heroku/nodejs"
 }
+{
+  "stack": "heroku-20"
+}
