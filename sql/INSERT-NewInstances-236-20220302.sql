@@ -1,0 +1,15 @@
+INSERT INTO public.rel_org_type (internal_rel_name,external_rel_name,org_id,org_type,org_region) VALUES
+    (236,'Spring ''22','CS221','Preview','Americas'),
+    (236,'Spring ''22','CS222','Preview','Americas'),
+    (236,'Spring ''22','CS223','Preview','Americas'),
+    (236,'Spring ''22','CS224','Preview','Americas'),
+    (236,'Spring ''22','CS225','Preview','Americas'),
+    (236,'Spring ''22','CS226','Non-Preview','Americas'),
+    (236,'Spring ''22','FRA6S','Preview','Europe'),
+    (236,'Spring ''22','FRA8S','Non-Preview','Europe'),
+    (236,'Spring ''22','FRA12S','Preview','Europe'),
+    (236,'Spring ''22','FRA24S','Preview','Europe'),
+    (236,'Spring ''22','SGP6S','Preview','Asia'),
+    (236,'Spring ''22','SGP8S','Non-Preview','Asia'),
+    (236,'Spring ''22','BRA6S','Preview','Americas'),
+    (236,'Spring ''22','BRA8S','Non-Preview','Americas');
