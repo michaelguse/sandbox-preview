@@ -21,7 +21,7 @@
     "handlebars": "^4.7.6",
     "heroku-logger": "^0.3.3",
     "hoek": "^5.0.4",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "mmenu-js": "^8.5.16",
     "pg": "^8.5.1",
     "pg-pool": "^2.0.10",
