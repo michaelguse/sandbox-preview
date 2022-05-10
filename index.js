@@ -157,18 +157,6 @@ app.get('/sandbox/instances', function (_request, response) {
   });
 });
 
-app.get('/sandbox/instances/americas', function (_request, response) {
-  logger.info('Sandbox Instances AMER page visit', {visit: 'sandboxinstances-amer'});
-  pool.query('SELECT org_id AS "Instance", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type WHERE org_region = "Americas" ORDER BY org_type DESC, org_id ASC', function (err, result) {
-    if (err) {
-      logger.error('Error executing query',{error: err.stack });
-      response.send('Error ' + err);
-    } else {
-      response.render('pages/sandboxinstances', {results: result.rows } );
-    }
-  });
-});
-
 app.get('/sandbox/:id', function (request, response) {
   logger.info('API lookup page visit', {visit: 'apilookup'});
   var list = request.params.id;
