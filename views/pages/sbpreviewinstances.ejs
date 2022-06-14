@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include ../partials/head.ejs %>
+
+    <body>
+        <div class="wrapper">
+            <div class="body-wrapper">
+                <% include ../partials/nav.ejs %>
+                    <% include ../partials/header.ejs %>
+                        <div class="content-wrapper">
+                            <div class="container">
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <h3>Sandbox Preview | <a href="/sandbox/nonpreview">Non-Preview</a> Instances</h3>
+                                            <br/>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div>
+                                    <table id="sandboxes">
+                                        <tr>
+                                            <th>Instance</th>
+                                            <th>Type</th>
+                                            <th>Region</th>
+                                            <th>Release Name</th>
+                                        </tr>
+                                        <% results.forEach(function(r) { %>
+                                            <tr>
+                                                <td>
+                                                    <a href="/sandbox/<%= r.Instance %>"><%= r.Instance %></a>
+                                                </td>
+                                                <td>
+                                                    <%= r.Type %>
+                                                </td>
+                                                <td>
+                                                    <%= r.Region %>
+                                                </td>
+                                                <td>
+                                                    <%= r.Release %>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <% include ../partials/footer.ejs %>
+                <% include ../partials/script_section.ejs %>
+        </div>
+    </body>
+
+</html>

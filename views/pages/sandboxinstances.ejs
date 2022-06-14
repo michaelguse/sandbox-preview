@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <% include ../partials/head.ejs %>
-
     <body>
         <div class="wrapper">
             <div class="body-wrapper">
@@ -17,38 +16,39 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div>
-                                    <table id="sandboxes">
-                                        <tr>
-                                            <th>Instance</th>
-                                            <th>Type</th>
-                                            <th>Region</th>
-                                            <th>Release Name</th>
-                                        </tr>
-                                        <% results.forEach(function(r) { %>
-                                            <tr>
-                                                <td>
-                                                    <a href="/sandbox/<%= r.Instance %>"><%= r.Instance %></a>
-                                                </td>
-                                                <td>
-                                                    <%= r.Type %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Region %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Release %>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
-                                    </table>
-                                </div>
+                                <div id="wrapperGrid"></div>
                             </div>
                         </div>
                 </div>
                 <% include ../partials/footer.ejs %>
                 <% include ../partials/script_section.ejs %>
         </div>
-    </body>
 
+        <script>
+            $("div#wrapperGrid").Grid({
+                columns: [{
+                    name: "Instance",
+                    width: '25%'
+                },{
+                    name: "Type",
+                    width: '25%'
+                },{
+                    name: "Region",
+                    width: '25%'
+                },{
+                    name: "Release Name",
+                    width: '25%'
+                }],
+                search: true,
+                selecting: true,
+                pagination: false,
+                sort: true,
+                data: [
+                    <% results.forEach(function(r) { %>
+                    ["<%= r.Instance %>", "<%= r.Type %>", "<%= r.Region %>", "<%- r.Release %>"],
+                    <% }); %>
+                ]
+            });
+        </script>
+    </body>
 </html>
