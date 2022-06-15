@@ -11,8 +11,7 @@
                                 <div>
                                     <table>
                                         <tr>
-                                            <h3>Sandbox Instances</h3>
-                                            <br/>
+                                            <h3>Sandbox Instances [All | <a href="/sandbox/preview">Preview</a> | <a href="/sandbox/nonpreview">Non-Preview</a>]</h3>
                                         </tr>
                                     </table>
                                 </div>
@@ -23,32 +22,6 @@
                 <% include ../partials/footer.ejs %>
                 <% include ../partials/script_section.ejs %>
         </div>
-
-        <script>
-            $("div#wrapperGrid").Grid({
-                columns: [{
-                    name: "Instance",
-                    width: '25%'
-                },{
-                    name: "Type",
-                    width: '25%'
-                },{
-                    name: "Region",
-                    width: '25%'
-                },{
-                    name: "Release Name",
-                    width: '25%'
-                }],
-                search: true,
-                selecting: true,
-                pagination: false,
-                sort: true,
-                data: [
-                    <% results.forEach(function(r) { %>
-                    ["<%= r.Instance %>", "<%= r.Type %>", "<%= r.Region %>", "<%- r.Release %>"],
-                    <% }); %>
-                ]
-            });
-        </script>
+        <% include ../partials/sb_grid_script.ejs %>
     </body>
 </html>

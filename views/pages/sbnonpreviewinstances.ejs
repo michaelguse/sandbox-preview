@@ -12,43 +12,18 @@
                                 <div>
                                     <table>
                                         <tr>
-                                            <h3>Sandbox <a href="/sandbox/preview">Preview</a> | Non-Preview Instances</h3>
-                                            <br/>
+                                            <h3>Sandbox Instances [<a href="/sandbox/instances">All</a> | <a href="/sandbox/preview">Preview</a> | Non-Preview]</h3>
                                         </tr>
                                     </table>
                                 </div>
-                                <div>
-                                    <table id="sandboxes">
-                                        <tr>
-                                            <th>Instance</th>
-                                            <th>Type</th>
-                                            <th>Region</th>
-                                            <th>Release Name</th>
-                                        </tr>
-                                        <% results.forEach(function(r) { %>
-                                            <tr>
-                                                <td>
-                                                    <a href="/sandbox/<%= r.Instance %>"><%= r.Instance %></a>
-                                                </td>
-                                                <td>
-                                                    <%= r.Type %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Region %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Release %>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
-                                    </table>
-                                </div>
+                                <div id="wrapperGrid"></div>
                             </div>
                         </div>
                 </div>
                 <% include ../partials/footer.ejs %>
                 <% include ../partials/script_section.ejs %>
         </div>
+        <% include ../partials/sb_grid_script.ejs %>
     </body>
 
 </html>
