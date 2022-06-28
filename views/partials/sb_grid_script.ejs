@@ -1,0 +1,33 @@
+<script>
+    $("div#wrapperGrid").Grid({
+        columns: [{
+            name: "Instance",
+            itemTemplate: function(value, item) {
+                return $("<a>").attr("href", "/sandbox/"+value).text(value);
+            },
+            width: '25%'
+        },{
+            name: "Type",
+            width: '25%'
+        },{
+            name: "Region",
+            width: '25%'
+        },{
+            name: "Release Name",
+            width: '25%'
+        }],
+        search: true,
+        selecting: true,
+        sort: true,
+        data: [
+            <% results.forEach(function(r) { %>
+            ["<%= r.Instance %>", "<%= r.Type %>", "<%= r.Region %>", "<%- r.Release %>"],
+            <% }); %>
+        ],
+        pagination: {
+            enabled: true,
+            limit: 10,
+            summary: true
+          }
+    });
+</script>
