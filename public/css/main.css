@@ -379,6 +379,10 @@ input.button:hover {
   width: 100%;
 }
 
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 .sandbox-table-col-header {
   /* font-family: Arial, Helvetica, sans-serif; */
   /* font-size: 12pt; */
@@ -496,18 +500,22 @@ p.trust-site-text {
   line-height: 1.0em;
 }
 
-#wrapperGrid {
+#sandboxes {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
 
-#wrapperGrid td, #wrapperGrid th {
-  border: 1px solid #999;
+#sandboxes td, #sandboxes th {
+  border: 1px solid #333;
   padding: 8px;
 }
 
-#wrapperGrid th {
+#sandboxes tr:nth-child(even){background-color: #f2f2f2;}
+
+#sandboxes tr:hover {background-color: #ddd;}
+
+#sandboxes th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

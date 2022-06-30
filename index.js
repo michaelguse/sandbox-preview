@@ -157,30 +157,6 @@ app.get('/sandbox/instances', function (_request, response) {
   });
 });
 
-app.get('/sandbox/preview', function (_request, response) {
-  logger.info('Sandbox Preview Instances page visit', {visit: 'sb-preview-instances'});
-  pool.query('SELECT org_id AS "Instance", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type WHERE org_type = $1 ORDER BY org_type DESC, org_region ASC, org_id ASC',['Preview'], function (err, result) {
-    if (err) {
-      logger.error('Error executing query',{error: err.stack });
-      response.send('Error ' + err);
-    } else {
-      response.render('pages/sbpreviewinstances', {results: result.rows } );
-    }
-  });
-});
-
-app.get('/sandbox/nonpreview', function (_request, response) {
-  logger.info('Sandbox Non-Preview Instances page visit', {visit: 'sb-nonpreview-instances'});
-  pool.query('SELECT org_id AS "Instance", org_type AS "Type", org_region AS "Region", external_rel_name AS "Release" FROM public.rel_org_type WHERE org_type = $1 ORDER BY org_type DESC, org_region ASC, org_id ASC',['Non-Preview'], function (err, result) {
-    if (err) {
-      logger.error('Error executing query',{error: err.stack });
-      response.send('Error ' + err);
-    } else {
-      response.render('pages/sbnonpreviewinstances', {results: result.rows } );
-    }
-  });
-});
-
 app.get('/sandbox/:id', function (request, response) {
   logger.info('API lookup page visit', {visit: 'apilookup'});
   var list = request.params.id;
