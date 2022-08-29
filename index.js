@@ -73,8 +73,8 @@ function lookupResult(list, response) {
 app.use(session({
   cookieName: 'session',
   secret: session_secret,
-  duration: 120 * 60 * 1000,
-  activeDuration: 15 * 60 * 1000,
+  duration: 15 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
   httpOnly: true,
   secure: true,
   ephemeral: true
