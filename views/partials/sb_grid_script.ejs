@@ -1,10 +1,17 @@
 <script>
     $("div#wrapperGrid").Grid({
+
+        search: true,
+        selecting: true,
+        pagination: {
+            enabled: true,
+            limit: 12
+        },
+        sort: true,
+
         columns: [{
             name: "Instance",
-            itemTemplate: function(value, item) {
-                return $("<a>").attr("href", "/sandbox/"+value).text(value);
-            },
+            //formatter: (cell) => html(`<b>${cell}</b>`),
             width: '25%'
         },{
             name: "Type",
@@ -13,21 +20,20 @@
             name: "Region",
             width: '25%'
         },{
-            name: "Release Name",
+            name: "Release",
             width: '25%'
         }],
-        search: true,
-        selecting: true,
-        sort: true,
+
         data: [
             <% results.forEach(function(r) { %>
-            ["<%= r.Instance %>", "<%= r.Type %>", "<%= r.Region %>", "<%- r.Release %>"],
-            <% }); %>
-        ],
-        pagination: {
-            enabled: true,
-            limit: 10,
-            summary: true
-          }
+            {
+                instance: '<%= r.Instance %>', 
+                url: 'https://sf-sandbox-preview.herokuapp.com/sandbox/<%= r.Instance %>', 
+                type: '<%= r.Type %>', 
+                region: '<%= r.Region %>', 
+                release: "<%- r.Release %>"
+            },
+            <% }); %> 
+        ]
     });
 </script>
