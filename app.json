@@ -5,5 +5,5 @@
   "logo": "https://cdn.jsdelivr.net/gh/heroku/node-js-getting-started@master/public/node.svg",
   "keywords": ["node", "express", "heroku", "sandbox", "salesforce", "preview", "guide"],
   "image": "heroku/nodejs",
-  "stack": "heroku-20"
+  "stack": "heroku-22"
 }
