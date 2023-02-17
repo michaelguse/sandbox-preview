@@ -16,7 +16,7 @@
     "client-sessions": "^0.8.0",
     "ejs": "2.5.6",
     "eslint": "^5.16.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-validator": "^6.10.0",
     "gridjs": "^5.0.2",
     "gridjs-jquery": "^4.0.0",
