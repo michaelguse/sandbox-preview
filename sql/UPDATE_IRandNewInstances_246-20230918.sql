@@ -1,11 +1,11 @@
 BEGIN ;
 
 /*
-CS290	Non-Preview	R2b	Americas	9/16/2023		        IR - replaced CS58
-CS310	Non-Preview	R2b	Americas	9/16/2023		        IR - replaced CS6, CS73
-CS58	Non-Preview	R2b	Americas	4/22/2020	9/16/2023	IR - replaced with CS290
-CS6	    Non-Preview	R2b	Americas	4/22/2020	9/16/2023	IR - replaced with CS310
-CS73	Non-Preview	R2b	Americas	4/22/2020	9/16/2023	IR - replaced with CS310
+CS290	Non-Preview	R2b	Asio	9/16/2023		        IR - replaced CS58
+CS310	Non-Preview	R2b	Asia	9/16/2023		        IR - replaced CS6, CS73
+CS58	Non-Preview	R2b	Asia	4/22/2020	9/16/2023	IR - replaced with CS290
+CS6	    Non-Preview	R2b	Asia	4/22/2020	9/16/2023	IR - replaced with CS310
+CS73	Non-Preview	R2b	Asia	4/22/2020	9/16/2023	IR - replaced with CS310
 */
 
 UPDATE public.rel_org_type SET org_id='CS290' WHERE org_id='CS58' ;
