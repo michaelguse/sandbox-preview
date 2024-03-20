@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<% include ../partials/head.ejs %>
+<%- include('../partials/head.ejs'); %>
 
     <body>
         <div class="wrapper">
             <div class="body-wrapper">
-                <% include ../partials/nav.ejs %>
-                    <% include ../partials/header.ejs %>
+                <%- include('../partials/nav.ejs'); %>
+                    <%- include('../partials/header.ejs'); %>
                         <div class="content-wrapper">
                             <div class="container">
                                 <div>
@@ -20,10 +20,10 @@
                             </div>
                         </div>
                 </div>
-                <% include ../partials/footer.ejs %>
-                <% include ../partials/script_section.ejs %>
+                <%- include('../partials/footer.ejs'); %>
+                <%- include('../partials/script_section.ejs'); %>
         </div>
-        <% include ../partials/sb_grid_script.ejs %>
+        <%- include('../partials/sb_grid_script.ejs'); %>
     </body>
 
 </html>
