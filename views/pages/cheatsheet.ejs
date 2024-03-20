@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<% include ../partials/head.ejs %>
+<%- include('../partials/head.ejs'); %>
 
   <body>
     <div class="wrapper">
       <div class="body-wrapper">
-        <% include ../partials/nav.ejs %>
-          <% include ../partials/header.ejs %>
-            <div class="content-wrapper">
-              <div class="component">
-                <h3>What is your Sandbox instance?</h3>
-                <form action="/query" type="GET" class="form-primary">
-                  <% if (locals.errors) { %>
-                    <% errors.forEach(function(r) { %>
-                      <input class="form-error-msg" name="org_id" placeholder="<%= r %>" type="text" autocomplete="off" autofocus required />
-                      <% }); %>
-                        <% } else { %>
-                          <input name="org_id" placeholder="Instance name, eg CS81" type="text" autocomplete="off" autofocus required />
-                          <% }; %>
-                            <input type="submit" class="button" value="submit" />
-                </form>
-                <div class="general-content">
-                  <img src="/images/SandboxPreview_CheatSheet.png" alt="Sandbox Preview CheatSheet" />
-                </div>
-                <div class="divider"></div>
-                <% include ../partials/helpful-links.ejs %>
-              </div>
+        <%- include('../partials/nav.ejs'); %>
+        <%- include('../partials/header.ejs'); %>
+        <div class="content-wrapper">
+          <div class="component">
+            <h3>What is your Sandbox instance?</h3>
+            <form action="/query" type="GET" class="form-primary">
+              <% if (locals.errors) { %>
+                <% errors.forEach(function(r) { %>
+                  <input class="form-error-msg" name="org_id" placeholder="<%= r %>" type="text" autocomplete="off" autofocus required />
+                  <% }); %>
+                    <% } else { %>
+                      <input name="org_id" placeholder="Instance name, eg CS81" type="text" autocomplete="off" autofocus required />
+                      <% }; %>
+                        <input type="submit" class="button" value="submit" />
+            </form>
+            <div class="general-content">
+              <img src="/images/SandboxPreview_CheatSheet.png" alt="Sandbox Preview CheatSheet" />
             </div>
+            <div class="divider"></div>
+            <%- include('../partials/helpful-links.ejs'); %>
+          </div>
+        </div>
       </div>
-      <% include ../partials/footer.ejs %>
-        <% include ../partials/script_section.ejs %>
+      <%- include('../partials/footer.ejs'); %>
+      <%- include('../partials/script_section.ejs'); %>
     </div>
   </body>
 
