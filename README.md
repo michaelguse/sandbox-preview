@@ -1,6 +1,6 @@
 # Sandbox Preview Guide
 
-The [Sandbox Preview Guide](https://sandbox-preview.herokuapp.com/) is a website that helps Salesforce customers to identify what __type__ of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
+The [Sandbox Preview Guide](http://www.sandboxpreview.com/) is a website that helps Salesforce customers to identify what __type__ of sandboxes they have in use and to assist in their release planning efforts, if they need/want to change a sandbox from Preview to Non-Preview or viceversa.
 
 ## Applcation Overview
 
