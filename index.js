@@ -89,8 +89,8 @@ app.use(function(req, res, next) {
   } else {
     req.session.reset();
     logger.info('Query for current prod and preview release');
-    //Querying CS87 and CS89 for setting sessions for Preview and Non-Preview release status
-    pool.query("SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id IN ('CS87','CS89') ORDER BY org_type", function (err, result) {  
+    //Querying US952S and US954S for setting sessions for Preview and Non-Preview release status
+    pool.query("SELECT id, internal_rel_name, external_rel_name, org_id, org_type FROM rel_org_type WHERE org_id IN ('US952S','US954S') ORDER BY org_type", function (err, result) {  
       if (err) {
         logger.error('Error executing query',{error: err.stack });
         res.send('Error: ' + err);
