@@ -304,7 +304,7 @@ strong {
   color: #fff;
   font-size: 12px;
   margin-top: 25px;
-  padding: 35px 0;
+  padding: 10px 0;
   width: 100%;
 }
 .footer-wrapper .footer-links {
@@ -528,6 +528,25 @@ p.trust-site-text {
   z-index: 1000;
   top: 0px;
   left: 40%;
+}
+
+.feedback-footer {
+  font-size: 15px;
+  font-weight: bold;
+  margin: 10px 150px 30px 150px;
+  padding: 15px;
+  text-align: center;
+  background-color:#215CA0;
+  color:#fff;
+  border-radius: 5px;
+}
+
+.feedback-footer a, .feedback-footer a:visited, .feedback-footer a:active {
+  text-decoration: none;
+  color: #fff;
+}
+.feedback-footer a:hover {
+  color: #b7d6f9;
 }
 
 #beta-ribbon {
