@@ -17,29 +17,46 @@
                                     </table>
                                 </div>
                                 <div>
+                                    <div class="table-controls">
+                                        <span id="sort-hint">Hold <kbd>Shift</kbd> and click columns to multi-sort</span>
+                                        <span id="filter-count"></span>
+                                        <div class="control-buttons">
+                                            <button id="reset-filter-btn" onclick="resetFilters()" style="display:none;">✕ Reset Filters</button>
+                                            <button id="reset-sort-btn" onclick="resetSort()" style="display:none;">✕ Reset Sort</button>
+                                            <button id="reset-all-btn" onclick="resetAll()" style="display:none;">✕ Reset All</button>
+                                            <button id="export-csv-btn" onclick="exportCSV()">⬇ Export CSV</button>
+                                        </div>
+                                    </div>
                                     <table id="sandboxes">
-                                        <tr>
-                                            <th>Instance</th>
-                                            <th>Type</th>
-                                            <th>Region</th>
-                                            <th>Release Name</th>
-                                        </tr>
-                                        <% results.forEach(function(r) { %>
-                                            <tr>
-                                                <td>
-                                                    <a href="/sandbox/<%= r.Instance %>"><%= r.Instance %></a>
-                                                </td>
-                                                <td>
-                                                    <%= r.Type %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Region %>
-                                                </td>
-                                                <td>
-                                                    <%= r.Release %>
-                                                </td>
+                                        <thead>
+                                            <tr class="sort-row">
+                                                <th class="sortable" onclick="sortTable(0, event)">Instance <span class="sort-icon"></span></th>
+                                                <th class="sortable" onclick="sortTable(1, event)">Type <span class="sort-icon"></span></th>
+                                                <th class="sortable" onclick="sortTable(2, event)">Region <span class="sort-icon"></span></th>
+                                                <th class="sortable" onclick="sortTable(3, event)">Release Name <span class="sort-icon"></span></th>
                                             </tr>
+                                            <tr class="filter-row">
+                                                <th><div class="filter-wrap"><input type="text" class="col-filter" placeholder="Filter…" data-col="0" oninput="applyFilters()"/><button class="clear-filter" onclick="clearFilter(this)" style="display:none;">×</button></div></th>
+                                                <th><div class="filter-wrap"><input type="text" class="col-filter" placeholder="Filter…" data-col="1" oninput="applyFilters()"/><button class="clear-filter" onclick="clearFilter(this)" style="display:none;">×</button></div></th>
+                                                <th><div class="filter-wrap"><input type="text" class="col-filter" placeholder="Filter…" data-col="2" oninput="applyFilters()"/><button class="clear-filter" onclick="clearFilter(this)" style="display:none;">×</button></div></th>
+                                                <th><div class="filter-wrap"><input type="text" class="col-filter" placeholder="Filter…" data-col="3" oninput="applyFilters()"/><button class="clear-filter" onclick="clearFilter(this)" style="display:none;">×</button></div></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% results.forEach(function(r) { %>
+                                                <tr>
+                                                    <td><a href="/sandbox/<%= r.Instance %>"><%= r.Instance %></a></td>
+                                                    <td><%= r.Type %></td>
+                                                    <td><%= r.Region %></td>
+                                                    <td><%= r.Release %></td>
+                                                </tr>
                                             <% }); %>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr id="no-results-row" style="display:none;">
+                                                <td colspan="4" class="no-results">No matching results found.</td>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
                             </div>
@@ -48,6 +65,386 @@
                 <%- include('../partials/footer.ejs'); %>
                 <%- include('../partials/script_section.ejs'); %>
         </div>
-    </body>
 
+        <style>
+            .table-controls {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 8px;
+                flex-wrap: wrap;
+            }
+            #sort-hint {
+                font-size: 0.8em;
+                color: #888;
+            }
+            #sort-hint kbd {
+                background: #f0f0f0;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                padding: 1px 5px;
+                font-size: 0.9em;
+            }
+            #filter-count {
+                font-size: 0.8em;
+                color: #555;
+                font-style: italic;
+            }
+            .control-buttons {
+                display: flex;
+                gap: 6px;
+                margin-left: auto;
+            }
+            .control-buttons button {
+                font-size: 0.8em;
+                padding: 3px 10px;
+                cursor: pointer;
+                background: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                color: #555;
+            }
+            .control-buttons button:hover {
+                background: #fee;
+                border-color: #c00;
+                color: #c00;
+            }
+            #export-csv-btn {
+                background: #f0f7f0 !important;
+                border-color: #5a9e5a !important;
+                color: #3a7a3a !important;
+            }
+            #export-csv-btn:hover {
+                background: #d4edda !important;
+                border-color: #2d6a2d !important;
+                color: #2d6a2d !important;
+            }
+            #sandboxes th.sortable {
+                cursor: pointer;
+                user-select: none;
+                white-space: nowrap;
+                position: relative;
+                padding-right: 2em;
+            }
+            #sandboxes th.sortable:hover {
+                background-color: #00A1E0;
+            }
+            #sandboxes th .sort-icon {
+                position: absolute;
+                right: 6px;
+                font-size: 0.7em;
+                color: #efefef;
+            }
+            #sandboxes th .sort-priority {
+                font-size: 0.65em;
+                color: #fff;
+                background: #666;
+                border-radius: 50%;
+                padding: 1px 4px;
+                margin-left: 2px;
+                vertical-align: middle;
+            }
+            #sandboxes tr.filter-row th {
+                padding: 4px 6px;
+                background: #f9f9f9;
+            }
+            .filter-wrap {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+            input.col-filter {
+                width: 100%;
+                padding: 4px 6px;
+                margin: 0px;
+                font-size: 0.82em;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                outline: none;
+                transition: border-color 0.15s;
+            }
+            input.col-filter:focus {
+                border-color: #6c8ebf;
+                box-shadow: 0 0 0 2px rgba(108,142,191,0.15);
+            }
+            input.col-filter.active {
+                border-color: #4a7fc1;
+                background: #f0f5ff;
+            }
+            button.clear-filter {
+                flex-shrink: 0;
+                background: none;
+                border: none;
+                cursor: pointer;
+                font-size: 1em;
+                color: #999;
+                padding: 0 2px;
+                line-height: 1;
+            }
+            button.clear-filter:hover {
+                color: #c00;
+            }
+            tr.hidden-row {
+                display: none;
+            }
+            .no-results {
+                text-align: center;
+                color: #888;
+                font-style: italic;
+                padding: 16px;
+            }
+            mark.highlight {
+                background: #fff176;
+                border-radius: 2px;
+                padding: 0;
+            }
+        </style>
+
+        <script>
+            let sortKeys = [];
+            let originalOrder = [];
+
+            window.addEventListener("DOMContentLoaded", () => {
+                const tbody = document.querySelector("#sandboxes tbody");
+                originalOrder = Array.from(tbody.querySelectorAll("tr")).map(r => r.cloneNode(true));
+            });
+
+            // ─── Sorting ────────────────────────────────────────────────────
+
+            function sortTable(colIndex, event) {
+                const isShift = event && event.shiftKey;
+                if (!isShift) {
+                    if (sortKeys.length === 1 && sortKeys[0].colIndex === colIndex) {
+                        sortKeys[0].direction = sortKeys[0].direction === "asc" ? "desc" : "asc";
+                    } else {
+                        sortKeys = [{ colIndex, direction: "asc" }];
+                    }
+                } else {
+                    const existing = sortKeys.find(k => k.colIndex === colIndex);
+                    if (existing) {
+                        existing.direction = existing.direction === "asc" ? "desc" : "asc";
+                    } else {
+                        sortKeys.push({ colIndex, direction: "asc" });
+                    }
+                }
+                applySort();
+            }
+
+            function applySort() {
+                const table = document.getElementById("sandboxes");
+                const tbody = table.querySelector("tbody");
+                const rows = Array.from(tbody.querySelectorAll("tr"));
+                const headers = table.querySelectorAll("th.sortable");
+
+                headers.forEach((th, i) => {
+                    const iconEl = th.querySelector(".sort-icon");
+                    const oldBadge = th.querySelector(".sort-priority");
+                    if (oldBadge) oldBadge.remove();
+                    const key = sortKeys.find(k => k.colIndex === i);
+                    if (key) {
+                        iconEl.textContent = key.direction === "asc" ? "▲" : "▼";
+                        if (sortKeys.length > 1) {
+                            const badge = document.createElement("span");
+                            badge.className = "sort-priority";
+                            badge.textContent = sortKeys.indexOf(key) + 1;
+                            th.appendChild(badge);
+                        }
+                    } else {
+                        iconEl.textContent = "";
+                    }
+                });
+
+                rows.sort((a, b) => {
+                    for (const { colIndex, direction } of sortKeys) {
+                        const aText = a.cells[colIndex].textContent.trim().toLowerCase();
+                        const bText = b.cells[colIndex].textContent.trim().toLowerCase();
+                        const aNum = parseFloat(aText);
+                        const bNum = parseFloat(bText);
+                        const isNumeric = !isNaN(aNum) && !isNaN(bNum);
+                        let cmp = isNumeric ? aNum - bNum : aText.localeCompare(bText);
+                        if (direction === "desc") cmp = -cmp;
+                        if (cmp !== 0) return cmp;
+                    }
+                    return 0;
+                });
+
+                rows.forEach(row => tbody.appendChild(row));
+                updateResetButtons();
+            }
+
+            function resetSort() {
+                sortKeys = [];
+                document.querySelectorAll("#sandboxes th.sortable").forEach(th => {
+                    th.querySelector(".sort-icon").textContent = "";
+                    const badge = th.querySelector(".sort-priority");
+                    if (badge) badge.remove();
+                });
+                applyFilters();
+                updateResetButtons();
+            }
+
+            // ─── Filtering ──────────────────────────────────────────────────
+
+            function applyFilters() {
+                const inputs = document.querySelectorAll("input.col-filter");
+                const filters = Array.from(inputs).map(inp => ({
+                    col: parseInt(inp.dataset.col),
+                    value: inp.value.trim().toLowerCase()
+                }));
+
+                inputs.forEach(inp => {
+                    const hasValue = inp.value.trim().length > 0;
+                    inp.nextElementSibling.style.display = hasValue ? "inline" : "none";
+                    inp.classList.toggle("active", hasValue);
+                });
+
+                const tbody = document.querySelector("#sandboxes tbody");
+                const rows = Array.from(tbody.querySelectorAll("tr"));
+                let visibleCount = 0;
+
+                rows.forEach(row => {
+                    const match = filters.every(({ col, value }) => {
+                        if (!value) return true;
+                        return row.cells[col].textContent.trim().toLowerCase().includes(value);
+                    });
+                    row.classList.toggle("hidden-row", !match);
+                    if (match) {
+                        visibleCount++;
+                        highlightRow(row, filters);
+                    } else {
+                        clearHighlights(row);
+                    }
+                });
+
+                document.getElementById("no-results-row").style.display = visibleCount === 0 ? "table-row" : "none";
+
+                const activeFilters = filters.filter(f => f.value);
+                const countEl = document.getElementById("filter-count");
+                countEl.textContent = activeFilters.length > 0 ? `Showing ${visibleCount} of ${rows.length} rows` : "";
+
+                updateResetButtons();
+            }
+
+            function highlightRow(row, filters) {
+                filters.forEach(({ col, value }) => {
+                    if (!value) {
+                        clearCellHighlight(row.cells[col]);
+                        return;
+                    }
+                    highlightCell(row.cells[col], value);
+                });
+            }
+
+            function highlightCell(cell, term) {
+                cell.childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+                        const regex = new RegExp(`(${escaped})`, "gi");
+                        const newHTML = node.textContent.replace(regex, "<mark class='highlight'>$1</mark>");
+                        if (newHTML !== node.textContent) {
+                            const span = document.createElement("span");
+                            span.innerHTML = newHTML;
+                            node.parentNode.replaceChild(span, node);
+                        }
+                    } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== "MARK") {
+                        highlightCell(node, term);
+                    }
+                });
+            }
+
+            function clearHighlights(row) {
+                Array.from(row.cells).forEach(clearCellHighlight);
+            }
+
+            function clearCellHighlight(cell) {
+                cell.querySelectorAll("mark.highlight, span").forEach(el => {
+                    el.replaceWith(...el.childNodes);
+                });
+                cell.normalize();
+            }
+
+            function clearFilter(btn) {
+                const input = btn.previousElementSibling;
+                input.value = "";
+                applyFilters();
+                input.focus();
+            }
+
+            function resetFilters() {
+                document.querySelectorAll("input.col-filter").forEach(inp => inp.value = "");
+                const tbody = document.querySelector("#sandboxes tbody");
+                originalOrder.forEach(r => tbody.appendChild(r.cloneNode(true)));
+                if (sortKeys.length) applySort();
+                document.getElementById("filter-count").textContent = "";
+                document.getElementById("no-results-row").style.display = "none";
+                updateResetButtons();
+            }
+
+            // ─── CSV Export ─────────────────────────────────────────────────
+
+            function exportCSV() {
+                const table = document.getElementById("sandboxes");
+
+                // Headers — read from the sort row, strip sort icons and priority badges
+                const headers = Array.from(table.querySelectorAll("tr.sort-row th")).map(th => {
+                    // Clone so we don't mutate the DOM
+                    const clone = th.cloneNode(true);
+                    clone.querySelectorAll(".sort-icon, .sort-priority").forEach(el => el.remove());
+                    return csvEscape(clone.textContent.trim());
+                });
+
+                // Visible rows only
+                const rows = Array.from(table.querySelectorAll("tbody tr:not(.hidden-row)")).map(row =>
+                    Array.from(row.cells).map(cell => csvEscape(cell.textContent.trim()))
+                );
+
+                const csvContent = [headers, ...rows].map(r => r.join(",")).join("\r\n");
+                const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+                const url = URL.createObjectURL(blob);
+
+                // Build a filename with a timestamp and active filter note
+                const hasFilters = Array.from(document.querySelectorAll("input.col-filter")).some(i => i.value.trim());
+                const timestamp = new Date().toISOString().slice(0, 16).replace("T", "_").replace(":", "-");
+                const filename = `sandbox-instances${hasFilters ? "-filtered" : ""}_${timestamp}.csv`;
+
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            // Wrap in double-quotes and escape any internal double-quotes per RFC 4180
+            function csvEscape(value) {
+                const str = String(value);
+                if (str.includes(",") || str.includes('"') || str.includes("\n") || str.includes("\r")) {
+                    return `"${str.replace(/"/g, '""')}"`;
+                }
+                return str;
+            }
+
+            // ─── Reset helpers ───────────────────────────────────────────────
+
+            function updateResetButtons() {
+                const hasSort = sortKeys.length > 0;
+                const hasFilter = Array.from(document.querySelectorAll("input.col-filter")).some(i => i.value.trim());
+                document.getElementById("reset-sort-btn").style.display = hasSort ? "inline-block" : "none";
+                document.getElementById("reset-filter-btn").style.display = hasFilter ? "inline-block" : "none";
+                document.getElementById("reset-all-btn").style.display = (hasSort && hasFilter) ? "inline-block" : "none";
+            }
+
+            function resetAll() {
+                sortKeys = [];
+                document.querySelectorAll("#sandboxes th.sortable").forEach(th => {
+                    th.querySelector(".sort-icon").textContent = "";
+                    const badge = th.querySelector(".sort-priority");
+                    if (badge) badge.remove();
+                });
+                resetFilters();
+            }
+        </script>
+    </body>
 </html>
