@@ -3,8 +3,8 @@
   "version": "0.11.3",
   "description": "A sandbox preview guide app using Express",
   "engines": {
-    "node": "19.6.1",
-    "npm": "9.4.0"
+    "node": "25.9.0",
+    "npm": "11.12.1"
   },
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,8 @@
   "dependencies": {
     "autocomplete": "0.0.1",
     "client-sessions": "^0.8.0",
-    "ejs": "3.1.7",
-    "eslint": "^5.16.0",
+    "ejs": "^3.1.10",
+    "eslint": "^10.2.0",
     "express": "^4.19.2",
     "express-validator": "^6.10.0",
     "gridjs": "^5.0.2",
@@ -37,7 +37,7 @@
     "eslint-config-google": "^0.9.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "request": "^2.88.2",
@@ -52,6 +52,5 @@
     "heroku",
     "express"
   ],
-  "license": "MIT",
-  "optionalDependencies": {}
+  "license": "MIT"
 }
