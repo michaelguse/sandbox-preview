@@ -22,7 +22,6 @@
     "gridjs-jquery": "^4.0.0",
     "handlebars": "^4.7.6",
     "heroku-logger": "^0.3.3",
-    "hoek": "^5.0.4",
     "jquery": "^3.6.0",
     "minimist": "^1.2.6",
     "mmenu-js": "^8.5.16",
@@ -45,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "ttps://git.heroku.com/sf-sandbox-preview.git"
+    "url": "https://git.heroku.com/sf-sandbox-preview.git"
   },
   "keywords": [
     "node",
